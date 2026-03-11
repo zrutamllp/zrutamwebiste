@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc Zrutam_Website_Brief.docx -o /tmp/zrutam_brief.md)",
+      "Bash(python scripts/office/unpack.py Zrutam_Website_Brief.docx /tmp/zrutam_unpacked/)",
+      "Bash(python \"C:\\\\Users\\\\lipsa\\\\AppData\\\\Roaming\\\\Claude\\\\local-agent-mode-sessions\\\\skills-plugin\\\\62e0e799-8f96-4420-9d2a-c14cd20cf9a3\\\\e15b5404-3d17-4f5a-9ff4-60e446c0b787\\\\skills\\\\docx\\\\scripts\\\\office\\\\unpack.py\" \"D:\\\\zrutamWebsite\\\\Zrutam_Website_Brief.docx\" /tmp/zrutam_unpacked/)",
+      "Bash(pip install defusedxml)",
+      "Bash(npx create-next-app@14 . --typescript --tailwind --eslint --app --src-dir --no-import-alias --use-npm)",
+      "Bash(npm install framer-motion)",
+      "Bash(npm run build)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where npx.cmd)",
+      "WebFetch(domain:www.linkedin.com)",
+      "Bash(dir \"D:\\\\zrutamWebsite\\\\public\"\")",
+      "Bash(npx next build)"
+    ]
+  }
+}

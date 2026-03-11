@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --navy: #0A1628;
+  --teal: #0EA5E9;
+  --amber: #F59E0B;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  color: #1F2937;
+  background: #ffffff;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gradient-navy {
+    background: linear-gradient(135deg, #0A1628 0%, #1A2A44 50%, #0F1E34 100%);
+  }
+  .gradient-teal {
+    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+  }
+}
