@@ -120,39 +120,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Schedule a Call */}
-                <div>
-                  <h3 className="text-lg font-semibold text-navy mb-3">
-                    Schedule a Call
-                  </h3>
-                  <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                    {/* Calendly Embed Placeholder */}
-                    <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                      <div className="text-center">
-                        <svg
-                          className="w-10 h-10 text-gray-400 mx-auto mb-2"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"
-                          />
-                        </svg>
-                        <p className="text-gray-500 text-sm font-medium">
-                          Calendly Embed
-                        </p>
-                        <p className="text-gray-400 text-xs mt-1">
-                          Schedule a 30-minute demo call
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Working Hours */}
                 <div>
                   <h3 className="text-lg font-semibold text-navy mb-3">

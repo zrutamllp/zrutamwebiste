@@ -14,23 +14,23 @@ const testimonials: Testimonial[] = [
   {
     quote:
       "Zrutam transformed our leadership pipeline. Their AI-driven IDP tool helped us identify and develop high-potential leaders across three countries in record time.",
-    name: "Priya Sharma",
-    title: "Chief Human Resources Officer",
-    company: "TechCorp India",
+    name: "Fouzia Kumar",
+    title: "Global Learning Head",
+    company: "HSBC",
   },
   {
     quote:
       "The custom e-learning modules were exactly what we needed -- contextualized for our APAC workforce and engaging enough to drive real completion rates. Our L&D ROI improved significantly.",
     name: "Ahmed Al-Rashid",
     title: "VP of Talent Development",
-    company: "Gulf Enterprises",
+    company: "Vi, Mumbai",
   },
   {
     quote:
       "Their skills assessment platform gave us real-time visibility into capability gaps we did not even know existed. It has become an essential part of our workforce planning strategy.",
-    name: "Wei Lin Chen",
-    title: "Director of Learning & Development",
-    company: "Meridian Group SEA",
+    name: "Shilpa Uniyal",
+    title: "Learning Head",
+    company: "Amazon UK",
   },
 ];
 
