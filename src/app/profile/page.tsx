@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Briefcase,
   Award,
@@ -9,14 +9,11 @@ import {
   Presentation,
   Globe,
   Cpu,
-  ChevronRight,
-  Mail,
   Phone,
   ExternalLink,
   Target,
   Layers,
   Building2,
-  Quote,
   ArrowRight,
   CheckCircle2,
   Sparkles,
@@ -26,8 +23,6 @@ import {
   MonitorPlay,
   Video,
   BarChart3,
-  MapPin,
-  GraduationCap,
   Trophy
 } from 'lucide-react';
 
@@ -149,7 +144,7 @@ const CompanyLogo = ({ src, name, className = "" }: { src: string; name: string;
   );
 };
 
-const TimelineNode = ({ company, role, date, description, highlights, logoSrc, isCurrent }: {
+const TimelineNode = ({ company, role, description, highlights, logoSrc, isCurrent }: {
   company: string;
   role: string;
   date?: string;
