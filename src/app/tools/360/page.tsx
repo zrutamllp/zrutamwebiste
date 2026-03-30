@@ -425,12 +425,12 @@ export default function Zrutam360Page() {
           >
             <div className="bg-navy p-8 text-center">
               <p className="text-teal text-sm font-medium uppercase tracking-wider mb-2">
-                Per Person Pricing
+                Enterprise Pricing
               </p>
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-1">
-                &#8377;1,999
+                Contact Us
               </h3>
-              <p className="text-gray-400 text-sm">~$24 USD per person</p>
+              <p className="text-gray-400 text-sm">Custom pricing based on volume</p>
             </div>
 
             <div className="p-8">

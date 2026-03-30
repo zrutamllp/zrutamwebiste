@@ -157,14 +157,14 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/contact"
+            <a
+              href="mailto:ceo@zrutam.com"
               className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold
                          text-white bg-teal hover:bg-teal-500 rounded-lg transition-colors
                          shadow-sm hover:shadow-md"
             >
               Book a Demo
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Hamburger */}
@@ -282,14 +282,14 @@ export default function Navbar() {
               })}
 
               <div className="pt-4 border-t border-gray-100">
-                <Link
-                  href="/contact"
+                <a
+                  href="mailto:ceo@zrutam.com"
                   onClick={closeMobile}
                   className="block w-full text-center px-5 py-3 text-base font-semibold
                              text-white bg-teal hover:bg-teal-500 rounded-lg transition-colors"
                 >
                   Book a Demo
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>
