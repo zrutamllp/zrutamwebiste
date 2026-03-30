@@ -114,6 +114,15 @@ export const STATS = [
 
 export const BLOG_POSTS = [
   {
+    slug: "why-legacy-360-assessments-fail",
+    title: "The Attention Economy: Why Legacy 360° Assessments Are Failing Your Frontline",
+    excerpt: "Legacy HR tools are incompatible with the modern workforce's attention span. Survey fatigue, bloated questionnaires, and 40-page reports are destroying data quality and paralyzing frontline managers.",
+    category: "360° Feedback",
+    date: "2026-03-28",
+    readTime: "8 min read",
+    keyword: "360 degree feedback assessment",
+  },
+  {
     slug: "why-idps-fail-and-how-to-fix-them",
     title: "Why IDPs Fail \u2014 And How to Fix Them",
     excerpt: "Individual Development Plans are a cornerstone of talent development, yet most fail to deliver results. Discover the common pitfalls and actionable strategies to make IDPs work.",

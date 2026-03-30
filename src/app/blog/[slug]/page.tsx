@@ -31,6 +31,19 @@ export function generateMetadata({ params }: PageProps): Metadata {
 }
 
 const articleContent: Record<string, string[]> = {
+  "why-legacy-360-assessments-fail": [
+    "If 360-degree feedback is so critical for frontline leadership development, why isn't it already standard practice? Because legacy HR tools are entirely incompatible with the modern workforce's attention span. By 2030, Generation Z will make up nearly 30% of the global workforce, rendering 1990s-era assessment tools obsolete.",
+
+    "The Survey Fatigue Epidemic: Traditional 360 assessments contain 50 to 80 redundant questions — a catastrophic design flaw. Research from UC Irvine indicates the average on-screen attention span has plummeted from 2.5 minutes in 2004 to just 47 seconds today. SurveySparrow data reveals high dropout rates after just 9 minutes on mobile and 12 minutes on desktop. When organizations force employees through a 45-minute survey, respondents rush through to finish, destroying the accuracy of behavioral data.",
+
+    "The 50-Question Danger Zone: The correlation between survey length and data quality is undeniable. A Milieu Insight study demonstrates that surveys with 10 to 20 questions yield 88% to 91% satisfaction rates. Once a survey crosses 50 questions (roughly 10 minutes), satisfaction plummets to 56% and the attention fail rate doubles.",
+
+    "The 40-Page Paralysis and Prohibitive Costs: Legacy systems generate massive 40-page PDF reports filled with complex charts. For a new frontline manager, receiving a 40-page dossier isn't empowering — it's paralyzing. These assessments cost between $100 to $500 per employee. Scaling a $300, 60-question assessment across hundreds of frontline managers is a financial and logistical impossibility.",
+
+    "At Zrutam LLP, we recognized the traditional multi-rater model was fundamentally broken — too long, too expensive, and misaligned with frontline reality. Our Zrutam 360° Assessment eliminates survey fatigue with frictionless 10-15 minute surveys focused on core observable competencies. Instead of paralyzing 40-page PDFs, managers receive clear, prioritized insights with 2-3 specific growth areas. Starting at just ₹1,999 INR (approx. $24 USD) per person, elite leadership insights no longer require an executive-tier budget.",
+
+    "You cannot fix systemic engagement or productivity issues without developing your frontline. Calculate your organization's hidden financial risk with our free Organizational Risk Calculator at /360-calculator, then explore the Zrutam 360° Assessment at /tools/360.",
+  ],
   "why-idps-fail-and-how-to-fix-them": [
     "Individual Development Plans have been a staple of corporate talent development for decades. Yet a significant majority of IDPs fail to produce meaningful outcomes. The reasons range from lack of personalization to poor follow-through, and the consequences are felt across organizations in the form of disengaged employees and stagnant leadership pipelines.",
     "The most common failure point is treating the IDP as a compliance exercise rather than a genuine development tool. When employees are asked to fill out a template once a year and then file it away, the IDP becomes nothing more than administrative overhead. Effective IDPs require ongoing engagement, regular check-ins, and alignment between individual career aspirations and organizational priorities.",
