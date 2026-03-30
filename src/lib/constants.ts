@@ -15,6 +15,7 @@ export const NAV_LINKS = [
   { label: "Tools", href: "/tools/idp", children: [
     { label: "IDP Tool", href: "/tools/idp" },
     { label: "Zrutam 360", href: "/tools/360" },
+    { label: "Risk Calculator", href: "/360-calculator" },
   ]},
   { label: "Clients", href: "/clients" },
   { label: "Blog", href: "/blog" },
