@@ -338,7 +338,7 @@ export default function CalculatorPage() {
           />
         </div>
 
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-28 pb-8 lg:pb-12">
           {/* ---------- Header ---------- */}
           <motion.header
             className="text-center mb-8"

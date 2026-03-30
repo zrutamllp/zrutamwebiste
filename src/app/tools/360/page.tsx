@@ -169,7 +169,7 @@ export default function Zrutam360Page() {
   return (
     <>
       {/* ====== Section 1 — Hero ====== */}
-      <section className="gradient-navy min-h-[80vh] flex items-center relative overflow-hidden">
+      <section className="gradient-navy min-h-[80vh] flex items-center relative overflow-hidden pt-20">
         <div className="absolute inset-0">
           <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-teal/5 blur-3xl animate-pulse" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-amber/5 blur-3xl animate-pulse" />
