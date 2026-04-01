@@ -8,9 +8,8 @@ import { motion, AnimatePresence } from "framer-motion";
 /* ------------------------------------------------------------------ */
 const EXCHANGE_RATE = 83;
 
-/* Google Apps Script web-app URL — replace with your deployed URL */
-const SHEET_WEBHOOK_URL =
-  "https://script.google.com/macros/s/AKfycbzQpDnVeSslqEJcOPTMjVqZqfBMUm8L_0gfmPNginVGLrVP-H2n1qfkL6ukT5S9SNd5/exec";
+/* Formspree endpoint — create a free form at https://formspree.io and paste your form ID below */
+const FORMSPREE_URL = "https://formspree.io/f/xdkogjrq";
 
 /* ------------------------------------------------------------------ */
 /*  Currency formatter                                                 */
@@ -145,11 +144,10 @@ export default function CalculatorPage() {
     setGateError("");
     setGateSubmitting(true);
     try {
-      await fetch(SHEET_WEBHOOK_URL, {
+      await fetch(FORMSPREE_URL, {
         method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "360-calculator", timestamp: new Date().toISOString() }),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ email, _subject: "New 360 Calculator Lead", source: "360-calculator" }),
       });
     } catch {
       // silently continue — don't block user if webhook fails
