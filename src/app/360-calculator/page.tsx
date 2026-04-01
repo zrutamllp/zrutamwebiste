@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const EXCHANGE_RATE = 83;
 
 /* Formspree endpoint — create a free form at https://formspree.io and paste your form ID below */
-const FORMSPREE_URL = "https://formspree.io/f/xdkogjrq";
+const FORMSPREE_URL = "https://formspree.io/f/mbdpkgdz";
 
 /* ------------------------------------------------------------------ */
 /*  Currency formatter                                                 */
