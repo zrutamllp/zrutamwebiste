@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 const EXCHANGE_RATE = 83;
+
+/* Google Apps Script web-app URL — replace with your deployed URL */
+const SHEET_WEBHOOK_URL =
+  "https://script.google.com/macros/s/AKfycbzQpDnVeSslqEJcOPTMjVqZqfBMUm8L_0gfmPNginVGLrVP-H2n1qfkL6ukT5S9SNd5/exec";
 
 /* ------------------------------------------------------------------ */
 /*  Currency formatter                                                 */
@@ -108,12 +112,59 @@ function SliderRow({
 /*  Main page                                                          */
 /* ------------------------------------------------------------------ */
 export default function CalculatorPage() {
+  /* --- email gate --- */
+  const [gateEmail, setGateEmail] = useState("");
+  const [gateUnlocked, setGateUnlocked] = useState(false);
+  const [gateSubmitting, setGateSubmitting] = useState(false);
+  const [gateError, setGateError] = useState("");
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && localStorage.getItem("zrutam_calc_email")) {
+      setGateUnlocked(true);
+    }
+  }, []);
+
+  const handleGateSubmit = async () => {
+    const email = gateEmail.trim();
+    if (!email) {
+      setGateError("Please enter your email.");
+      return;
+    }
+    // basic email validation
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setGateError("Please enter a valid email address.");
+      return;
+    }
+    // block personal emails
+    const personal = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com", "aol.com", "icloud.com", "mail.com", "protonmail.com"];
+    const domain = email.split("@")[1]?.toLowerCase();
+    if (personal.includes(domain)) {
+      setGateError("Please use your official work email.");
+      return;
+    }
+    setGateError("");
+    setGateSubmitting(true);
+    try {
+      await fetch(SHEET_WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "360-calculator", timestamp: new Date().toISOString() }),
+      });
+    } catch {
+      // silently continue — don't block user if webhook fails
+    }
+    localStorage.setItem("zrutam_calc_email", email);
+    setGateUnlocked(true);
+    setGateSubmitting(false);
+  };
+
   /* --- inputs --- */
-  const [total, setTotal] = useState(5000);
-  const [salary, setSalary] = useState(50000);
-  const [senior, setSenior] = useState(50);
-  const [middle, setMiddle] = useState(200);
-  const [flm, setFlm] = useState(350);
+  const [total, setTotal] = useState<number | "">("");
+  const [salary, setSalary] = useState<number | "">("");
+  const [senior, setSenior] = useState<number | "">("");
+  const [middle, setMiddle] = useState<number | "">("");
+  const [flm, setFlm] = useState<number | "">("");
 
   const [pctIneffective, setPctIneffective] = useState(30);
   const [pctFlight, setPctFlight] = useState(33);
@@ -139,14 +190,20 @@ export default function CalculatorPage() {
   const affectedStaffAnim = useAnimatedValue();
 
   /* ---- core calculation ---- */
+  const numTotal = typeof total === "number" ? total : 0;
+  const numSalary = typeof salary === "number" ? salary : 0;
+  const numSenior = typeof senior === "number" ? senior : 0;
+  const numMiddle = typeof middle === "number" ? middle : 0;
+  const numFlm = typeof flm === "number" ? flm : 0;
+
   const runCalculations = useCallback(
     (animate: boolean, currencyOverride?: string) => {
       const cur = currencyOverride ?? currency;
-      const staff = total - (senior + middle + flm);
+      const staff = numTotal - (numSenior + numMiddle + numFlm);
 
-      if (staff < 0 || flm <= 0) {
+      if (staff < 0 || numFlm <= 0) {
         setErrorMsg(
-          flm <= 0
+          numFlm <= 0
             ? "Error: Must have at least 1 Frontline Manager."
             : "Error: Managers exceed total headcount.",
         );
@@ -154,12 +211,12 @@ export default function CalculatorPage() {
       }
       setErrorMsg("");
 
-      const span = staff / flm;
-      const ineffectiveFLMs = Math.ceil(flm * (pctIneffective / 100));
+      const span = staff / numFlm;
+      const ineffectiveFLMs = Math.ceil(numFlm * (pctIneffective / 100));
       const affectedStaff = Math.round(ineffectiveFLMs * span);
       const totalFlightRisk = Math.round(affectedStaff * (pctFlight / 100));
-      const turnoverCost = totalFlightRisk * (salary * (pctTurnover / 100));
-      const prodLoss = affectedStaff * (salary * (pctProd / 100));
+      const turnoverCost = totalFlightRisk * (numSalary * (pctTurnover / 100));
+      const prodLoss = affectedStaff * (numSalary * (pctProd / 100));
       const totalRisk = turnoverCost + prodLoss;
 
       setStaffTotal(staff);
@@ -183,7 +240,7 @@ export default function CalculatorPage() {
       if (!revealed) setRevealed(true);
     },
     [
-      total, senior, middle, flm, salary, currency,
+      numTotal, numSenior, numMiddle, numFlm, numSalary, currency,
       pctIneffective, pctFlight, pctTurnover, pctProd,
       revealed,
       totalRiskAnim, prodRiskAnim, turnoverRiskAnim, flightNumAnim, affectedStaffAnim,
@@ -197,25 +254,25 @@ export default function CalculatorPage() {
       runCalculations(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [total, senior, middle, flm, salary, pctIneffective, pctFlight, pctTurnover, pctProd]);
+  }, [numTotal, numSenior, numMiddle, numFlm, numSalary, pctIneffective, pctFlight, pctTurnover, pctProd]);
 
   /* --- currency toggle --- */
   const toggleCurrency = (target: "USD" | "INR") => {
     if (target === currency) return;
-    let newSalary = salary;
+    let newSalary = numSalary;
     if (target === "INR") {
-      newSalary = Math.round(salary * EXCHANGE_RATE);
+      newSalary = Math.round(numSalary * EXCHANGE_RATE);
     } else {
-      newSalary = Math.round(salary / EXCHANGE_RATE);
+      newSalary = Math.round(numSalary / EXCHANGE_RATE);
     }
     setSalary(newSalary);
     setCurrencyState(target);
     if (firstReveal.current) {
       // recalc with new currency+salary immediately
-      const staff = total - (senior + middle + flm);
-      if (staff >= 0 && flm > 0) {
-        const span = staff / flm;
-        const ineffectiveFLMs = Math.ceil(flm * (pctIneffective / 100));
+      const staff = numTotal - (numSenior + numMiddle + numFlm);
+      if (staff >= 0 && numFlm > 0) {
+        const span = staff / numFlm;
+        const ineffectiveFLMs = Math.ceil(numFlm * (pctIneffective / 100));
         const affectedStaff = Math.round(ineffectiveFLMs * span);
         const totalFlightRisk = Math.round(affectedStaff * (pctFlight / 100));
         const turnoverCost = totalFlightRisk * (newSalary * (pctTurnover / 100));
@@ -325,6 +382,62 @@ export default function CalculatorPage() {
         }
       `}</style>
 
+      {/* ========== EMAIL GATE OVERLAY ========== */}
+      <AnimatePresence>
+        {!gateUnlocked && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center"
+            >
+              <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-5">
+                <svg className="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                Unlock the Risk Calculator
+              </h2>
+              <p className="text-slate-500 text-sm mb-6 leading-relaxed">
+                Enter your official work email to access the full interactive
+                Organizational Risk Calculator.
+              </p>
+              <div className="space-y-3">
+                <input
+                  type="email"
+                  value={gateEmail}
+                  onChange={(e) => { setGateEmail(e.target.value); setGateError(""); }}
+                  onKeyDown={(e) => { if (e.key === "Enter") handleGateSubmit(); }}
+                  placeholder="you@company.com"
+                  className="w-full px-4 py-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                />
+                {gateError && (
+                  <p className="text-red-500 text-xs font-medium text-left">{gateError}</p>
+                )}
+                <button
+                  onClick={handleGateSubmit}
+                  disabled={gateSubmitting}
+                  className="w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+                >
+                  {gateSubmitting ? "Please wait..." : "Access Calculator"}
+                </button>
+              </div>
+              <p className="text-[11px] text-slate-400 mt-4">
+                We respect your privacy. No spam, ever.
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden">
         {/* Ambient background blobs */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
@@ -394,8 +507,9 @@ export default function CalculatorPage() {
                       <input
                         type="number"
                         value={total}
-                        onChange={(e) => setTotal(Number(e.target.value) || 0)}
-                        className="w-full px-3 py-2.5 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                        placeholder="Enter your headcount"
+                        onChange={(e) => setTotal(e.target.value === "" ? "" : Number(e.target.value))}
+                        className="w-full px-3 py-2.5 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
                       />
                     </div>
                     <div>
@@ -433,8 +547,9 @@ export default function CalculatorPage() {
                         <input
                           type="number"
                           value={salary}
-                          onChange={(e) => setSalary(Number(e.target.value) || 0)}
-                          className="w-full pl-7 pr-3 py-2.5 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                          placeholder="Avg. frontline salary"
+                          onChange={(e) => setSalary(e.target.value === "" ? "" : Number(e.target.value))}
+                          className="w-full pl-7 pr-3 py-2.5 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
                         />
                       </div>
                     </div>
@@ -449,8 +564,9 @@ export default function CalculatorPage() {
                       <input
                         type="number"
                         value={senior}
-                        onChange={(e) => setSenior(Number(e.target.value) || 0)}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                        placeholder="e.g. 50"
+                        onChange={(e) => setSenior(e.target.value === "" ? "" : Number(e.target.value))}
+                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
                       />
                     </div>
                     <div>
@@ -460,8 +576,9 @@ export default function CalculatorPage() {
                       <input
                         type="number"
                         value={middle}
-                        onChange={(e) => setMiddle(Number(e.target.value) || 0)}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                        placeholder="e.g. 200"
+                        onChange={(e) => setMiddle(e.target.value === "" ? "" : Number(e.target.value))}
+                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
                       />
                     </div>
                     <div>
@@ -471,8 +588,9 @@ export default function CalculatorPage() {
                       <input
                         type="number"
                         value={flm}
-                        onChange={(e) => setFlm(Number(e.target.value) || 0)}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold text-orange-600 border-orange-300 bg-orange-50 shadow-[inset_0_1px_3px_rgba(249,115,22,0.1)] focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                        placeholder="e.g. 350"
+                        onChange={(e) => setFlm(e.target.value === "" ? "" : Number(e.target.value))}
+                        className="w-full px-3 py-2 rounded-lg text-sm font-bold text-orange-600 border-orange-300 bg-orange-50 shadow-[inset_0_1px_3px_rgba(249,115,22,0.1)] focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400 placeholder:text-orange-300"
                       />
                     </div>
                   </div>
