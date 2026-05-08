@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import FadeInSection from "@/components/FadeInSection";
-import CTABanner from "@/components/CTABanner";
-import AwardsSection from "@/components/AwardsSection";
+import FadeInSection from "@/shared/components/FadeInSection";
+import CTABanner from "@/shared/components/CTABanner";
+import AwardsSection from "@/shared/components/AwardsSection";
 
 export const metadata: Metadata = {
   title: "About Zrutam | AI-Powered L&D Company",

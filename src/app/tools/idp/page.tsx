@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import FadeInSection from "@/components/FadeInSection";
+import FadeInSection from "@/shared/components/FadeInSection";
 
 export const metadata: Metadata = {
   title: "IDP Tool powered by RSI\u2122 | Zrutam",
