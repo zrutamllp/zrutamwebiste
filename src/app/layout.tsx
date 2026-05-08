@@ -15,6 +15,11 @@ export const metadata: Metadata = {
   title: "Zrutam | AI-Powered Corporate L&D Solutions",
   description: SITE_DESCRIPTION,
   metadataBase: new URL("https://www.zrutam.com"),
+  icons: {
+    icon: "/logo.png?v=3",
+    shortcut: "/logo.png?v=3",
+    apple: "/logo.png?v=3",
+  },
   openGraph: {
     title: "Zrutam | AI-Powered Corporate L&D Solutions",
     description: SITE_DESCRIPTION,
