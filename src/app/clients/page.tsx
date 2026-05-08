@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Metadata } from "next";
-import FadeInSection from "@/components/FadeInSection";
-import CTABanner from "@/components/CTABanner";
+import FadeInSection from "@/shared/components/FadeInSection";
+import CTABanner from "@/shared/components/CTABanner";
 
 const CLIENT_LOGOS = [
   { src: "/clients/amazon.svg", alt: "Amazon" },

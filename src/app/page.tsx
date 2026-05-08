@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { SOLUTIONS } from "@/lib/constants";
-import SolutionCard from "@/components/SolutionCard";
-import StatsCounter from "@/components/StatsCounter";
-import TestimonialSlider from "@/components/TestimonialSlider";
-import CTABanner from "@/components/CTABanner";
-import HeroSection from "@/components/HeroSection";
-import FadeInSection from "@/components/FadeInSection";
-import AwardsSection from "@/components/AwardsSection";
+import { SOLUTIONS } from "@/app/solutions/constants";
+import SolutionCard from "@/shared/components/SolutionCard";
+import StatsCounter from "@/shared/components/StatsCounter";
+import TestimonialSlider from "@/shared/components/TestimonialSlider";
+import CTABanner from "@/shared/components/CTABanner";
+import HeroSection from "@/shared/components/HeroSection";
+import FadeInSection from "@/shared/components/FadeInSection";
+import AwardsSection from "@/shared/components/AwardsSection";
 
 const CLIENT_LOGOS = [
   { src: "/clients/amazon.svg", alt: "Amazon" },

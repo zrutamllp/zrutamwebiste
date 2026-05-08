@@ -1,8 +1,8 @@
 import { Metadata } from "next";
-import { SOLUTIONS } from "@/lib/constants";
-import SolutionCard from "@/components/SolutionCard";
-import FadeInSection from "@/components/FadeInSection";
-import CTABanner from "@/components/CTABanner";
+import { SOLUTIONS } from "@/app/solutions/constants";
+import SolutionCard from "@/shared/components/SolutionCard";
+import FadeInSection from "@/shared/components/FadeInSection";
+import CTABanner from "@/shared/components/CTABanner";
 
 export const metadata: Metadata = {
   title: "Our Solutions | Zrutam",

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import { SOLUTIONS } from "@/lib/constants";
-import SolutionDetailPage from "@/components/SolutionDetailPage";
+import { SOLUTIONS } from "@/app/solutions/constants";
+import SolutionDetailPage from "@/shared/components/SolutionDetailPage";
 
 const solution = SOLUTIONS.find((s) => s.slug === "ai-skills-assessment")!;
 

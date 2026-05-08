@@ -95,7 +95,7 @@ export default function TestimonialSlider() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative min-h-[280px] sm:min-h-[240px]">
+          <div className="relative">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={activeIndex}
@@ -105,7 +105,7 @@ export default function TestimonialSlider() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.35, ease: "easeInOut" }}
-                className="absolute inset-0"
+                className="w-full"
               >
                 <div className="bg-white rounded-2xl p-8 sm:p-10 lg:p-12 shadow-sm border border-gray-100">
                   {/* Quote Mark */}

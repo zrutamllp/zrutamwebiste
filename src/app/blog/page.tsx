@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { BLOG_POSTS } from "@/lib/constants";
+import { BLOG_POSTS } from "@/app/blog/constants";
 
 const categories = [
   "All",

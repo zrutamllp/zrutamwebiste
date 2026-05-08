@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { BLOG_POSTS } from "@/lib/constants";
-import FadeInSection from "@/components/FadeInSection";
-import CTABanner from "@/components/CTABanner";
+import { BLOG_POSTS } from "@/app/blog/constants";
+import FadeInSection from "@/shared/components/FadeInSection";
+import CTABanner from "@/shared/components/CTABanner";
 
 interface PageProps {
   params: { slug: string };

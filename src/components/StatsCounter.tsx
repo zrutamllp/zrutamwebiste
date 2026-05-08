@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { STATS } from "@/lib/constants";
+import { STATS } from "@/app/home/constants";
 
 function AnimatedNumber({
   value,
