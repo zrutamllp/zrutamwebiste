@@ -4,17 +4,10 @@ import { useState } from "react";
 import {
   Award,
   TrendingUp,
-  Users,
-  Presentation,
   Cpu,
   Phone,
-  Target,
-  Layers,
   ArrowRight,
   Sparkles,
-  Gamepad2,
-  Image as ImageIcon,
-  MonitorPlay,
   BarChart3,
 } from "lucide-react";
 import { AnimatedCounter } from "@/app/profile/components/AnimatedCounter";
@@ -79,6 +72,7 @@ export default function ProfilePage() {
                 <div className="absolute inset-0 border border-white/10 rounded-3xl transform -rotate-2 scale-105 backdrop-blur-sm hidden sm:block"></div>
 
                 <div className="aspect-square sm:aspect-[4/5] rounded-3xl overflow-hidden border border-white/20 bg-slate-800 relative z-10 shadow-2xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="/shobhraj.jpg"
                     alt="Shobhraj Sharma"

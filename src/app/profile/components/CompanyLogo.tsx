@@ -15,6 +15,7 @@ export function CompanyLogo({ src, name, className = "" }: CompanyLogoProps) {
   if (hasError || !src) return <Building2 size={24} className="text-slate-400" />;
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={`${name} logo`}

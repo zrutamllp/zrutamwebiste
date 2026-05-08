@@ -16,6 +16,7 @@ export function MediaCard({ type, title, subtitle, imageSrc, link }: MediaCardPr
 
   return (
     <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 aspect-video cursor-pointer">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={imageSrc}
         alt={title}
