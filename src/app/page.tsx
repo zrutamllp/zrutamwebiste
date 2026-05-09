@@ -26,14 +26,17 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Trusted By Section */}
-      <section className="py-16 bg-gray-50">
+      <section id="trusted-by" className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-gray-500 text-sm font-medium uppercase tracking-wider mb-10">
             Trusted by leading enterprises across APAC
           </p>
           <div className="flex flex-wrap items-center justify-center gap-10 md:gap-14">
             {CLIENT_LOGOS.map((logo) => (
-              <div key={logo.alt} className="flex items-center justify-center h-10 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+              <div
+                key={logo.alt}
+                className="flex items-center justify-center h-10 transition-transform duration-300 hover:scale-105"
+              >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
