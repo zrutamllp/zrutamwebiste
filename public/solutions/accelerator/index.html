@@ -1,0 +1,2928 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zrutam Accelerator — Terminal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0f1a;
+        --bg-2: #0f1623;
+        --bg-3: #151e2e;
+        --bg-4: #1c2638;
+        --line: #1f2a3e;
+        --line-soft: #1a2333;
+        --ink: #e8edf5;
+        --ink-2: #b8c0cf;
+        --ink-3: #7a8499;
+        --ink-4: #4e576a;
+        --amber: #f5a524; /* signal */
+        --amber-soft: rgba(245, 165, 36, 0.12);
+        --cyan: #22d3ee;
+        --cyan-soft: rgba(34, 211, 238, 0.1);
+        --green: #4ade80;
+        --green-soft: rgba(74, 222, 128, 0.12);
+        --red: #fb7185;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      ::selection {
+        background: var(--amber);
+        color: var(--bg);
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "IBM Plex Sans", system-ui, sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        background-image:
+          radial-gradient(
+            ellipse at 80% -10%,
+            rgba(34, 211, 238, 0.05),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at -10% 60%,
+            rgba(245, 165, 36, 0.04),
+            transparent 60%
+          );
+      }
+
+      .mono {
+        font-family: "IBM Plex Mono", monospace;
+      }
+      .wrap {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      @media (min-width: 900px) {
+        .wrap {
+          padding: 0 40px;
+        }
+      }
+      @media (min-width: 1200px) {
+        .wrap {
+          padding: 0 56px;
+        }
+      }
+
+      /* TICKER */
+      .ticker {
+        background: var(--bg-2);
+        border-bottom: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        color: var(--ink-3);
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .ticker-inner {
+        display: inline-flex;
+        gap: 32px;
+        padding: 8px 0;
+        animation: tick 60s linear infinite;
+        white-space: nowrap;
+      }
+      .ticker-item {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .ticker-item .v {
+        color: var(--ink);
+      }
+      .ticker-item .v.up {
+        color: var(--green);
+      }
+      .ticker-item .v.dn {
+        color: var(--amber);
+      }
+      @keyframes tick {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* NAV */
+      nav {
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(8px);
+      }
+      .nav-row {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        align-items: stretch;
+        height: 56px;
+        gap: 24px;
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-right: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .brand-mark {
+        width: 26px;
+        height: 26px;
+        background: var(--bg-3);
+        border: 1px solid var(--amber);
+        color: var(--amber);
+        display: grid;
+        place-items: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .brand-text {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.005em;
+      }
+      .brand-text .sub {
+        color: var(--ink-3);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        font-weight: 400;
+      }
+      .nav-meta {
+        display: none;
+        align-items: center;
+        gap: 24px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        color: var(--ink-3);
+        text-transform: uppercase;
+      }
+      @media (min-width: 1000px) {
+        .nav-meta {
+          display: flex;
+        }
+      }
+      .nav-meta .item .k {
+        color: var(--ink-4);
+      }
+      .nav-meta .item .v {
+        color: var(--ink);
+        font-size: 11px;
+        font-family: "IBM Plex Mono", monospace;
+        letter-spacing: 0.04em;
+      }
+      .nav-meta .item .v.live {
+        color: var(--green);
+      }
+      .nav-meta .item .v.live::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: var(--green);
+        border-radius: 50%;
+        margin-right: 6px;
+        animation: blink 1.5s infinite;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: stretch;
+        gap: 0;
+      }
+      .nav-link {
+        display: flex;
+        align-items: center;
+        padding: 0 18px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-2);
+        text-decoration: none;
+        border-left: 1px solid var(--line);
+        transition: all 0.15s;
+      }
+      .nav-link:hover {
+        color: var(--amber);
+      }
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 18px;
+        background: var(--amber);
+        color: var(--bg);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.15s;
+      }
+      .nav-cta:hover {
+        background: var(--ink);
+      }
+
+      @keyframes blink {
+        0%,
+        60%,
+        100% {
+          opacity: 1;
+        }
+        30% {
+          opacity: 0.3;
+        }
+      }
+
+      /* HERO */
+      .hero {
+        padding: 64px 0 88px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (min-width: 900px) {
+        .hero {
+          padding: 96px 0 120px;
+        }
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 48px;
+        align-items: end;
+      }
+      @media (min-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1.3fr 1fr;
+          gap: 80px;
+        }
+      }
+
+      .hero-prompt {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 12px;
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        color: var(--cyan);
+        margin-bottom: 32px;
+        text-transform: uppercase;
+      }
+      .hero-prompt::before {
+        content: "▸";
+        color: var(--amber);
+      }
+      .hero-prompt::after {
+        content: "";
+        width: 7px;
+        height: 12px;
+        background: var(--cyan);
+        margin-left: 4px;
+        animation: cursor 1s infinite;
+      }
+      @keyframes cursor {
+        0%,
+        50% {
+          opacity: 1;
+        }
+        51%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .hero h1 {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 500;
+        font-size: clamp(40px, 6.5vw, 84px);
+        line-height: 0.97;
+        letter-spacing: -0.04em;
+        color: var(--ink);
+        margin-bottom: 32px;
+        text-wrap: balance;
+      }
+      .hero h1 .amb {
+        color: var(--amber);
+      }
+      .hero h1 .cy {
+        color: var(--cyan);
+        font-style: italic;
+        font-weight: 400;
+      }
+
+      .hero-sub {
+        font-size: 16.5px;
+        font-weight: 300;
+        color: var(--ink-2);
+        max-width: 580px;
+        margin-bottom: 36px;
+        line-height: 1.6;
+      }
+      .hero-sub strong {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 13px 22px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .btn-solid {
+        background: var(--amber);
+        color: var(--bg);
+      }
+      .btn-solid:hover {
+        background: var(--ink);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+      .btn-ghost:hover {
+        border-color: var(--ink);
+      }
+
+      /* hero side panel */
+      .hero-panel {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+      }
+      .hero-panel-head {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        background: var(--bg-3);
+      }
+      .hero-panel-head .id {
+        color: var(--amber);
+      }
+      .hero-panel-head .ts {
+        color: var(--ink-4);
+      }
+      .hero-panel-row {
+        padding: 18px 16px;
+        border-bottom: 1px solid var(--line-soft);
+        display: grid;
+        grid-template-columns: 36px 1fr auto;
+        gap: 14px;
+        align-items: baseline;
+      }
+      .hero-panel-row:last-child {
+        border-bottom: none;
+      }
+      .hpr-id {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        color: var(--ink-4);
+      }
+      .hpr-label {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--ink-3);
+        letter-spacing: 0.04em;
+        line-height: 1.4;
+      }
+      .hpr-label strong {
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .hpr-v {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 32px;
+        font-weight: 600;
+        color: var(--amber);
+        letter-spacing: -0.03em;
+        font-feature-settings: "tnum" on;
+        line-height: 1;
+        text-align: right;
+      }
+      .hpr-v .unit {
+        font-size: 0.5em;
+        font-weight: 400;
+        color: var(--ink-3);
+        letter-spacing: 0;
+      }
+
+      /* SECTION */
+      .section {
+        padding: 96px 0;
+      }
+      @media (min-width: 900px) {
+        .section {
+          padding: 132px 0;
+        }
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-bottom: 64px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid var(--line);
+      }
+      @media (min-width: 900px) {
+        .section-head {
+          grid-template-columns: 1fr 2fr;
+          gap: 60px;
+          align-items: end;
+        }
+      }
+      .section-id {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .section-id .badge {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        padding: 6px 10px;
+        border: 1px solid var(--cyan);
+        background: var(--cyan-soft);
+        width: fit-content;
+      }
+      .section-id .meta {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--ink-3);
+        letter-spacing: 0.04em;
+        line-height: 1.7;
+      }
+      .section-id .meta span {
+        display: block;
+      }
+      .section-id .meta strong {
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .section-head h2 {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 500;
+        font-size: clamp(34px, 5vw, 60px);
+        line-height: 1;
+        letter-spacing: -0.035em;
+        color: var(--ink);
+        margin-bottom: 18px;
+        text-wrap: balance;
+      }
+      .section-head h2 em {
+        font-style: italic;
+        color: var(--amber);
+        font-weight: 400;
+      }
+      .section-head p {
+        font-size: 16px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        max-width: 640px;
+      }
+
+      /* JOURNEY */
+      .journey-shell {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      @media (min-width: 900px) {
+        .journey-shell {
+          grid-template-columns: 320px 1fr;
+          gap: 40px;
+          align-items: start;
+        }
+      }
+
+      .journey-rail {
+        position: sticky;
+        top: 80px;
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+      }
+      .rail-head {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--bg-3);
+      }
+      .rail-head .indicator {
+        color: var(--green);
+      }
+      .rail-head .indicator::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        background: var(--green);
+        border-radius: 50%;
+        margin-right: 6px;
+        animation: blink 1.5s infinite;
+      }
+      .rail-item {
+        display: grid;
+        grid-template-columns: 40px 1fr auto;
+        align-items: center;
+        padding: 14px 14px 14px 0;
+        border-top: 1px solid var(--line-soft);
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: "IBM Plex Mono", monospace;
+        gap: 4px;
+      }
+      .rail-item:first-of-type {
+        border-top: none;
+      }
+      .rail-item:hover {
+        background: var(--bg-3);
+      }
+      .rail-id {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--ink-4);
+        letter-spacing: 0.04em;
+        text-align: center;
+        border-right: 1px solid var(--line-soft);
+        padding: 4px 0;
+        margin-right: 14px;
+        transition: all 0.2s;
+      }
+      .rail-body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .rail-name {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink-2);
+        letter-spacing: -0.005em;
+        transition: color 0.2s;
+      }
+      .rail-dur {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        color: var(--ink-4);
+        letter-spacing: 0.04em;
+      }
+      .rail-state {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+      }
+      .rail-item.active {
+        background: rgba(245, 165, 36, 0.06);
+        border-left: 2px solid var(--amber);
+      }
+      .rail-item.active .rail-id {
+        color: var(--amber);
+        border-right-color: var(--amber);
+      }
+      .rail-item.active .rail-name {
+        color: var(--amber);
+      }
+      .rail-item.active .rail-state {
+        color: var(--amber);
+      }
+      .rail-item.active .rail-state::before {
+        content: "▸ ";
+        color: var(--amber);
+      }
+      .rail-item.complete .rail-id {
+        color: var(--green);
+      }
+      .rail-item.complete .rail-name {
+        color: var(--ink-3);
+      }
+      .rail-item.complete .rail-state {
+        color: var(--green);
+      }
+      .rail-item.complete .rail-state::after {
+        content: " ✓";
+      }
+
+      .rail-foot {
+        padding: 12px 14px;
+        border-top: 1px solid var(--line);
+        background: var(--bg-3);
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        color: var(--ink-3);
+        text-transform: uppercase;
+      }
+      .rail-foot-bar {
+        background: var(--bg-4);
+        height: 4px;
+        position: relative;
+        overflow: hidden;
+      }
+      .rail-foot-bar-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        background: var(--amber);
+        width: 0%;
+        transition: width 0.4s ease;
+      }
+      .rail-foot-val {
+        color: var(--amber);
+        font-weight: 500;
+      }
+
+      /* phase blocks — log entries */
+      .phase-stream {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .phase-entry {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        border-left: 2px solid var(--line);
+        opacity: 0.5;
+        transform: translateY(20px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease,
+          border-left-color 0.35s ease;
+      }
+      .phase-entry.in-view {
+        opacity: 1;
+        transform: translateY(0);
+        border-left-color: var(--amber);
+      }
+      .phase-head-row {
+        padding: 12px 22px;
+        background: var(--bg-3);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .phase-head-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .phase-head-left .ts {
+        color: var(--ink-4);
+      }
+      .phase-head-left .id {
+        color: var(--amber);
+        border: 1px solid var(--amber);
+        padding: 3px 8px;
+        background: var(--amber-soft);
+      }
+      .phase-head-left .sev {
+        color: var(--cyan);
+      }
+      .phase-head-right {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        color: var(--ink-3);
+        text-transform: uppercase;
+      }
+      .phase-entry.in-view .phase-head-right::before {
+        content: "● ";
+        color: var(--green);
+        animation: blink 1.5s infinite;
+      }
+
+      .phase-body {
+        padding: 36px 28px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      @media (min-width: 800px) {
+        .phase-body {
+          grid-template-columns: 1.1fr 1fr;
+          gap: 48px;
+        }
+      }
+      .phase-entry h3 {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 500;
+        font-size: clamp(28px, 3.6vw, 44px);
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        color: var(--ink);
+        margin-bottom: 18px;
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .phase-entry h3 em {
+        font-style: italic;
+        color: var(--amber);
+        font-weight: 400;
+      }
+      .phase-entry h3 .prefix {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.4em;
+        color: var(--ink-4);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 400;
+        border: 1px solid var(--line);
+        padding: 4px 8px;
+      }
+      .phase-lead {
+        font-size: 15.5px;
+        color: var(--ink-2);
+        line-height: 1.65;
+        margin-bottom: 24px;
+      }
+      .phase-out {
+        border-top: 1px solid var(--line);
+        padding-top: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .phase-out-k {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .phase-out-k::before {
+        content: "OUT ▸";
+        color: var(--cyan);
+      }
+      .phase-out-v {
+        font-size: 15px;
+        font-weight: 500;
+        color: var(--cyan);
+        letter-spacing: -0.005em;
+        line-height: 1.4;
+      }
+
+      .phase-items {
+        background: var(--bg);
+        border: 1px solid var(--line);
+      }
+      .phase-items-head {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg-3);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        display: flex;
+        justify-content: space-between;
+      }
+      .phase-items-head .count {
+        color: var(--ink-4);
+      }
+      .phase-item {
+        display: grid;
+        grid-template-columns: 32px 1fr;
+        gap: 14px;
+        padding: 14px 16px;
+        border-top: 1px solid var(--line-soft);
+        align-items: start;
+      }
+      .phase-item:first-of-type {
+        border-top: none;
+      }
+      .phase-item-id {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        font-weight: 500;
+        color: var(--amber);
+        border: 1px solid var(--line);
+        background: var(--bg-2);
+        padding: 4px 0;
+        text-align: center;
+        letter-spacing: 0.04em;
+      }
+      .phase-item-title {
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--ink);
+        margin-bottom: 3px;
+        letter-spacing: -0.005em;
+      }
+      .phase-item-sub {
+        font-size: 12.5px;
+        color: var(--ink-3);
+        line-height: 1.55;
+      }
+
+      /* DASHBOARD */
+      .dash {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+      }
+      .dash-bar {
+        padding: 16px 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        background: var(--bg-3);
+        border-bottom: 1px solid var(--line);
+      }
+      .dash-bar-l {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+      }
+      .dash-bar-glyph {
+        width: 32px;
+        height: 32px;
+        background: var(--bg);
+        color: var(--amber);
+        border: 1px solid var(--amber);
+        display: grid;
+        place-items: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .dash-bar-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .dash-bar-text .k {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+      }
+      .dash-bar-text .v {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.005em;
+      }
+      .dash-bar-r {
+        display: flex;
+        gap: 24px;
+        align-items: center;
+      }
+      .dash-bar-r .item {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        color: var(--ink-3);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .dash-bar-r .item .v {
+        color: var(--ink);
+      }
+      .dash-pill {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--green);
+        background: var(--green-soft);
+        border: 1px solid var(--green);
+        padding: 5px 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+      }
+      .dash-pill::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        background: var(--green);
+        border-radius: 50%;
+        animation: blink 1.5s infinite;
+      }
+
+      .dash-block {
+        border-bottom: 1px solid var(--line);
+      }
+      .dash-block:last-child {
+        border-bottom: none;
+      }
+      .dbh {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 22px;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg);
+      }
+      .dbh h4 {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.005em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .dbh h4 .id {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        color: var(--amber);
+        border: 1px solid var(--line);
+        padding: 3px 6px;
+        letter-spacing: 0.06em;
+        background: var(--bg-3);
+        font-weight: 500;
+      }
+      .dbh .meta {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+      }
+
+      /* metric tiles */
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: 800px) {
+        .metrics {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .metric {
+        padding: 22px;
+        border-right: 1px solid var(--line);
+        position: relative;
+      }
+      .metric:nth-child(2n) {
+        border-right: none;
+      }
+      .metric:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--line);
+      }
+      @media (min-width: 800px) {
+        .metric {
+          border-right: 1px solid var(--line);
+        }
+        .metric:nth-child(2n) {
+          border-right: 1px solid var(--line);
+        }
+        .metric:last-child {
+          border-right: none;
+        }
+        .metric:nth-child(-n + 2) {
+          border-bottom: none;
+        }
+      }
+      .metric-k {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+        margin-bottom: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .metric-k .id {
+        color: var(--cyan);
+        border: 1px solid var(--line);
+        padding: 2px 5px;
+        background: var(--bg-3);
+      }
+      .metric-v {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 36px;
+        font-weight: 600;
+        color: var(--ink);
+        line-height: 1;
+        letter-spacing: -0.035em;
+        margin-bottom: 10px;
+        font-feature-settings: "tnum" on;
+      }
+      .metric-v .unit {
+        font-size: 0.45em;
+        color: var(--ink-3);
+        font-weight: 400;
+      }
+      .metric-v.amber {
+        color: var(--amber);
+      }
+      .metric-trend {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--green);
+        letter-spacing: 0.04em;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* sparkline */
+      .sparkline {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        width: 64px;
+        height: 22px;
+        opacity: 0.7;
+      }
+
+      /* competency table */
+      .comp-table {
+        width: 100%;
+      }
+      .comp-table-head {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 14px;
+        padding: 10px 22px;
+        background: var(--bg);
+        border-bottom: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-4);
+      }
+      @media (min-width: 900px) {
+        .comp-table-head {
+          grid-template-columns: 36px 1.5fr 1fr 1fr 1fr;
+          gap: 18px;
+        }
+      }
+      .comp-row {
+        display: grid;
+        grid-template-columns: 36px 1fr;
+        gap: 14px;
+        padding: 18px 22px;
+        border-bottom: 1px solid var(--line-soft);
+        align-items: center;
+        transition: background 0.15s;
+      }
+      @media (min-width: 900px) {
+        .comp-row {
+          grid-template-columns: 36px 1.5fr 1fr 1fr 1fr;
+          gap: 18px;
+        }
+      }
+      .comp-row:hover {
+        background: var(--bg-3);
+      }
+      .comp-row:last-child {
+        border-bottom: none;
+      }
+      .comp-id {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--amber);
+        border: 1px solid var(--amber);
+        padding: 4px 0;
+        text-align: center;
+        background: var(--amber-soft);
+        letter-spacing: 0.04em;
+      }
+      .comp-name-cell {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+      }
+      .comp-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.005em;
+      }
+      .comp-sub {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        color: var(--ink-3);
+        letter-spacing: 0.04em;
+      }
+      .comp-cell {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .comp-v {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+        font-feature-settings: "tnum" on;
+      }
+      .comp-v.amber {
+        color: var(--amber);
+      }
+      .comp-bar {
+        height: 4px;
+        background: var(--bg-4);
+        position: relative;
+        overflow: hidden;
+      }
+      .comp-bar-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        background: linear-gradient(to right, var(--cyan), var(--amber));
+        width: 0%;
+        transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .comp-bar.warn .comp-bar-fill {
+        background: var(--amber);
+      }
+      .comp-biz {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--ink);
+        letter-spacing: -0.005em;
+      }
+      .comp-biz strong {
+        color: var(--green);
+        font-weight: 600;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 14px;
+        font-feature-settings: "tnum" on;
+      }
+      .comp-biz strong.dn {
+        color: var(--green);
+      }
+      .comp-cell-sub {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        color: var(--ink-4);
+        letter-spacing: 0.04em;
+      }
+      @media (max-width: 899px) {
+        .comp-row > div:nth-child(3),
+        .comp-row > div:nth-child(4),
+        .comp-row > div:nth-child(5),
+        .comp-table-head > span:nth-child(3),
+        .comp-table-head > span:nth-child(4),
+        .comp-table-head > span:nth-child(5) {
+          display: none;
+        }
+      }
+
+      /* split */
+      .dash-split {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 900px) {
+        .dash-split {
+          grid-template-columns: 1.5fr 1fr;
+        }
+      }
+      .dash-split > div + div {
+        border-top: 1px solid var(--line);
+      }
+      @media (min-width: 900px) {
+        .dash-split > div + div {
+          border-top: none;
+          border-left: 1px solid var(--line);
+        }
+      }
+
+      .chart-wrap {
+        padding: 22px;
+      }
+      .chart-grid {
+        position: relative;
+        height: 220px;
+        display: flex;
+        margin-bottom: 18px;
+      }
+      .chart-y {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-right: 8px;
+        border-right: 1px solid var(--line);
+        width: 38px;
+      }
+      .chart-y span {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9.5px;
+        color: var(--ink-4);
+        letter-spacing: 0.04em;
+        text-align: right;
+      }
+      .chart-area {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        gap: 14px;
+        padding: 4px 0 0 14px;
+      }
+      .chart-area::before,
+      .chart-area::after {
+        content: "";
+        position: absolute;
+        left: 14px;
+        right: 0;
+        height: 1px;
+        background: var(--line-soft);
+      }
+      .chart-area::before {
+        top: 0;
+      }
+      .chart-area::after {
+        top: 50%;
+      }
+      .chart-area .target {
+        position: absolute;
+        left: 14px;
+        right: 0;
+        top: 30%;
+        height: 1px;
+        background: repeating-linear-gradient(
+          to right,
+          var(--cyan) 0 4px,
+          transparent 4px 8px
+        );
+      }
+      .chart-area .target::after {
+        content: "TARGET +0.50";
+        position: absolute;
+        right: 0;
+        top: -6px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 0.06em;
+        color: var(--cyan);
+        background: var(--bg-2);
+        padding: 1px 4px;
+      }
+      .bcol {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .bstack {
+        display: flex;
+        align-items: flex-end;
+        gap: 4px;
+        height: 210px;
+        width: 100%;
+        justify-content: center;
+      }
+      .bbl,
+      .bnow {
+        width: 18px;
+        height: 0;
+        transition: height 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .bbl {
+        background: var(--bg-4);
+        border-top: 1px solid var(--ink-4);
+      }
+      .bnow {
+        background: var(--amber);
+        box-shadow: 0 0 12px rgba(245, 165, 36, 0.3);
+      }
+      .bnow.warn {
+        background: var(--red);
+      }
+      .blabel {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        font-weight: 500;
+        color: var(--ink-2);
+        letter-spacing: 0.04em;
+      }
+      .chart-legend {
+        display: flex;
+        gap: 22px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        color: var(--ink-3);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .chart-legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .legend-sq {
+        width: 10px;
+        height: 10px;
+      }
+      .legend-bl {
+        background: var(--bg-4);
+        border-top: 1px solid var(--ink-4);
+      }
+      .legend-now {
+        background: var(--amber);
+      }
+      .legend-tgt {
+        width: 14px;
+        height: 0;
+        border-top: 1px dashed var(--cyan);
+      }
+
+      .johari-wrap {
+        padding: 22px;
+      }
+      .johari {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        border: 1px solid var(--line);
+        background: var(--bg);
+        position: relative;
+        min-height: 240px;
+      }
+      .johari::before,
+      .johari::after {
+        content: "";
+        position: absolute;
+        background: var(--line);
+      }
+      .johari::before {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+      }
+      .johari::after {
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+      }
+      .jcell {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .jcell-lab {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .jcell-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .jcell-v {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-size: 30px;
+        font-weight: 600;
+        color: var(--ink);
+        letter-spacing: -0.03em;
+        line-height: 1;
+        font-feature-settings: "tnum" on;
+      }
+      .jcell-v .unit {
+        font-size: 0.45em;
+        font-weight: 400;
+        color: var(--ink-3);
+      }
+      .jcell-d {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+      }
+      .jcell-d.up {
+        color: var(--green);
+      }
+      .jcell-d.dn {
+        color: var(--ink-3);
+      }
+      .jcell-d.big {
+        color: var(--amber);
+        font-weight: 500;
+      }
+      .johari-axes {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 9.5px;
+        color: var(--ink-4);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .dash-watch {
+        padding: 16px 22px;
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 16px;
+        background: rgba(245, 165, 36, 0.04);
+      }
+      .dwl {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--amber);
+        background: var(--amber-soft);
+        border: 1px solid var(--amber);
+        padding: 5px 10px;
+        align-self: start;
+        font-weight: 500;
+      }
+      .dwb {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.6;
+      }
+      .dwb strong {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      /* CTA */
+      .cta-section {
+        padding: 96px 0;
+        border-top: 1px solid var(--line);
+        position: relative;
+        overflow: hidden;
+      }
+      @media (min-width: 900px) {
+        .cta-section {
+          padding: 128px 0;
+        }
+      }
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            ellipse at 20% 50%,
+            rgba(245, 165, 36, 0.08),
+            transparent 60%
+          ),
+          radial-gradient(
+            ellipse at 80% 50%,
+            rgba(34, 211, 238, 0.08),
+            transparent 60%
+          );
+        pointer-events: none;
+      }
+      .cta-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: end;
+        position: relative;
+      }
+      @media (min-width: 900px) {
+        .cta-grid {
+          grid-template-columns: 1.3fr 1fr;
+          gap: 80px;
+        }
+      }
+      .cta-prompt {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        border: 1px solid var(--cyan);
+        padding: 5px 10px;
+        background: var(--cyan-soft);
+        margin-bottom: 28px;
+      }
+      .cta-prompt::before {
+        content: "▸";
+        color: var(--amber);
+      }
+      .cta-section h2 {
+        font-family: "IBM Plex Sans", sans-serif;
+        font-weight: 500;
+        font-size: clamp(34px, 5vw, 64px);
+        line-height: 1;
+        letter-spacing: -0.035em;
+        margin-bottom: 24px;
+      }
+      .cta-section h2 em {
+        font-style: italic;
+        color: var(--amber);
+        font-weight: 400;
+      }
+      .cta-section p {
+        font-size: 16px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        max-width: 540px;
+      }
+
+      .cta-side {
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+      }
+      .cta-side-head {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg-3);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+      }
+      .cta-actions {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .cta-btn {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 18px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: all 0.15s;
+      }
+      .cta-btn-primary {
+        background: var(--amber);
+        color: var(--bg);
+      }
+      .cta-btn-primary:hover {
+        background: var(--ink);
+      }
+      .cta-btn-secondary {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+      .cta-btn-secondary:hover {
+        border-color: var(--ink);
+      }
+      .cta-side-foot {
+        padding: 14px 18px;
+        border-top: 1px solid var(--line);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        color: var(--ink-4);
+        letter-spacing: 0.04em;
+        line-height: 1.6;
+      }
+
+      footer {
+        background: var(--bg-2);
+        border-top: 1px solid var(--line);
+        padding: 32px 0;
+        color: var(--ink-3);
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .foot strong {
+        color: var(--ink);
+        font-weight: 500;
+      }
+
+      .back-link {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 100;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-2);
+        background: var(--bg-2);
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        text-decoration: none;
+        transition: all 0.15s;
+      }
+      .back-link:hover {
+        color: var(--amber);
+        border-color: var(--amber);
+      }
+    </style>
+  </head>
+  <body data-screen-label="C Terminal">
+    <template id="__bundler_thumbnail" data-bg-color="#0A0F1A">
+      <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+        <rect width="1200" height="800" fill="#0A0F1A" />
+        <rect
+          x="200"
+          y="280"
+          width="800"
+          height="240"
+          fill="none"
+          stroke="#1F2A3E"
+          stroke-width="2"
+        />
+        <rect x="200" y="280" width="800" height="40" fill="#151E2E" />
+        <circle cx="240" cy="300" r="6" fill="#F5A524" />
+        <text
+          x="600"
+          y="450"
+          text-anchor="middle"
+          font-family="ui-monospace, monospace"
+          font-size="180"
+          font-weight="600"
+          fill="#F5A524"
+        >
+          Z
+        </text>
+        <text
+          x="600"
+          y="640"
+          text-anchor="middle"
+          font-family="ui-monospace, monospace"
+          font-size="22"
+          fill="#22D3EE"
+          letter-spacing="3"
+        >
+          $ TERMINAL
+        </text>
+      </svg>
+    </template>
+
+    <a href="/" class="back-link">← Home</a>
+
+    <div class="ticker">
+      <div class="wrap">
+        <div class="ticker-inner">
+          <span class="ticker-item"
+            >ACTIVE COHORTS <span class="v">12</span></span
+          >
+          <span class="ticker-item"
+            >PARTICIPANTS <span class="v">1,742</span></span
+          >
+          <span class="ticker-item"
+            >BARS Δ AVG <span class="v up">+0.58</span></span
+          >
+          <span class="ticker-item"
+            >RETENTION <span class="v up">96%</span></span
+          >
+          <span class="ticker-item"
+            >BLIND-SPOT CLOSURE <span class="v up">38%</span></span
+          >
+          <span class="ticker-item"
+            >C4 CYCLE TIME <span class="v dn">−31%</span></span
+          >
+          <span class="ticker-item"
+            >ENGAGEMENT Δ <span class="v up">+14 pts</span></span
+          >
+          <span class="ticker-item"
+            >CHRO READOUTS DELIVERED <span class="v">9</span></span
+          >
+          <span class="ticker-item"
+            >REGIONS <span class="v">IND · UAE · SG</span></span
+          >
+          <!-- duplicate for seamless loop -->
+          <span class="ticker-item"
+            >ACTIVE COHORTS <span class="v">12</span></span
+          >
+          <span class="ticker-item"
+            >PARTICIPANTS <span class="v">1,742</span></span
+          >
+          <span class="ticker-item"
+            >BARS Δ AVG <span class="v up">+0.58</span></span
+          >
+          <span class="ticker-item"
+            >RETENTION <span class="v up">96%</span></span
+          >
+          <span class="ticker-item"
+            >BLIND-SPOT CLOSURE <span class="v up">38%</span></span
+          >
+          <span class="ticker-item"
+            >C4 CYCLE TIME <span class="v dn">−31%</span></span
+          >
+          <span class="ticker-item"
+            >ENGAGEMENT Δ <span class="v up">+14 pts</span></span
+          >
+          <span class="ticker-item"
+            >CHRO READOUTS DELIVERED <span class="v">9</span></span
+          >
+          <span class="ticker-item"
+            >REGIONS <span class="v">IND · UAE · SG</span></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <nav>
+      <div class="wrap">
+        <div class="nav-row">
+          <div class="nav-brand">
+            <span class="brand-mark">Z</span>
+            <span class="brand-text">Zrutam <span class="sub">/acl</span></span>
+          </div>
+          <div class="nav-meta">
+            <div class="item">
+              <span class="k">SESSION</span
+              ><span class="v">CHRO-DESK · 15.05.26</span>
+            </div>
+            <div class="item">
+              <span class="k">FEED</span><span class="v live">LIVE</span>
+            </div>
+            <div class="item">
+              <span class="k">LATENCY</span><span class="v">8ms</span>
+            </div>
+          </div>
+          <div class="nav-actions">
+            <a href="#journey" class="nav-link">/journey</a>
+            <a href="#dashboard" class="nav-link">/dashboard</a>
+            <a href="#connect" class="nav-cta">Book briefing →</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-prompt">$ zrutam --audience missing-80</div>
+            <h1>
+              The leadership program built for the layer that
+              <span class="amb">actually runs</span> the business.
+            </h1>
+            <p class="hero-sub">
+              <strong>Frontline and middle managers run 80%</strong> of your
+              workforce — and rarely get the development that earns budget at
+              the table. Zrutam Accelerator is the end-to-end program that
+              breaks the loop, from baseline assessment to measurable business
+              impact.
+            </p>
+            <div class="hero-actions">
+              <a href="#connect" class="btn btn-solid">Book a briefing →</a>
+              <a href="#journey" class="btn btn-ghost">See the journey</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel">
+            <div class="hero-panel-head">
+              <span><span class="id">FIG.01</span> · PROGRAMME SNAPSHOT</span>
+              <span class="ts">15.05.26 14:22 IST</span>
+            </div>
+            <div class="hero-panel-row">
+              <span class="hpr-id">i.</span>
+              <span class="hpr-label"
+                >Workforce managed by
+                <strong>frontline + middle</strong> layer</span
+              >
+              <span class="hpr-v"
+                ><span data-count="80">0</span><span class="unit">%</span></span
+              >
+            </div>
+            <div class="hero-panel-row">
+              <span class="hpr-id">ii.</span>
+              <span class="hpr-label"
+                >Competencies measured · <strong>26 BARS</strong> items</span
+              >
+              <span class="hpr-v"><span data-count="5">0</span></span>
+            </div>
+            <div class="hero-panel-row">
+              <span class="hpr-id">iii.</span>
+              <span class="hpr-label"
+                >End-to-end journey · <strong>customisable</strong></span
+              >
+              <span class="hpr-v"
+                ><span data-count="18">0</span
+                ><span class="unit"> mo</span></span
+              >
+            </div>
+            <div class="hero-panel-row">
+              <span class="hpr-id">iv.</span>
+              <span class="hpr-label"
+                >Tangible <strong>artifacts</strong> per manager</span
+              >
+              <span class="hpr-v"
+                ><span data-count="25">0</span><span class="unit">+</span></span
+              >
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="journey">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-id">
+            <span class="badge">§ 01 · The journey</span>
+            <div class="meta">
+              <span>5 phases · 26 BARS items · 5 competencies</span>
+              <span><strong>18 months</strong> end-to-end · customisable</span>
+            </div>
+          </div>
+          <div>
+            <h2>A five-phase programme built for <em>behaviour change.</em></h2>
+            <p>
+              Each phase produces a tangible artifact. Each artifact moves a
+              measurable behaviour. Scroll through the curriculum — the full
+              instrument is shared in the briefing.
+            </p>
+          </div>
+        </div>
+
+        <div class="journey-shell">
+          <aside class="journey-rail">
+            <div class="rail-head">
+              <span>PHASE.MAP</span>
+              <span class="indicator">TRACKING</span>
+            </div>
+            <div id="rail-body">
+              <div class="rail-item active" data-phase="1">
+                <span class="rail-id">P01</span>
+                <div class="rail-body">
+                  <span class="rail-name">Baseline 360°</span>
+                  <span class="rail-dur">2–3 wks</span>
+                </div>
+                <span class="rail-state">live</span>
+              </div>
+              <div class="rail-item" data-phase="2">
+                <span class="rail-id">P02</span>
+                <div class="rail-body">
+                  <span class="rail-name">Debrief &amp; plan</span>
+                  <span class="rail-dur">2–3 wks</span>
+                </div>
+                <span class="rail-state">queued</span>
+              </div>
+              <div class="rail-item" data-phase="3">
+                <span class="rail-id">P03</span>
+                <div class="rail-body">
+                  <span class="rail-name">Competency journey</span>
+                  <span class="rail-dur">12–16 wks</span>
+                </div>
+                <span class="rail-state"></span>
+              </div>
+              <div class="rail-item" data-phase="4">
+                <span class="rail-id">P04</span>
+                <div class="rail-body">
+                  <span class="rail-name">Outcome 360°</span>
+                  <span class="rail-dur">2 wks</span>
+                </div>
+                <span class="rail-state"></span>
+              </div>
+              <div class="rail-item" data-phase="5">
+                <span class="rail-id">P05</span>
+                <div class="rail-body">
+                  <span class="rail-name">Impact report</span>
+                  <span class="rail-dur">3–4 wks</span>
+                </div>
+                <span class="rail-state"></span>
+              </div>
+            </div>
+            <div class="rail-foot">
+              <span>Progress</span>
+              <span class="rail-foot-val" id="rail-pct">20%</span>
+              <div class="rail-foot-bar" style="grid-column: 1 / -1">
+                <div class="rail-foot-bar-fill" id="rail-bar"></div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="phase-stream" id="phase-stream">
+            <article class="phase-entry in-view" data-phase="1">
+              <div class="phase-head-row">
+                <div class="phase-head-left">
+                  <span class="ts">T+00 · WK01</span>
+                  <span class="id">PHASE 01</span>
+                  <span class="sev">DIAGNOSTIC</span>
+                </div>
+                <span class="phase-head-right">2–3 weeks</span>
+              </div>
+              <div class="phase-body">
+                <div>
+                  <h3>Baseline <em>360°</em></h3>
+                  <p class="phase-lead">
+                    A multi-rater diagnostic across self, direct reports, peers,
+                    and supervisor. BARS-anchored items across five competencies
+                    surface every manager's strengths, blind spots, and hidden
+                    patterns. The honest starting line.
+                  </p>
+                  <div class="phase-out">
+                    <p class="phase-out-k">What you walk away with</p>
+                    <p class="phase-out-v">
+                      Personalised diagnostic report with Johari window mapping
+                    </p>
+                  </div>
+                </div>
+                <div class="phase-items">
+                  <div class="phase-items-head">
+                    <span>$ phase-01 --inside</span
+                    ><span class="count">[ 3 ]</span>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">01</span>
+                    <div>
+                      <p class="phase-item-title">Four rater groups</p>
+                      <p class="phase-item-sub">
+                        Self, direct report, peer, supervisor
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">02</span>
+                    <div>
+                      <p class="phase-item-title">26 BARS items</p>
+                      <p class="phase-item-sub">
+                        Behaviourally anchored — no vague Likert prompts
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">03</span>
+                    <div>
+                      <p class="phase-item-title">Johari window mapping</p>
+                      <p class="phase-item-sub">
+                        Surfaces Open, Blind, Hidden, Unknown patterns
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase-entry" data-phase="2">
+              <div class="phase-head-row">
+                <div class="phase-head-left">
+                  <span class="ts">T+03 · WK04</span>
+                  <span class="id">PHASE 02</span>
+                  <span class="sev">ALIGN</span>
+                </div>
+                <span class="phase-head-right">2–3 weeks</span>
+              </div>
+              <div class="phase-body">
+                <div>
+                  <h3>Debrief &amp; <em>plan</em></h3>
+                  <p class="phase-lead">
+                    Where data becomes action. A facilitator-led group debrief
+                    takes the cohort through their reports together — surfacing
+                    patterns, processing reactions, and translating findings
+                    into focused development goals co-signed with each manager's
+                    supervisor.
+                  </p>
+                  <div class="phase-out">
+                    <p class="phase-out-k">What you walk away with</p>
+                    <p class="phase-out-v">
+                      Personal Development Plan + signed supervisor contract
+                    </p>
+                  </div>
+                </div>
+                <div class="phase-items">
+                  <div class="phase-items-head">
+                    <span>$ phase-02 --inside</span
+                    ><span class="count">[ 3 ]</span>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">01</span>
+                    <div>
+                      <p class="phase-item-title">
+                        Facilitator-led group debrief
+                      </p>
+                      <p class="phase-item-sub">
+                        Cohort processes results together with structured
+                        guidance
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">02</span>
+                    <div>
+                      <p class="phase-item-title">
+                        Cohort goal-setting workshop
+                      </p>
+                      <p class="phase-item-sub">
+                        Peer stress-tests narrow goals to 2–3 priorities
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">03</span>
+                    <div>
+                      <p class="phase-item-title">Supervisor alignment</p>
+                      <p class="phase-item-sub">
+                        Co-signed development contract closes the loop
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase-entry" data-phase="3">
+              <div class="phase-head-row">
+                <div class="phase-head-left">
+                  <span class="ts">T+06 · WK08</span>
+                  <span class="id">PHASE 03</span>
+                  <span class="sev">ACTION-LEARNING</span>
+                </div>
+                <span class="phase-head-right">12–16 wks / module</span>
+              </div>
+              <div class="phase-body">
+                <div>
+                  <h3>Competency <em>journey</em></h3>
+                  <p class="phase-lead">
+                    Five competency modules, fifteen proven leadership models,
+                    twenty-five action-learning artifacts. Each model is paired
+                    with real-work practice — managers don't just learn
+                    frameworks, they apply them, produce evidence, and review
+                    with peers.
+                  </p>
+                  <div class="phase-out">
+                    <p class="phase-out-k">What you walk away with</p>
+                    <p class="phase-out-v">
+                      Twenty-five tangible artifacts + capstone deliverables
+                    </p>
+                  </div>
+                </div>
+                <div class="phase-items">
+                  <div class="phase-items-head">
+                    <span>$ phase-03 --inside</span
+                    ><span class="count">[ 3 ]</span>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">01</span>
+                    <div>
+                      <p class="phase-item-title">Five competencies</p>
+                      <p class="phase-item-sub">
+                        People, execution, communication, decisions, change
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">02</span>
+                    <div>
+                      <p class="phase-item-title">
+                        Action learning, not classroom
+                      </p>
+                      <p class="phase-item-sub">
+                        Real-work artifacts, peer-reviewed
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">03</span>
+                    <div>
+                      <p class="phase-item-title">Cohort accountability</p>
+                      <p class="phase-item-sub">
+                        Peer review drives behaviour change faster
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase-entry" data-phase="4">
+              <div class="phase-head-row">
+                <div class="phase-head-left">
+                  <span class="ts">T+14 · WK56</span>
+                  <span class="id">PHASE 04</span>
+                  <span class="sev">MEASURE</span>
+                </div>
+                <span class="phase-head-right">2 weeks</span>
+              </div>
+              <div class="phase-body">
+                <div>
+                  <h3>Outcome <em>360°</em></h3>
+                  <p class="phase-lead">
+                    The same instrument, the same raters where possible.
+                    Measures movement on every BARS item, closure of Johari
+                    blind spots, and shifts in how each rater group perceives
+                    the manager — pre vs post, item by item.
+                  </p>
+                  <div class="phase-out">
+                    <p class="phase-out-k">What you walk away with</p>
+                    <p class="phase-out-v">
+                      Pre/post comparison report with movement evidence
+                    </p>
+                  </div>
+                </div>
+                <div class="phase-items">
+                  <div class="phase-items-head">
+                    <span>$ phase-04 --inside</span
+                    ><span class="count">[ 3 ]</span>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">01</span>
+                    <div>
+                      <p class="phase-item-title">
+                        Same instrument, same raters
+                      </p>
+                      <p class="phase-item-sub">Apples-to-apples comparison</p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">02</span>
+                    <div>
+                      <p class="phase-item-title">Item-level BARS movement</p>
+                      <p class="phase-item-sub">
+                        Every behaviour tracked individually
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">03</span>
+                    <div>
+                      <p class="phase-item-title">Self vs Other gap closure</p>
+                      <p class="phase-item-sub">
+                        The truest signal of self-awareness growth
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="phase-entry" data-phase="5">
+              <div class="phase-head-row">
+                <div class="phase-head-left">
+                  <span class="ts">T+16 · WK60</span>
+                  <span class="id">PHASE 05</span>
+                  <span class="sev">READOUT</span>
+                </div>
+                <span class="phase-head-right">3–4 weeks</span>
+              </div>
+              <div class="phase-body">
+                <div>
+                  <h3>Impact <em>report</em></h3>
+                  <p class="phase-lead">
+                    Behavioural movement correlated with business outcomes —
+                    engagement, attrition, productivity. Each manager receives
+                    their personal Leadership Operating Manual. The CHRO
+                    receives a cohort-level readout designed for the next budget
+                    conversation.
+                  </p>
+                  <div class="phase-out">
+                    <p class="phase-out-k">What you walk away with</p>
+                    <p class="phase-out-v">
+                      Leadership Operating Manual + CHRO outcome readout
+                    </p>
+                  </div>
+                </div>
+                <div class="phase-items">
+                  <div class="phase-items-head">
+                    <span>$ phase-05 --inside</span
+                    ><span class="count">[ 3 ]</span>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">01</span>
+                    <div>
+                      <p class="phase-item-title">
+                        Business outcome correlation
+                      </p>
+                      <p class="phase-item-sub">
+                        Engagement, attrition, productivity shifts
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">02</span>
+                    <div>
+                      <p class="phase-item-title">
+                        Leadership Operating Manual
+                      </p>
+                      <p class="phase-item-sub">
+                        Personal artifact each manager keeps
+                      </p>
+                    </div>
+                  </div>
+                  <div class="phase-item">
+                    <span class="phase-item-id">03</span>
+                    <div>
+                      <p class="phase-item-title">
+                        CHRO &amp; supervisor readout
+                      </p>
+                      <p class="phase-item-sub">
+                        Designed for next year's budget conversation
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="section"
+      id="dashboard"
+      style="
+        border-top: 1px solid var(--line);
+        background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+      "
+    >
+      <div class="wrap">
+        <div class="section-head">
+          <div class="section-id">
+            <span class="badge">§ 02 · What you measure</span>
+            <div class="meta">
+              <span>Cohort-level readout · per manager + aggregate</span>
+              <span>Refreshed <strong>quarterly</strong> during programme</span>
+            </div>
+          </div>
+          <div>
+            <h2>Every cohort produces a <em>CHRO-ready dashboard.</em></h2>
+            <p>
+              Behavioural movement, action-learning artifacts, and downstream
+              business outcomes — all in one view. The artifact that earns
+              frontline development its seat at next year's budget table.
+            </p>
+          </div>
+        </div>
+
+        <div class="dash" id="dash-frame">
+          <div class="dash-bar">
+            <div class="dash-bar-l">
+              <span class="dash-bar-glyph">Z</span>
+              <div class="dash-bar-text">
+                <span class="k">QBR · sample cohort</span>
+                <span class="v"
+                  >Frontline manager · 142 managers · month 9 / 14</span
+                >
+              </div>
+            </div>
+            <div class="dash-bar-r">
+              <div class="item">
+                <span class="k">COACH LOAD</span><span class="v">7/142</span>
+              </div>
+              <div class="item">
+                <span class="k">NEXT</span><span class="v">OUT.360 · W34</span>
+              </div>
+              <span class="dash-pill">ON TRACK</span>
+            </div>
+          </div>
+
+          <div class="dash-block">
+            <div class="dbh">
+              <h4><span class="id">A</span>Programme summary</h4>
+              <span class="meta">TBL.01 · as of 15.05.26</span>
+            </div>
+            <div class="metrics">
+              <div class="metric">
+                <div class="metric-k">
+                  <span>Participants</span><span class="id">M01</span>
+                </div>
+                <div class="metric-v"><span data-count="142">0</span></div>
+                <div class="metric-trend">↑ 96% retention</div>
+                <svg
+                  class="sparkline"
+                  viewBox="0 0 64 22"
+                  preserveAspectRatio="none"
+                >
+                  <polyline
+                    points="0,18 8,15 16,17 24,12 32,14 40,9 48,11 56,6 64,4"
+                    fill="none"
+                    stroke="#4ADE80"
+                    stroke-width="1.2"
+                  />
+                </svg>
+              </div>
+              <div class="metric">
+                <div class="metric-k">
+                  <span>BARS movement</span><span class="id">M02</span>
+                </div>
+                <div class="metric-v amber">
+                  +<span data-count="0.58" data-decimals="2">0</span>
+                </div>
+                <div class="metric-trend">▲ Ahead of plan</div>
+                <svg
+                  class="sparkline"
+                  viewBox="0 0 64 22"
+                  preserveAspectRatio="none"
+                >
+                  <polyline
+                    points="0,20 8,17 16,15 24,14 32,11 40,8 48,9 56,5 64,3"
+                    fill="none"
+                    stroke="#F5A524"
+                    stroke-width="1.2"
+                  />
+                </svg>
+              </div>
+              <div class="metric">
+                <div class="metric-k">
+                  <span>Artifacts done</span><span class="id">M03</span>
+                </div>
+                <div class="metric-v">
+                  <span data-count="87">0</span><span class="unit">%</span>
+                </div>
+                <div class="metric-trend">↑ vs 80% target</div>
+                <svg
+                  class="sparkline"
+                  viewBox="0 0 64 22"
+                  preserveAspectRatio="none"
+                >
+                  <polyline
+                    points="0,19 8,17 16,16 24,13 32,11 40,10 48,7 56,5 64,3"
+                    fill="none"
+                    stroke="#22D3EE"
+                    stroke-width="1.2"
+                  />
+                </svg>
+              </div>
+              <div class="metric">
+                <div class="metric-k">
+                  <span>Blind-spot closure</span><span class="id">M04</span>
+                </div>
+                <div class="metric-v">
+                  <span data-count="38">0</span><span class="unit">%</span>
+                </div>
+                <div class="metric-trend">↑ vs 30% target</div>
+                <svg
+                  class="sparkline"
+                  viewBox="0 0 64 22"
+                  preserveAspectRatio="none"
+                >
+                  <polyline
+                    points="0,19 8,18 16,16 24,15 32,12 40,11 48,9 56,7 64,4"
+                    fill="none"
+                    stroke="#22D3EE"
+                    stroke-width="1.2"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-block">
+            <div class="dbh">
+              <h4>
+                <span class="id">B</span>Competency performance · three layers
+              </h4>
+              <span class="meta">TBL.02 · self · cohort · supervisor</span>
+            </div>
+            <div class="comp-table-head">
+              <span></span>
+              <span>Competency</span>
+              <span>BARS Δ</span>
+              <span>Cohort velocity</span>
+              <span>Business outcome</span>
+            </div>
+            <div class="comp-row">
+              <span class="comp-id">C1</span>
+              <div class="comp-name-cell">
+                <span class="comp-name">People leadership</span>
+                <span class="comp-sub">3 models · 5 BARS items</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v">+0.68</span>
+                <div class="comp-bar">
+                  <div class="comp-bar-fill" data-width="85"></div>
+                </div>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v"
+                  >85<span
+                    style="
+                      font-size: 0.55em;
+                      color: var(--ink-3);
+                      font-weight: 400;
+                    "
+                    >%</span
+                  ></span
+                >
+                <span class="comp-cell-sub">moving</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-biz"><strong>−24%</strong> attrition</span>
+                <span class="comp-cell-sub">12-mo trailing</span>
+              </div>
+            </div>
+            <div class="comp-row">
+              <span class="comp-id">C2</span>
+              <div class="comp-name-cell">
+                <span class="comp-name">Execution &amp; accountability</span>
+                <span class="comp-sub">3 models · 5 BARS items</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v">+0.61</span>
+                <div class="comp-bar">
+                  <div class="comp-bar-fill" data-width="76"></div>
+                </div>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v"
+                  >76<span
+                    style="
+                      font-size: 0.55em;
+                      color: var(--ink-3);
+                      font-weight: 400;
+                    "
+                    >%</span
+                  ></span
+                >
+                <span class="comp-cell-sub">moving</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-biz"
+                  ><strong>+22%</strong> KR attainment</span
+                >
+                <span class="comp-cell-sub">vs baseline</span>
+              </div>
+            </div>
+            <div class="comp-row">
+              <span class="comp-id">C3</span>
+              <div class="comp-name-cell">
+                <span class="comp-name">Communication &amp; influence</span>
+                <span class="comp-sub">3 models · 5 BARS items</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v">+0.55</span>
+                <div class="comp-bar">
+                  <div class="comp-bar-fill" data-width="69"></div>
+                </div>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v"
+                  >69<span
+                    style="
+                      font-size: 0.55em;
+                      color: var(--ink-3);
+                      font-weight: 400;
+                    "
+                    >%</span
+                  ></span
+                >
+                <span class="comp-cell-sub">moving</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-biz"><strong>−4.2 hrs</strong>/wk</span>
+                <span class="comp-cell-sub">meeting time saved</span>
+              </div>
+            </div>
+            <div class="comp-row">
+              <span class="comp-id">C4</span>
+              <div class="comp-name-cell">
+                <span class="comp-name">Decision-making</span>
+                <span class="comp-sub">3 models · 5 BARS items</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v amber">+0.49</span>
+                <div class="comp-bar warn">
+                  <div class="comp-bar-fill" data-width="61"></div>
+                </div>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v"
+                  >61<span
+                    style="
+                      font-size: 0.55em;
+                      color: var(--ink-3);
+                      font-weight: 400;
+                    "
+                    >%</span
+                  ></span
+                >
+                <span class="comp-cell-sub" style="color: var(--amber)"
+                  >behind · watch</span
+                >
+              </div>
+              <div class="comp-cell">
+                <span class="comp-biz"><strong>−31%</strong> cycle</span>
+                <span class="comp-cell-sub">decision speed</span>
+              </div>
+            </div>
+            <div class="comp-row">
+              <span class="comp-id">C5</span>
+              <div class="comp-name-cell">
+                <span class="comp-name">Change agility</span>
+                <span class="comp-sub">3 models · 5 BARS items</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v">+0.57</span>
+                <div class="comp-bar">
+                  <div class="comp-bar-fill" data-width="71"></div>
+                </div>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-v"
+                  >71<span
+                    style="
+                      font-size: 0.55em;
+                      color: var(--ink-3);
+                      font-weight: 400;
+                    "
+                    >%</span
+                  ></span
+                >
+                <span class="comp-cell-sub">moving</span>
+              </div>
+              <div class="comp-cell">
+                <span class="comp-biz"><strong>+3.4</strong>/qtr</span>
+                <span class="comp-cell-sub">team experiments</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-block">
+            <div class="dbh">
+              <h4>
+                <span class="id">C</span>BARS movement &amp; self-awareness
+              </h4>
+              <span class="meta">FIG.01 · cohort aggregate</span>
+            </div>
+            <div class="dash-split">
+              <div class="chart-wrap">
+                <div class="chart-grid">
+                  <div class="chart-y">
+                    <span>4.0</span><span>3.5</span><span>3.0</span
+                    ><span>2.5</span><span>2.0</span>
+                  </div>
+                  <div class="chart-area">
+                    <div class="target"></div>
+                    <div class="bcol">
+                      <div class="bstack">
+                        <div class="bbl" data-h="70"></div>
+                        <div class="bnow" data-h="87"></div>
+                      </div>
+                      <div class="blabel">C1</div>
+                    </div>
+                    <div class="bcol">
+                      <div class="bstack">
+                        <div class="bbl" data-h="70"></div>
+                        <div class="bnow" data-h="85"></div>
+                      </div>
+                      <div class="blabel">C2</div>
+                    </div>
+                    <div class="bcol">
+                      <div class="bstack">
+                        <div class="bbl" data-h="68"></div>
+                        <div class="bnow" data-h="81"></div>
+                      </div>
+                      <div class="blabel">C3</div>
+                    </div>
+                    <div class="bcol">
+                      <div class="bstack">
+                        <div class="bbl" data-h="68"></div>
+                        <div class="bnow warn" data-h="80"></div>
+                      </div>
+                      <div class="blabel">C4</div>
+                    </div>
+                    <div class="bcol">
+                      <div class="bstack">
+                        <div class="bbl" data-h="70"></div>
+                        <div class="bnow" data-h="84"></div>
+                      </div>
+                      <div class="blabel">C5</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="chart-legend">
+                  <span><span class="legend-sq legend-bl"></span>Baseline</span>
+                  <span><span class="legend-sq legend-now"></span>Current</span>
+                  <span
+                    ><span class="legend-sq legend-tgt"></span>Target
+                    +0.50</span
+                  >
+                </div>
+              </div>
+
+              <div class="johari-wrap">
+                <div class="johari">
+                  <div class="jcell">
+                    <p class="jcell-lab">Open · self &amp; other</p>
+                    <div class="jcell-row">
+                      <span class="jcell-v">48<span class="unit">%</span></span
+                      ><span class="jcell-d up">↑ +12</span>
+                    </div>
+                  </div>
+                  <div class="jcell">
+                    <p class="jcell-lab">Blind · other only</p>
+                    <div class="jcell-row">
+                      <span class="jcell-v">19<span class="unit">%</span></span
+                      ><span class="jcell-d big">↓ −11</span>
+                    </div>
+                  </div>
+                  <div class="jcell">
+                    <p class="jcell-lab">Hidden · self only</p>
+                    <div class="jcell-row">
+                      <span class="jcell-v">22<span class="unit">%</span></span
+                      ><span class="jcell-d dn">↓ −4</span>
+                    </div>
+                  </div>
+                  <div class="jcell">
+                    <p class="jcell-lab">Unknown · neither</p>
+                    <div class="jcell-row">
+                      <span class="jcell-v">11<span class="unit">%</span></span
+                      ><span class="jcell-d up">↑ +3</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="johari-axes">
+                  <span>← KNOWN TO OTHERS</span>
+                  <span>SELF-KNOWN →</span>
+                </div>
+              </div>
+            </div>
+            <div class="dash-watch">
+              <span class="dwl">ALERT · C4</span>
+              <p class="dwb">
+                <strong>C4 BARS movement</strong> tracking slightly behind
+                target (+0.49 vs +0.50). Coaches are alerted automatically when
+                any measurement layer drifts — early intervention rather than
+                end-of-programme surprise.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" id="connect">
+      <div class="wrap">
+        <div class="cta-grid">
+          <div>
+            <span class="cta-prompt">§ 03 · Want the full picture?</span>
+            <h2>The programme is best <em>shown, not summarised.</em></h2>
+            <p>
+              Book a 30-minute walkthrough. We share the complete curriculum,
+              the full BARS instrument, sample participant reports, and case
+              studies from current cohorts.
+            </p>
+          </div>
+          <aside class="cta-side">
+            <div class="cta-side-head">
+              <span>$ next-steps</span>
+              <span>[ 02 ]</span>
+            </div>
+            <div class="cta-actions">
+              <a href="mailto:hello@zrutam.com" class="cta-btn cta-btn-primary">
+                <span>Book a briefing</span><span>→</span>
+              </a>
+              <a
+                href="https://www.zrutam.com"
+                class="cta-btn cta-btn-secondary"
+              >
+                <span>Visit zrutam.com</span><span>→</span>
+              </a>
+            </div>
+            <p class="cta-side-foot">
+              Typical briefing · 30 min · attended by CHRO + Head of L&amp;D ·
+              sample participant reports under NDA
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot">
+          <span
+            ><strong>Zrutam / Accelerator</strong> · A leadership development
+            platform for the layer that runs the business</span
+          >
+          <span>India · UAE · Singapore</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function animateCounter(el, target, decimals, suffix) {
+        var duration = 1400,
+          start = performance.now();
+        function frame(now) {
+          var t = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - t, 3);
+          var current = target * eased;
+          el.textContent =
+            (decimals ? current.toFixed(decimals) : Math.round(current)) +
+            (suffix || "");
+          if (t < 1) requestAnimationFrame(frame);
+          else
+            el.textContent =
+              (decimals ? target.toFixed(decimals) : target) + (suffix || "");
+        }
+        requestAnimationFrame(frame);
+      }
+
+      window.addEventListener("load", function () {
+        document.querySelectorAll(".hpr-v [data-count]").forEach(function (el) {
+          animateCounter(el, parseFloat(el.dataset.count), 0);
+        });
+      });
+
+      // dash trigger
+      var dashFrame = document.getElementById("dash-frame");
+      var dashTriggered = false;
+      function triggerDash() {
+        if (dashTriggered) return;
+        dashTriggered = true;
+        document
+          .querySelectorAll(".metric-v [data-count]")
+          .forEach(function (el) {
+            animateCounter(
+              el,
+              parseFloat(el.dataset.count),
+              parseInt(el.dataset.decimals || "0"),
+            );
+          });
+        setTimeout(function () {
+          document.querySelectorAll(".comp-bar-fill").forEach(function (el) {
+            el.style.width = el.dataset.width + "%";
+          });
+        }, 200);
+        setTimeout(function () {
+          document.querySelectorAll(".bbl, .bnow").forEach(function (el) {
+            el.style.height = el.dataset.h + "%";
+          });
+        }, 300);
+      }
+      if ("IntersectionObserver" in window && dashFrame) {
+        var dashObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                triggerDash();
+                dashObs.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1 },
+        );
+        dashObs.observe(dashFrame);
+      }
+
+      // scroll-driven phase reveal
+      var phases = document.querySelectorAll(".phase-entry");
+      var rails = document.querySelectorAll(".rail-item");
+      var pct = document.getElementById("rail-pct");
+      var bar = document.getElementById("rail-bar");
+      var current = 1;
+
+      function setActive(p) {
+        if (p === current) return;
+        current = p;
+        rails.forEach(function (m) {
+          var n = parseInt(m.dataset.phase);
+          m.classList.remove("active", "complete");
+          var st = m.querySelector(".rail-state");
+          if (n === p) {
+            m.classList.add("active");
+            st.textContent = "live";
+          } else if (n < p) {
+            m.classList.add("complete");
+            st.textContent = "done";
+          } else if (n === p + 1) {
+            st.textContent = "queued";
+          } else {
+            st.textContent = "";
+          }
+        });
+        pct.textContent = p * 20 + "%";
+        bar.style.width = p * 20 + "%";
+      }
+
+      if ("IntersectionObserver" in window) {
+        var phaseObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("in-view");
+                setActive(parseInt(entry.target.dataset.phase));
+              }
+            });
+          },
+          { threshold: 0.35, rootMargin: "-15% 0px -35% 0px" },
+        );
+        phases.forEach(function (p) {
+          phaseObs.observe(p);
+        });
+      }
+
+      rails.forEach(function (m) {
+        m.addEventListener("click", function () {
+          var p = parseInt(m.dataset.phase);
+          var t = document.querySelector(
+            '.phase-entry[data-phase="' + p + '"]',
+          );
+          if (t) {
+            var y = t.getBoundingClientRect().top + window.scrollY - 80;
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
