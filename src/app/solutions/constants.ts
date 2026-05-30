@@ -84,4 +84,21 @@ export const SOLUTIONS = [
     targetAudience: "HR Analytics Teams, CHROs",
     highlight: "Real-time skill gap identification and analytics",
   },
+  {
+    title: "AI Mastery Quiz",
+    slug: "quiz",
+    shortTitle: "AI Mastery Quiz",
+    description:
+      "A fun, interactive assessment to help your team benchmark AI knowledge and prompt skills.",
+    icon: "quiz",
+    features: [
+      "11-question mastery assessment",
+      "Instant AI skill level feedback",
+      "Designed for learners and L&D teams",
+      "Easy to share across your organization",
+      "Supports quick engagement and discovery",
+    ],
+    targetAudience: "L&D teams, learners, AI enthusiasts",
+    highlight: "Discover AI readiness with an interactive quiz",
+  },
 ];
