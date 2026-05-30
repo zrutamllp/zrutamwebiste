@@ -1,3 +1,4 @@
+import React from "react";
 import { Metadata } from "next";
 import { SOLUTIONS } from "@/app/solutions/constants";
 import SolutionCard from "@/shared/components/SolutionCard";

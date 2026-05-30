@@ -79,6 +79,15 @@ function SolutionIcon({ icon }: { icon: string }) {
         </svg>
       );
 
+    case "quiz":
+      // Quiz icon
+      return (
+        <svg className={iconClass} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 9.75h.008v.008H9V9.75zm6 0h.008v.008H15V9.75zm-6 6h.008v.008H9v-.008zm6 0h.008v.008H15v-.008z" />
+        </svg>
+      );
+
     default:
       // Fallback generic icon
       return (
