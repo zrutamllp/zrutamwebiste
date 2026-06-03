@@ -29,7 +29,7 @@ export default function ResultSlide({
               <path d="M8 2h8l1 4h3v2.5a6.5 6.5 0 01-5 6.371V16a4 4 0 01-8 0v-1.129A6.5 6.5 0 014 8.5V6h3l1-4zM7 6h10v2.5a4.5 4.5 0 01-3 4.33V14a2 2 0 01-4 0v-1.17A4.5 4.5 0 017 8.5V6z" />
             </svg>
           </div>
-          <p className="text-slate-400 uppercase tracking-widest text-xs font-bold mb-2">Your Mastery Level</p>
+          <p className="text-slate-400 uppercase tracking-widest text-xs font-bold mb-2">Your AI Level</p>
           <h2 className={`text-3xl sm:text-4xl font-extrabold mb-6 bg-gradient-to-r ${userLevel.color} text-transparent bg-clip-text leading-tight`}>
             {userLevel.title}
           </h2>
@@ -64,7 +64,7 @@ export default function ResultSlide({
               <path d="M3 12v5h5" />
               <path d="M21 12a9 9 0 00-8.97-8.364" />
             </svg>
-            Retake Quiz
+            Retake Assessment
           </button>
         </div>
       </div>

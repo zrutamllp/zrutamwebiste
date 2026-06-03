@@ -25,17 +25,17 @@ export default function WelcomeSlide({ onStart, active }: WelcomeSlideProps) {
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold mb-4 text-slate-800">
           Discover Your <br />
-          <span className="text-gradient">AI Mastery</span>
+          <span className="text-gradient">AI Assessment</span>
         </h1>
         <p className="text-slate-500 mb-8 text-sm sm:text-base leading-relaxed">
-          Take this quick 11-question interactive quiz to find out your true AI level. Are you a beginner or a prompt wizard?
+          Take this quick 11-question interactive assessment to find out your true AI level. Are you a beginner or a prompt wizard?
         </p>
         <button
           type="button"
           onClick={onStart}
           className="w-full px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-200 transition-all transform hover:-translate-y-1 active:translate-y-0 text-lg flex justify-center items-center gap-3"
         >
-          Start Quiz
+          Start Assessment
           <svg
             viewBox="0 0 24 24"
             className="w-5 h-5"
