@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Metadata } from "next";
 import { SOLUTIONS } from "@/app/solutions/constants";
 import SolutionCard from "@/shared/components/SolutionCard";
@@ -25,6 +26,14 @@ export default function SolutionsPage() {
             designed to transform your workforce and drive measurable business
             outcomes across APAC.
           </p>
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="/solutions/quiz"
+              className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-navy shadow-xl shadow-white/20 transition hover:bg-slate-100"
+            >
+              AI Assessment
+            </Link>
+          </div>
         </div>
       </section>
 

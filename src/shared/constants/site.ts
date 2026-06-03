@@ -17,7 +17,7 @@ export const NAV_LINKS = [
       { label: "Upskilling & Reskilling", href: "/solutions/upskilling-reskilling" },
       { label: "Custom E-Learning", href: "/solutions/custom-elearning" },
       { label: "AI Skills Assessment", href: "/solutions/ai-skills-assessment" },
-      { label: "AI Mastery Quiz", href: "/solutions/quiz" },
+      { label: "AI Assessment", href: "/solutions/quiz" },
       { label: "Accelerator", href: "/solutions/accelerator" },
     ],
   },

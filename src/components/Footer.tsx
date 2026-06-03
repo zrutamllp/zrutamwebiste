@@ -6,7 +6,9 @@ const solutionLinks = [
   { label: "IDP Tool (RSI\u2122)", href: "/solutions/idp-tool" },
   { label: "Upskilling & Reskilling", href: "/solutions/upskilling-reskilling" },
   { label: "Custom E-Learning", href: "/solutions/custom-elearning" },
-  { label: "AI Skills Assessment", href: "/solutions/ai-skills-assessment" },  { label: "AI Mastery Quiz", href: "/solutions/quiz" },];
+  { label: "AI Skills Assessment", href: "/solutions/ai-skills-assessment" },
+  { label: "AI Assessment", href: "/solutions/quiz" },
+];
 
 const resourceLinks = [
   { label: "Blog", href: "/blog" },

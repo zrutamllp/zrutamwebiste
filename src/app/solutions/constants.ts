@@ -85,9 +85,9 @@ export const SOLUTIONS = [
     highlight: "Real-time skill gap identification and analytics",
   },
   {
-    title: "AI Mastery Quiz",
+    title: "AI Assessment",
     slug: "quiz",
-    shortTitle: "AI Mastery Quiz",
+    shortTitle: "AI Assessment",
     description:
       "A fun, interactive assessment to help your team benchmark AI knowledge and prompt skills.",
     icon: "quiz",
@@ -99,6 +99,6 @@ export const SOLUTIONS = [
       "Supports quick engagement and discovery",
     ],
     targetAudience: "L&D teams, learners, AI enthusiasts",
-    highlight: "Discover AI readiness with an interactive quiz",
+    highlight: "Discover AI readiness with an interactive assessment",
   },
 ];
