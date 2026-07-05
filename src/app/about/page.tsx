@@ -98,7 +98,7 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
             <FadeInSection>
@@ -109,10 +109,10 @@ export default function AboutPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-bold text-navy mb-4">
+                <h2 className="text-3xl font-bold text-white tracking-tight mb-4">
                   Our Vision
                 </h2>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-gray-400 text-lg leading-relaxed">
                   To be the leading AI-powered corporate L&D partner for
                   enterprises across the APAC region, enabling every organization
                   to unlock the full potential of its workforce through
@@ -127,10 +127,10 @@ export default function AboutPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-bold text-navy mb-4">
+                <h2 className="text-3xl font-bold text-white tracking-tight mb-4">
                   Our Mission
                 </h2>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <p className="text-gray-400 text-lg leading-relaxed">
                   To empower organizations with AI-driven learning tools and
                   frameworks that make leadership development, skills assessment,
                   and career growth accessible, personalized, and impactful. We
@@ -144,14 +144,14 @@ export default function AboutPage() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
                 Our Values
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                 The principles that guide everything we build and every
                 partnership we form.
               </p>
@@ -160,14 +160,14 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <FadeInSection key={value.title} delay={index * 0.1}>
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 text-center h-full">
-                  <div className="w-14 h-14 bg-teal-50 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <div className="glass-card p-8 text-center h-full">
+                  <div className="w-14 h-14 bg-teal/10 border border-teal/20 rounded-xl flex items-center justify-center mx-auto mb-6">
                     {value.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-navy mb-3">
+                  <h3 className="text-xl font-semibold text-white mb-3">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed text-sm">
+                  <p className="text-gray-400 leading-relaxed text-sm">
                     {value.description}
                   </p>
                 </div>
@@ -181,14 +181,14 @@ export default function AboutPage() {
       <AwardsSection />
 
       {/* Team Placeholder */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
                 Our Team
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                 A passionate team of L&D experts, technologists, and
                 strategists dedicated to transforming workforce development.
               </p>
@@ -203,11 +203,11 @@ export default function AboutPage() {
             ].map((member, index) => (
               <FadeInSection key={index} delay={index * 0.1}>
                 <div className="text-center">
-                  <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-navy">
+                  <div className="w-32 h-32 bg-white/10 border border-white/10 rounded-full mx-auto mb-4" />
+                  <h3 className="text-lg font-semibold text-white">
                     {member.name}
                   </h3>
-                  <p className="text-gray-500 text-sm">{member.role}</p>
+                  <p className="text-gray-400 text-sm">{member.role}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -216,14 +216,14 @@ export default function AboutPage() {
       </section>
 
       {/* Markets Served */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
                 Markets We Serve
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                 Delivering impact across three of the most dynamic economic
                 regions in the world.
               </p>
@@ -232,20 +232,20 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {markets.map((market, index) => (
               <FadeInSection key={market.region} delay={index * 0.15}>
-                <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow duration-300 h-full">
+                <div className="glass-card p-8 h-full">
                   <div className="w-12 h-12 bg-gradient-to-br from-teal to-teal-500 rounded-xl flex items-center justify-center mb-6">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold text-navy mb-3">
+                  <h3 className="text-2xl font-bold text-white mb-3">
                     {market.region}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <p className="text-gray-400 leading-relaxed mb-4">
                     {market.description}
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-gray-400">
                     <span className="font-medium">Key cities:</span>{" "}
                     {market.cities}
                   </p>

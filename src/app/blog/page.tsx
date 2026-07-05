@@ -33,7 +33,7 @@ export default function BlogPage() {
       </section>
 
       {/* Filter & Posts */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Category Filters */}
           <div className="flex flex-wrap gap-3 mb-12 justify-center">
@@ -43,8 +43,8 @@ export default function BlogPage() {
                 onClick={() => setActiveCategory(category)}
                 className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
                   activeCategory === category
-                    ? "bg-teal text-white shadow-md shadow-teal/25"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                    ? "bg-teal text-white shadow-md shadow-teal/25 hover:shadow-glow-teal"
+                    : "bg-white/10 text-gray-300 hover:bg-white/20"
                 }`}
               >
                 {category}
@@ -60,7 +60,7 @@ export default function BlogPage() {
                 href={`/blog/${post.slug}`}
                 className="group"
               >
-                <article className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300 hover:border-teal/20 h-full flex flex-col">
+                <article className="glass-card overflow-hidden hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300 h-full flex flex-col">
                   {/* Placeholder Image */}
                   <div className="h-48 bg-gradient-to-br from-navy to-navy-50 relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent" />
@@ -71,7 +71,7 @@ export default function BlogPage() {
                     </div>
                   </div>
                   <div className="p-6 flex flex-col flex-1">
-                    <div className="flex items-center gap-3 text-sm text-gray-500 mb-3">
+                    <div className="flex items-center gap-3 text-sm text-gray-400 mb-3">
                       <time dateTime={post.date}>
                         {new Date(post.date).toLocaleDateString("en-US", {
                           month: "short",
@@ -79,16 +79,16 @@ export default function BlogPage() {
                           year: "numeric",
                         })}
                       </time>
-                      <span className="w-1 h-1 rounded-full bg-gray-300" />
+                      <span className="w-1 h-1 rounded-full bg-gray-600" />
                       <span>{post.readTime}</span>
                     </div>
-                    <h2 className="text-xl font-semibold text-navy mb-3 group-hover:text-teal transition-colors leading-snug">
+                    <h2 className="text-xl font-semibold text-white tracking-tight mb-3 group-hover:text-teal-300 transition-colors leading-snug">
                       {post.title}
                     </h2>
-                    <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                    <p className="text-gray-400 text-sm leading-relaxed flex-1">
                       {post.excerpt}
                     </p>
-                    <div className="mt-4 pt-4 border-t border-gray-100">
+                    <div className="mt-4 pt-4 border-t border-white/10">
                       <span className="text-teal text-sm font-medium group-hover:underline inline-flex items-center gap-1">
                         Read Article
                         <svg
@@ -114,7 +114,7 @@ export default function BlogPage() {
 
           {filteredPosts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">
+              <p className="text-gray-400 text-lg">
                 No posts found in this category.
               </p>
             </div>

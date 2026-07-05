@@ -113,7 +113,7 @@ export default function BlogPostPage({ params }: PageProps) {
             </svg>
             Back to Blog
           </Link>
-          <span className="inline-block px-3 py-1 bg-teal/10 text-teal text-sm font-medium rounded-full mb-4">
+          <span className="inline-block px-3 py-1 bg-teal/10 border border-teal/20 text-teal-300 text-sm font-medium rounded-full mb-4">
             {post.category}
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
@@ -136,7 +136,7 @@ export default function BlogPostPage({ params }: PageProps) {
       </section>
 
       {/* Article Content */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Main Content */}
@@ -144,7 +144,7 @@ export default function BlogPostPage({ params }: PageProps) {
               <div className="prose prose-lg max-w-none">
                 {content.map((paragraph, index) => (
                   <FadeInSection key={index} delay={index * 0.1}>
-                    <p className="text-gray-700 leading-relaxed mb-6 text-lg">
+                    <p className="text-gray-300 leading-relaxed mb-6 text-lg">
                       {paragraph}
                     </p>
                   </FadeInSection>
@@ -152,13 +152,13 @@ export default function BlogPostPage({ params }: PageProps) {
               </div>
 
               {/* Tags */}
-              <div className="mt-12 pt-8 border-t border-gray-200">
+              <div className="mt-12 pt-8 border-t border-white/10">
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-sm text-gray-500 mr-2">Tags:</span>
+                  <span className="text-sm text-gray-400 mr-2">Tags:</span>
                   {post.keyword.split(" ").map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded-full"
+                      className="px-3 py-1 bg-white/10 text-gray-300 text-sm rounded-full"
                     >
                       {tag}
                     </span>
@@ -170,7 +170,7 @@ export default function BlogPostPage({ params }: PageProps) {
             {/* Sidebar */}
             <aside className="lg:col-span-1">
               <div className="sticky top-24">
-                <h3 className="text-lg font-semibold text-navy mb-6">
+                <h3 className="text-lg font-semibold text-white mb-6">
                   Related Articles
                 </h3>
                 <div className="space-y-6">
@@ -180,14 +180,14 @@ export default function BlogPostPage({ params }: PageProps) {
                       href={`/blog/${related.slug}`}
                       className="block group"
                     >
-                      <div className="bg-gray-50 rounded-xl p-5 hover:bg-gray-100 transition-colors border border-gray-100">
-                        <span className="text-xs text-teal font-medium">
+                      <div className="glass-card p-5 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300">
+                        <span className="text-xs text-teal-300 font-medium">
                           {related.category}
                         </span>
-                        <h4 className="text-sm font-semibold text-navy mt-1 group-hover:text-teal transition-colors leading-snug">
+                        <h4 className="text-sm font-semibold text-white mt-1 group-hover:text-teal-300 transition-colors leading-snug">
                           {related.title}
                         </h4>
-                        <div className="flex items-center gap-2 mt-2 text-xs text-gray-500">
+                        <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
                           <time dateTime={related.date}>
                             {new Date(related.date).toLocaleDateString(
                               "en-US",
@@ -197,7 +197,7 @@ export default function BlogPostPage({ params }: PageProps) {
                               }
                             )}
                           </time>
-                          <span className="w-1 h-1 rounded-full bg-gray-300" />
+                          <span className="w-1 h-1 rounded-full bg-gray-600" />
                           <span>{related.readTime}</span>
                         </div>
                       </div>
