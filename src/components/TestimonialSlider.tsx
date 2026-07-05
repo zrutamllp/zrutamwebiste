@@ -77,14 +77,26 @@ export default function TestimonialSlider() {
   const current = testimonials[activeIndex];
 
   return (
-    <section className="py-16 lg:py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-16 lg:py-24 bg-surface overflow-hidden">
+      {/* Decorative giant quote */}
+      <div
+        className="absolute top-8 left-1/2 -translate-x-1/2 text-[200px] lg:text-[280px] leading-none
+                   font-serif text-white/[0.03] select-none pointer-events-none"
+        aria-hidden="true"
+      >
+        &ldquo;
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-navy mb-4">
+          <span className="block text-teal-300 text-sm font-semibold uppercase tracking-[0.2em] mb-3">
+            Testimonials
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Trusted by leading enterprises across India, Middle East, and Southeast Asia.
           </p>
         </div>
@@ -107,7 +119,7 @@ export default function TestimonialSlider() {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
-                <div className="bg-white rounded-2xl p-8 sm:p-10 lg:p-12 shadow-sm border border-gray-100">
+                <div className="glass-card p-8 sm:p-10 lg:p-12">
                   {/* Quote Mark */}
                   <div className="mb-6">
                     <svg
@@ -120,7 +132,7 @@ export default function TestimonialSlider() {
                   </div>
 
                   {/* Quote Text */}
-                  <blockquote className="text-navy text-base sm:text-lg leading-relaxed mb-8">
+                  <blockquote className="text-gray-200 text-base sm:text-lg leading-relaxed mb-8">
                     &ldquo;{current.quote}&rdquo;
                   </blockquote>
 
@@ -131,10 +143,10 @@ export default function TestimonialSlider() {
                       {current.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-semibold text-navy text-sm sm:text-base">
+                      <p className="font-semibold text-white text-sm sm:text-base">
                         {current.name}
                       </p>
-                      <p className="text-gray-500 text-sm">
+                      <p className="text-gray-400 text-sm">
                         {current.title}, {current.company}
                       </p>
                     </div>
@@ -153,8 +165,8 @@ export default function TestimonialSlider() {
                 aria-label={`Go to testimonial ${index + 1}`}
                 className={`rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? "w-8 h-2.5 bg-teal"
-                    : "w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400"
+                    ? "w-8 h-2.5 bg-teal shadow-glow-teal"
+                    : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
                 }`}
               />
             ))}
@@ -165,9 +177,9 @@ export default function TestimonialSlider() {
             <button
               onClick={() => paginate(-1)}
               aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full border border-gray-200 hover:border-teal
-                         hover:text-teal flex items-center justify-center text-gray-400
-                         transition-colors"
+              className="w-10 h-10 rounded-full border border-white/15 hover:border-teal/50
+                         hover:text-teal-300 hover:shadow-glow-teal flex items-center justify-center
+                         text-gray-400 transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -176,9 +188,9 @@ export default function TestimonialSlider() {
             <button
               onClick={() => paginate(1)}
               aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full border border-gray-200 hover:border-teal
-                         hover:text-teal flex items-center justify-center text-gray-400
-                         transition-colors"
+              className="w-10 h-10 rounded-full border border-white/15 hover:border-teal/50
+                         hover:text-teal-300 hover:shadow-glow-teal flex items-center justify-center
+                         text-gray-400 transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
