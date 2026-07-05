@@ -16,8 +16,13 @@ html {
 
 body {
   font-family: "Inter", system-ui, sans-serif;
-  color: #1F2937;
-  background: #ffffff;
+  color: #CBD5E1;
+  background: #050A14;
+}
+
+::selection {
+  background: rgba(14, 165, 233, 0.35);
+  color: #fff;
 }
 
 @layer utilities {
@@ -29,5 +34,31 @@ body {
   }
   .gradient-teal {
     background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+  }
+  .text-gradient {
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-teal to-sky-400;
+  }
+  .glass-card {
+    @apply bg-white/[0.04] border border-white/10 backdrop-blur-md rounded-2xl;
+  }
+  .bg-grid-dots {
+    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+  .aurora-blob {
+    @apply absolute rounded-full blur-3xl pointer-events-none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

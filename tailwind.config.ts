@@ -47,9 +47,50 @@ const config: Config = {
           700: "#374151",
           800: "#1F2937",
         },
+        surface: {
+          DEFAULT: "#050A14",
+          raised: "#0A1628",
+          overlay: "#0D1B2E",
+        },
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+      },
+      boxShadow: {
+        "glow-teal": "0 0 40px -8px rgba(14, 165, 233, 0.4)",
+        "glow-teal-lg": "0 0 60px -10px rgba(14, 165, 233, 0.55)",
+        "glow-amber": "0 0 40px -8px rgba(245, 158, 11, 0.45)",
+      },
+      keyframes: {
+        "aurora-1": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(80px, -60px) scale(1.15)" },
+          "66%": { transform: "translate(-40px, 40px) scale(0.95)" },
+        },
+        "aurora-2": {
+          "0%, 100%": { transform: "translate(0, 0) scale(1)" },
+          "33%": { transform: "translate(-70px, 50px) scale(1.1)" },
+          "66%": { transform: "translate(50px, -30px) scale(0.9)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "200% 50%" },
+          "100%": { backgroundPosition: "-200% 50%" },
+        },
+        "float-slow": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-12px)" },
+        },
+      },
+      animation: {
+        "aurora-1": "aurora-1 18s ease-in-out infinite",
+        "aurora-2": "aurora-2 22s ease-in-out infinite",
+        marquee: "marquee 35s linear infinite",
+        shimmer: "shimmer 6s linear infinite",
+        "float-slow": "float-slow 6s ease-in-out infinite",
       },
     },
   },
