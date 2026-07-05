@@ -25,12 +25,14 @@ export default function SolutionDetailPage({
   return (
     <>
       {/* Hero */}
-      <section className="gradient-navy py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-surface py-20 md:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-grid-dots opacity-30 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
+        <div className="aurora-blob animate-aurora-1 -top-40 -right-20 w-[500px] h-[500px] bg-teal/10" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl">
             <Link
               href="/solutions"
-              className="inline-flex items-center text-teal hover:text-teal-200 text-sm font-medium mb-6 transition-colors"
+              className="inline-flex items-center text-teal-300 hover:text-teal-200 text-sm font-medium mb-6 transition-colors"
             >
               <svg
                 className="w-4 h-4 mr-2"
@@ -47,10 +49,10 @@ export default function SolutionDetailPage({
               </svg>
               Back to Solutions
             </Link>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
               {solution.title}
             </h1>
-            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
               {solution.description}
             </p>
           </div>
@@ -58,13 +60,13 @@ export default function SolutionDetailPage({
       </section>
 
       {/* Overview */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <FadeInSection>
               <div>
-                <h2 className="text-3xl font-bold text-navy mb-6">Overview</h2>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <h2 className="text-3xl font-bold text-white tracking-tight mb-6">Overview</h2>
+                <p className="text-gray-400 text-lg leading-relaxed">
                   {longDescription}
                 </p>
               </div>
@@ -72,8 +74,8 @@ export default function SolutionDetailPage({
 
             {/* Key Highlight Callout */}
             <FadeInSection delay={0.2}>
-              <div className="bg-gradient-to-br from-teal-50 to-teal-100/50 rounded-2xl p-8 border border-teal-200/50">
-                <div className="w-12 h-12 bg-teal rounded-xl flex items-center justify-center mb-4">
+              <div className="glass-card p-8 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300">
+                <div className="w-12 h-12 bg-gradient-to-br from-teal to-sky-500 rounded-xl flex items-center justify-center mb-4 shadow-glow-teal">
                   <svg
                     className="w-6 h-6 text-white"
                     fill="none"
@@ -88,10 +90,10 @@ export default function SolutionDetailPage({
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-navy mb-2">
+                <h3 className="text-xl font-semibold text-white mb-2">
                   Key Highlight
                 </h3>
-                <p className="text-gray-700 text-lg leading-relaxed">
+                <p className="text-gray-300 text-lg leading-relaxed">
                   {solution.highlight}
                 </p>
               </div>
@@ -101,20 +103,20 @@ export default function SolutionDetailPage({
       </section>
 
       {/* Features */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
-            <h2 className="text-3xl font-bold text-navy mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white tracking-tight mb-12 text-center">
               Key Features
             </h2>
           </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {solution.features.map((feature, index) => (
               <FadeInSection key={index} delay={index * 0.1}>
-                <div className="flex items-start gap-4 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <div className="flex-shrink-0 w-8 h-8 bg-teal/10 rounded-lg flex items-center justify-center mt-0.5">
+                <div className="flex items-start gap-4 glass-card !rounded-xl p-6 hover:border-teal/30 transition-colors duration-300">
+                  <div className="flex-shrink-0 w-8 h-8 bg-teal/15 border border-teal/25 rounded-lg flex items-center justify-center mt-0.5">
                     <svg
-                      className="w-5 h-5 text-teal"
+                      className="w-5 h-5 text-teal-300"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -127,7 +129,7 @@ export default function SolutionDetailPage({
                       />
                     </svg>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">{feature}</p>
+                  <p className="text-gray-300 leading-relaxed">{feature}</p>
                 </div>
               </FadeInSection>
             ))}
@@ -136,14 +138,14 @@ export default function SolutionDetailPage({
       </section>
 
       {/* Target Audience */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-navy mb-6">
+              <h2 className="text-3xl font-bold text-white tracking-tight mb-6">
                 Who Is This For?
               </h2>
-              <div className="bg-navy-50 rounded-2xl p-8">
+              <div className="glass-card p-8 hover:border-amber/25 transition-colors duration-300">
                 <div className="w-16 h-16 bg-amber/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
                   <svg
                     className="w-8 h-8 text-amber"
@@ -159,7 +161,7 @@ export default function SolutionDetailPage({
                     />
                   </svg>
                 </div>
-                <p className="text-xl text-navy font-medium">
+                <p className="text-xl text-gray-200 font-medium">
                   {solution.targetAudience}
                 </p>
               </div>
@@ -169,26 +171,27 @@ export default function SolutionDetailPage({
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 gradient-navy">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative py-20 bg-surface overflow-hidden">
+        <div className="aurora-blob animate-aurora-2 -bottom-40 left-1/4 w-[450px] h-[450px] bg-teal/[0.08]" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeInSection>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
               Ready to Get Started?
             </h2>
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto mb-10">
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
               Schedule a personalized demo to see how {solution.shortTitle} can
               transform your organization.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-amber/25"
+                className="inline-flex items-center justify-center px-8 py-4 bg-amber hover:bg-amber-400 text-navy font-semibold rounded-lg transition-all duration-300 shadow-glow-amber hover:-translate-y-1"
               >
                 Book a Demo
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-all duration-200"
+                className="inline-flex items-center justify-center px-8 py-4 glass-card !rounded-lg text-white font-semibold hover:border-teal/40 hover:bg-white/[0.08] transition-all duration-300"
               >
                 Contact Sales
               </Link>
