@@ -138,7 +138,7 @@ const CompanyLogo = ({ src, name, className = "" }: { src: string; name: string;
     <img
       src={src}
       alt={`${name} logo`}
-      className={`object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100 ${className}`}
+      className={`object-contain filter grayscale invert transition-all duration-300 opacity-60 hover:opacity-90 ${className}`}
       onError={() => setHasError(true)}
     />
   );
@@ -154,36 +154,36 @@ const TimelineNode = ({ company, role, description, highlights, logoSrc, isCurre
   isCurrent: boolean;
 }) => (
   <div className="relative pl-10 md:pl-0 w-full group">
-    <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-slate-200 -translate-x-1/2 group-last:bg-transparent"></div>
-    <div className="md:hidden absolute left-3 top-0 bottom-0 w-px bg-slate-200 group-last:bg-transparent"></div>
+    <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 group-last:bg-transparent"></div>
+    <div className="md:hidden absolute left-3 top-0 bottom-0 w-px bg-white/10 group-last:bg-transparent"></div>
     <div className={`absolute left-3 md:left-1/2 top-8 md:top-6 -translate-x-1/2 w-4 h-4 rounded-full border-4 box-content transition-all duration-500 z-10
-      ${isCurrent ? 'bg-indigo-600 border-indigo-100 shadow-[0_0_15px_rgba(79,70,229,0.5)] scale-110 md:scale-125' : 'bg-white border-slate-300 group-hover:border-indigo-400 group-hover:scale-110'}`}>
+      ${isCurrent ? 'bg-indigo-500 border-indigo-500/30 shadow-[0_0_15px_rgba(99,102,241,0.6)] scale-110 md:scale-125' : 'bg-surface-overlay border-white/20 group-hover:border-indigo-400 group-hover:scale-110'}`}>
     </div>
     <div className={`md:w-1/2 ${isCurrent ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'} pb-12 md:pb-16`}>
       <FadeIn direction={isCurrent ? "right" : "left"} delay={100}>
-        <div className={`bg-white p-6 md:p-8 rounded-2xl border transition-all duration-500 hover:shadow-2xl
-          ${isCurrent ? 'border-indigo-300 shadow-xl shadow-indigo-100/50 relative overflow-hidden' : 'border-slate-100 shadow-sm hover:border-indigo-100'}`}>
+        <div className={`glass-card p-6 md:p-8 transition-all duration-500 hover:shadow-glow-teal
+          ${isCurrent ? 'border-indigo-500/40 shadow-xl shadow-indigo-500/10 relative overflow-hidden' : 'hover:border-indigo-400/30'}`}>
 
-          {isCurrent && <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>}
+          {isCurrent && <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/10 rounded-bl-full -mr-8 -mt-8 pointer-events-none"></div>}
           <div className="flex flex-col sm:flex-row sm:items-start justify-between mb-4 relative z-10 gap-4">
             <div>
               <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-1">
-                <h3 className="text-xl md:text-2xl font-bold text-slate-900">{company}</h3>
-                {isCurrent && <span className="bg-indigo-100 text-indigo-700 text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full uppercase tracking-wider">Present Focus</span>}
+                <h3 className="text-xl md:text-2xl font-bold text-white">{company}</h3>
+                {isCurrent && <span className="bg-indigo-500/15 text-indigo-300 text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full uppercase tracking-wider">Present Focus</span>}
               </div>
-              <p className={`font-semibold text-sm md:text-base ${isCurrent ? 'text-indigo-600' : 'text-slate-600'}`}>{role}</p>
+              <p className={`font-semibold text-sm md:text-base ${isCurrent ? 'text-indigo-300' : 'text-gray-400'}`}>{role}</p>
             </div>
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-slate-50 rounded-lg flex items-center justify-center p-2 border border-slate-100 shrink-0 self-start">
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-white/5 rounded-lg flex items-center justify-center p-2 border border-white/10 shrink-0 self-start">
                <CompanyLogo src={logoSrc} name={company} />
             </div>
           </div>
 
-          <p className="text-slate-600 mb-6 leading-relaxed text-sm md:text-[15px] relative z-10">{description}</p>
+          <p className="text-gray-400 mb-6 leading-relaxed text-sm md:text-[15px] relative z-10">{description}</p>
 
           <ul className="space-y-3 relative z-10">
             {highlights.map((item, idx) => (
-              <li key={idx} className="flex gap-3 text-sm text-slate-600 items-start">
-                <CheckCircle2 size={16} className={`mt-0.5 shrink-0 ${isCurrent ? 'text-indigo-500' : 'text-slate-400'}`} />
+              <li key={idx} className="flex gap-3 text-sm text-gray-400 items-start">
+                <CheckCircle2 size={16} className={`mt-0.5 shrink-0 ${isCurrent ? 'text-indigo-400' : 'text-gray-500'}`} />
                 <span>{item}</span>
               </li>
             ))}
@@ -207,7 +207,7 @@ const MediaCard = ({ type, title, subtitle, imageSrc, link }: {
   const isGame = type === 'game';
 
   return (
-    <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-sm hover:shadow-2xl transition-all duration-500 aspect-video cursor-pointer">
+    <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-white/10 hover:border-indigo-400/30 hover:shadow-glow-teal transition-all duration-500 aspect-video cursor-pointer">
       <img src={imageSrc} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
 
@@ -303,7 +303,7 @@ export default function ProfilePage() {
   const filteredMedia = activeTab === 'all' ? mediaItems : mediaItems.filter(item => item.tab === activeTab);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans selection:bg-indigo-500 selection:text-white overflow-hidden text-slate-900">
+    <div className="min-h-screen bg-surface font-sans selection:bg-indigo-500 selection:text-white overflow-hidden text-gray-200">
 
       <style dangerouslySetInnerHTML={{__html: `
         @keyframes float { 0%, 100% { transform: translateY(0) translateX(0); } 50% { transform: translateY(-20px) translateX(10px); } }
@@ -372,9 +372,9 @@ export default function ProfilePage() {
       </section>
 
       {/* Infinite Marquee Client Bar */}
-      <section className="bg-white border-b border-slate-200 py-6 md:py-10 overflow-hidden relative">
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+      <section className="bg-surface-raised border-b border-white/10 py-6 md:py-10 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-surface-raised to-transparent z-10"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-surface-raised to-transparent z-10"></div>
         <div className="flex w-[200%] md:w-[200%] animate-scroll hover-pause">
           <div className="flex w-1/2 justify-around items-center px-4 md:px-8">
             <div className="hidden sm:block text-slate-400 font-bold uppercase tracking-widest text-[10px] md:text-sm shrink-0 mr-4 md:mr-8">Trusted By Global Leaders</div>
@@ -401,9 +401,9 @@ export default function ProfilePage() {
       <section id="portfolio" className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
         <FadeIn>
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <h4 className="text-indigo-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">Interactive Portfolio</h4>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 md:mb-6 tracking-tight">Impact in Action</h2>
-            <p className="text-base md:text-lg text-slate-600">Explore videos of past offsites, play demos of custom business simulations, and view galleries of large group interventions.</p>
+            <h4 className="text-indigo-400 font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">Interactive Portfolio</h4>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 md:mb-6 tracking-tight">Impact in Action</h2>
+            <p className="text-base md:text-lg text-gray-400">Explore videos of past offsites, play demos of custom business simulations, and view galleries of large group interventions.</p>
           </div>
         </FadeIn>
         <FadeIn delay={200}>
@@ -419,8 +419,8 @@ export default function ProfilePage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-1.5 md:gap-2 px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-semibold transition-all duration-300 ${
                   activeTab === tab.id
-                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 scale-105'
-                  : 'bg-white text-slate-600 border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50'
+                  ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 scale-105'
+                  : 'bg-white/5 text-gray-400 border border-white/10 hover:border-indigo-400/40 hover:bg-white/10 hover:text-gray-200'
                 }`}
               >
                 {tab.icon && <tab.icon size={16} className="md:w-4 md:h-4" />}
@@ -439,14 +439,14 @@ export default function ProfilePage() {
       </section>
 
       {/* Services / High-Impact Interventions */}
-      <section id="services" className="py-16 md:py-24 px-4 md:px-6 bg-slate-100 border-y border-slate-200">
+      <section id="services" className="py-16 md:py-24 px-4 md:px-6 bg-surface-raised border-y border-white/10">
         <div className="max-w-7xl mx-auto">
           <FadeIn>
             <div className="mb-10 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 text-center md:text-left">
               <div className="max-w-2xl mx-auto md:mx-0">
-                <h4 className="text-indigo-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">Core Offerings</h4>
-                <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-3 md:mb-4 tracking-tight">High-Impact Solutions</h2>
-                <p className="text-base md:text-lg text-slate-600">Comprehensive, enterprise-grade interventions delivered directly through Zrutam LLP.</p>
+                <h4 className="text-indigo-400 font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">Core Offerings</h4>
+                <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-3 md:mb-4 tracking-tight">High-Impact Solutions</h2>
+                <p className="text-base md:text-lg text-gray-400">Comprehensive, enterprise-grade interventions delivered directly through Zrutam LLP.</p>
               </div>
             </div>
           </FadeIn>
@@ -460,12 +460,12 @@ export default function ProfilePage() {
               { icon: ArrowRight, title: "Succession Planning Models", desc: "Architecting global talent pipelines and comprehensive assessment frameworks to future-proof your bench." }
             ].map((service, idx) => (
               <FadeIn key={idx} delay={idx * 100}>
-                <div className="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:shadow-2xl transition-all duration-300 group cursor-pointer h-full text-center md:text-left">
-                  <div className="w-12 h-12 bg-slate-50 text-indigo-600 rounded-lg flex items-center justify-center mx-auto md:mx-0 mb-5 md:mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                <div className="glass-card p-6 md:p-8 hover:border-indigo-400/40 hover:shadow-glow-teal transition-all duration-300 group cursor-pointer h-full text-center md:text-left">
+                  <div className="w-12 h-12 bg-white/5 text-indigo-300 rounded-lg flex items-center justify-center mx-auto md:mx-0 mb-5 md:mb-6 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
                     <service.icon size={24} />
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-slate-900 group-hover:text-indigo-700 transition-colors">{service.title}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{service.desc}</p>
+                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-white group-hover:text-indigo-300 transition-colors">{service.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{service.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -557,9 +557,9 @@ export default function ProfilePage() {
       <section id="experience" className="py-16 md:py-24 px-4 md:px-6 max-w-5xl mx-auto">
         <FadeIn>
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
-            <h4 className="text-indigo-600 font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">Track Record</h4>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 md:mb-6 tracking-tight">Enterprise Capability</h2>
-            <p className="text-base md:text-lg text-slate-600">A two-decade foundation of scaling organizational development for the world&apos;s leading brands.</p>
+            <h4 className="text-indigo-400 font-bold tracking-widest uppercase text-xs md:text-sm mb-2 md:mb-3">Track Record</h4>
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white mb-4 md:mb-6 tracking-tight">Enterprise Capability</h2>
+            <p className="text-base md:text-lg text-gray-400">A two-decade foundation of scaling organizational development for the world&apos;s leading brands.</p>
           </div>
         </FadeIn>
 
@@ -677,21 +677,21 @@ export default function ProfilePage() {
       </section>
 
       {/* Final Massive CTA */}
-      <section className="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white text-center relative border-t border-slate-200">
+      <section className="py-20 md:py-32 px-4 md:px-6 bg-gradient-to-b from-surface to-surface-raised text-center relative border-t border-white/10">
         <FadeIn>
           <div className="max-w-3xl mx-auto">
-            <div className="w-16 h-16 md:w-20 md:h-20 bg-indigo-100 text-indigo-600 rounded-2xl md:rounded-3xl flex items-center justify-center mx-auto mb-6 md:mb-8 transform rotate-12 shadow-xl shadow-indigo-100">
+            <div className="w-16 h-16 md:w-20 md:h-20 bg-indigo-500/15 text-indigo-300 rounded-2xl md:rounded-3xl flex items-center justify-center mx-auto mb-6 md:mb-8 transform rotate-12 shadow-xl shadow-indigo-500/20">
               <Phone size={28} className="md:w-9 md:h-9 -rotate-12" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 mb-4 md:mb-6 tracking-tight">Ready to architect your <br className="hidden sm:block"/><span className="text-indigo-600">future organization?</span></h2>
-            <p className="text-base md:text-xl text-slate-600 mb-8 md:mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white mb-4 md:mb-6 tracking-tight">Ready to architect your <br className="hidden sm:block"/><span className="text-indigo-400">future organization?</span></h2>
+            <p className="text-base md:text-xl text-gray-400 mb-8 md:mb-12">
               Let&apos;s schedule a brief consultation to discuss your cultural, leadership, or succession challenges.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
-              <a href="mailto:shobhrajsharma@gmail.com" className="bg-slate-900 hover:bg-indigo-600 text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all shadow-2xl hover:shadow-indigo-500/40 hover:-translate-y-1">
+              <a href="mailto:shobhrajsharma@gmail.com" className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all shadow-2xl hover:shadow-indigo-500/40 hover:-translate-y-1">
                 Email Shobhraj
               </a>
-              <a href="tel:+917770006300" className="bg-white hover:bg-slate-50 text-slate-900 border-2 border-slate-200 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all hover:-translate-y-1">
+              <a href="tel:+917770006300" className="bg-white/5 hover:bg-white/10 text-white border-2 border-white/15 px-8 py-4 md:px-10 md:py-5 rounded-full font-bold text-base md:text-lg transition-all hover:-translate-y-1">
                 +91-7770006300
               </a>
             </div>

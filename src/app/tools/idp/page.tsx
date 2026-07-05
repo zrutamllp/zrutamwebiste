@@ -103,6 +103,7 @@ export default function IDPToolProductPage() {
       {/* Hero */}
       <section className="gradient-navy py-20 md:py-28 relative overflow-hidden">
         <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-grid-dots opacity-40" />
           <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-teal/5 blur-3xl" />
           <div className="absolute bottom-20 left-20 w-72 h-72 rounded-full bg-amber/5 blur-3xl" />
         </div>
@@ -114,7 +115,7 @@ export default function IDPToolProductPage() {
               </svg>
               Proprietary Technology
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
               IDP Tool{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal to-teal-200">
                 powered by RSI&trade;
@@ -128,7 +129,7 @@ export default function IDPToolProductPage() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-amber/25"
+                className="inline-flex items-center justify-center px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber"
               >
                 Start Free Trial
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -147,14 +148,14 @@ export default function IDPToolProductPage() {
       </section>
 
       {/* Feature Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
                 Everything You Need for Employee Development
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                 A comprehensive platform that transforms how your organization
                 approaches individual development planning.
               </p>
@@ -163,14 +164,14 @@ export default function IDPToolProductPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <FadeInSection key={feature.title} delay={index * 0.1}>
-                <div className="bg-gray-50 rounded-xl p-8 hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-teal/20 group">
-                  <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-6 shadow-sm group-hover:shadow-md transition-shadow">
+                <div className="glass-card p-8 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300 group">
+                  <div className="w-14 h-14 bg-teal/10 border border-teal/20 rounded-xl flex items-center justify-center mb-6 transition-shadow">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-navy mb-3">
+                  <h3 className="text-xl font-semibold text-white mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-400 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -181,14 +182,14 @@ export default function IDPToolProductPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
                 How It Works
               </h2>
-              <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                 Three simple steps to transform employee development at your
                 organization.
               </p>
@@ -198,18 +199,18 @@ export default function IDPToolProductPage() {
             {steps.map((item, index) => (
               <FadeInSection key={item.step} delay={index * 0.15}>
                 <div className="relative text-center">
-                  <div className="text-7xl font-bold text-teal/10 mb-4">
+                  <div className="text-7xl font-bold text-teal/20 mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-2xl font-bold text-navy mb-3">
+                  <h3 className="text-2xl font-bold text-white mb-3">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-400 leading-relaxed">
                     {item.description}
                   </p>
                   {index < steps.length - 1 && (
                     <div className="hidden md:block absolute top-10 -right-4 w-8">
-                      <svg className="w-8 h-8 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </div>
@@ -222,15 +223,15 @@ export default function IDPToolProductPage() {
       </section>
 
       {/* Integration Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <FadeInSection>
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-navy mb-6">
+                <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
                   Integrates with Your Existing Stack
                 </h2>
-                <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                <p className="text-gray-400 text-lg leading-relaxed mb-8">
                   The IDP Tool connects seamlessly with your existing HR
                   technology ecosystem through REST APIs and pre-built
                   connectors.
@@ -249,7 +250,7 @@ export default function IDPToolProductPage() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <span className="text-gray-700">{integration}</span>
+                      <span className="text-gray-200">{integration}</span>
                     </div>
                   ))}
                 </div>
@@ -295,7 +296,7 @@ export default function IDPToolProductPage() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-10 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-amber/25 text-lg"
+              className="inline-flex items-center justify-center px-10 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber text-lg"
             >
               Start Free Trial
             </Link>
