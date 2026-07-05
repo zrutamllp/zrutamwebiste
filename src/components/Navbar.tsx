@@ -56,8 +56,8 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-shadow duration-300 bg-white ${
-        scrolled ? "shadow-md" : "shadow-none"
+      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300 ${
+        scrolled ? "bg-surface/90 shadow-lg shadow-black/20" : "bg-surface/70"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,8 +92,8 @@ export default function Navbar() {
                     onMouseLeave={handleDropdownLeave}
                   >
                     <button
-                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-700
-                                 hover:text-teal transition-colors rounded-lg"
+                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-300
+                                 hover:text-white transition-colors rounded-lg"
                       aria-expanded={activeDropdown === link.label}
                       aria-haspopup="true"
                     >
@@ -122,15 +122,15 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 8, scale: 0.96 }}
                           transition={{ duration: 0.18, ease: "easeOut" }}
-                          className="absolute top-full left-0 mt-1 w-64 bg-white rounded-xl shadow-xl
-                                     border border-gray-100 py-2 z-50"
+                          className="absolute top-full left-0 mt-1 w-64 bg-surface-overlay/95 backdrop-blur-xl
+                                     rounded-xl shadow-xl shadow-black/40 border border-white/10 py-2 z-50"
                         >
                           {link.children!.map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-teal-50/60
-                                         hover:text-teal transition-colors"
+                              className="block px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5
+                                         hover:text-teal-300 transition-colors"
                             >
                               {child.label}
                             </Link>
@@ -146,10 +146,16 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-teal
+                  className="group px-3 py-2 text-sm font-medium text-gray-300 hover:text-white
                              transition-colors rounded-lg"
                 >
-                  {link.label}
+                  <span
+                    className="relative after:absolute after:left-0 after:-bottom-0.5 after:h-px
+                               after:w-0 after:bg-teal after:transition-all after:duration-300
+                               group-hover:after:w-full"
+                  >
+                    {link.label}
+                  </span>
                 </Link>
               );
             })}
@@ -160,8 +166,8 @@ export default function Navbar() {
             <a
               href="mailto:ceo@zrutam.com"
               className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold
-                         text-white bg-teal hover:bg-teal-500 rounded-lg transition-colors
-                         shadow-sm hover:shadow-md"
+                         text-navy bg-amber hover:bg-amber-400 rounded-lg transition-all duration-300
+                         hover:shadow-glow-amber hover:-translate-y-0.5"
             >
               Book a Demo
             </a>
@@ -170,7 +176,7 @@ export default function Navbar() {
           {/* Mobile Hamburger */}
           <button
             className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg
-                       hover:bg-gray-100 transition-colors"
+                       hover:bg-white/10 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -178,17 +184,17 @@ export default function Navbar() {
             <span className="sr-only">Toggle navigation</span>
             <div className="w-5 h-4 relative flex flex-col justify-between">
               <span
-                className={`block h-0.5 w-5 bg-navy rounded-full transition-all duration-300 origin-center ${
+                className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 origin-center ${
                   mobileOpen ? "rotate-45 translate-y-[7px]" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-navy rounded-full transition-all duration-300 ${
+                className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${
                   mobileOpen ? "opacity-0 scale-0" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-navy rounded-full transition-all duration-300 origin-center ${
+                className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 origin-center ${
                   mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
                 }`}
               />
@@ -205,7 +211,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+            className="lg:hidden bg-surface-overlay/[0.98] backdrop-blur-xl border-t border-white/10 overflow-hidden"
           >
             <div className="max-h-[calc(100vh-4rem)] overflow-y-auto px-4 py-4 space-y-1">
               {NAV_LINKS.map((link) => {
@@ -217,8 +223,8 @@ export default function Navbar() {
                       <button
                         onClick={() => toggleMobileExpanded(link.label)}
                         className="flex items-center justify-between w-full px-3 py-3 text-base
-                                   font-medium text-gray-800 hover:text-teal rounded-lg
-                                   hover:bg-gray-50 transition-colors"
+                                   font-medium text-gray-200 hover:text-teal-300 rounded-lg
+                                   hover:bg-white/5 transition-colors"
                       >
                         {link.label}
                         <svg
@@ -253,8 +259,8 @@ export default function Navbar() {
                                   key={child.href}
                                   href={child.href}
                                   onClick={closeMobile}
-                                  className="block px-3 py-2.5 text-sm text-gray-600
-                                             hover:text-teal hover:bg-gray-50 rounded-lg
+                                  className="block px-3 py-2.5 text-sm text-gray-400
+                                             hover:text-teal-300 hover:bg-white/5 rounded-lg
                                              transition-colors"
                                 >
                                   {child.label}
@@ -273,20 +279,20 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={closeMobile}
-                    className="block px-3 py-3 text-base font-medium text-gray-800
-                               hover:text-teal rounded-lg hover:bg-gray-50 transition-colors"
+                    className="block px-3 py-3 text-base font-medium text-gray-200
+                               hover:text-teal-300 rounded-lg hover:bg-white/5 transition-colors"
                   >
                     {link.label}
                   </Link>
                 );
               })}
 
-              <div className="pt-4 border-t border-gray-100">
+              <div className="pt-4 border-t border-white/10">
                 <a
                   href="mailto:ceo@zrutam.com"
                   onClick={closeMobile}
                   className="block w-full text-center px-5 py-3 text-base font-semibold
-                             text-white bg-teal hover:bg-teal-500 rounded-lg transition-colors"
+                             text-navy bg-amber hover:bg-amber-400 rounded-lg transition-colors"
                 >
                   Book a Demo
                 </a>
