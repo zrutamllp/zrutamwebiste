@@ -40,7 +40,7 @@ function AnimatedNumber({
   }, [inView, value]);
 
   return (
-    <span className="text-teal">
+    <span className="text-gradient">
       {display.toLocaleString()}
       {suffix}
     </span>
@@ -52,9 +52,13 @@ export default function StatsCounter() {
   const inView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section ref={sectionRef} className="gradient-navy py-16 lg:py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+    <section
+      ref={sectionRef}
+      className="relative bg-surface py-16 lg:py-24 border-y border-white/[0.06] overflow-hidden"
+    >
+      <div className="aurora-blob animate-aurora-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-teal/[0.07]" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-white/[0.06]">
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}
