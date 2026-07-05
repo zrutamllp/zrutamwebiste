@@ -220,7 +220,7 @@ export default function Zrutam360Page() {
             >
               <a
                 href="mailto:ceo@zrutam.com"
-                className="px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-amber/25 inline-flex items-center gap-2"
+                className="px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber inline-flex items-center gap-2"
               >
                 Book a Demo
                 <ArrowRight className="w-5 h-5" />
@@ -237,7 +237,7 @@ export default function Zrutam360Page() {
       </section>
 
       {/* ====== Section 2 — Problem Statement ====== */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -245,10 +245,10 @@ export default function Zrutam360Page() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
               Why 360° Feedback Is Broken
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               Traditional assessment tools were designed for executives with
               unlimited budgets, not frontline managers who need quick, actionable
               insights.
@@ -263,15 +263,15 @@ export default function Zrutam360Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-gray-50 rounded-2xl p-8 border border-gray-100 hover:shadow-lg transition-shadow"
+                className="glass-card p-8 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300"
               >
-                <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-5">
-                  <card.icon className="w-6 h-6 text-red-500" />
+                <div className="w-12 h-12 bg-red-500/10 border border-red-500/30 rounded-xl flex items-center justify-center mb-5">
+                  <card.icon className="w-6 h-6 text-red-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-navy mb-3">
+                <h3 className="text-xl font-semibold text-white mb-3">
                   {card.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">{card.desc}</p>
+                <p className="text-gray-400 leading-relaxed">{card.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -279,7 +279,7 @@ export default function Zrutam360Page() {
       </section>
 
       {/* ====== Section 3 — How It Works ====== */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -287,10 +287,10 @@ export default function Zrutam360Page() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
               How It Works
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               From roster upload to actionable insights in four simple steps.
             </p>
           </motion.div>
@@ -308,16 +308,16 @@ export default function Zrutam360Page() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative text-center"
               >
-                <div className="w-14 h-14 bg-teal/10 border-2 border-teal/30 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10 bg-gray-50">
+                <div className="w-14 h-14 bg-teal/10 border-2 border-teal/30 rounded-full flex items-center justify-center mx-auto mb-5 relative z-10 bg-surface">
                   <step.icon className="w-6 h-6 text-teal" />
                 </div>
                 <span className="inline-block text-xs font-bold text-teal bg-teal/10 px-3 py-1 rounded-full mb-3">
                   Step {i + 1}
                 </span>
-                <h3 className="text-lg font-semibold text-navy mb-2">
+                <h3 className="text-lg font-semibold text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-400 text-sm leading-relaxed">
                   {step.desc}
                 </p>
               </motion.div>
@@ -327,7 +327,7 @@ export default function Zrutam360Page() {
       </section>
 
       {/* ====== Section 4 — Features Grid ====== */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -335,10 +335,10 @@ export default function Zrutam360Page() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
               Everything You Need
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
               A complete 360° feedback platform, from survey launch to development
               action plans.
             </p>
@@ -352,15 +352,15 @@ export default function Zrutam360Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:shadow-lg hover:border-teal/20 transition-all"
+                className="glass-card p-6 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300"
               >
                 <div className="w-11 h-11 bg-teal/10 rounded-xl flex items-center justify-center mb-4">
                   <f.icon className="w-5 h-5 text-teal" />
                 </div>
-                <h3 className="text-base font-semibold text-navy mb-2">
+                <h3 className="text-base font-semibold text-white mb-2">
                   {f.title}
                 </h3>
-                <p className="text-gray-600 text-sm leading-relaxed">
+                <p className="text-gray-400 text-sm leading-relaxed">
                   {f.desc}
                 </p>
               </motion.div>
@@ -415,13 +415,13 @@ export default function Zrutam360Page() {
       </section>
 
       {/* ====== Section 6 — Pricing ====== */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-surface">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="max-w-lg mx-auto bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+            className="max-w-lg mx-auto glass-card shadow-xl shadow-black/50 overflow-hidden"
           >
             <div className="bg-navy p-8 text-center">
               <p className="text-teal text-sm font-medium uppercase tracking-wider mb-2">
@@ -436,7 +436,7 @@ export default function Zrutam360Page() {
             <div className="p-8">
               <ul className="space-y-3 mb-8">
                 {pricingChecklist.map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-gray-700">
+                  <li key={item} className="flex items-center gap-3 text-gray-200">
                     <Check className="w-5 h-5 text-teal flex-shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -445,7 +445,7 @@ export default function Zrutam360Page() {
 
               <a
                 href="mailto:ceo@zrutam.com"
-                className="block w-full text-center px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-amber/25"
+                className="block w-full text-center px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber"
               >
                 Contact for Volume Pricing
               </a>
@@ -459,7 +459,7 @@ export default function Zrutam360Page() {
       </section>
 
       {/* ====== Section 7 — FAQ ====== */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-surface-raised">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -467,7 +467,7 @@ export default function Zrutam360Page() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-4">
               Frequently Asked Questions
             </h2>
           </motion.div>
@@ -480,13 +480,13 @@ export default function Zrutam360Page() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.05 }}
-                className="border border-gray-200 rounded-xl overflow-hidden"
+                className="border border-white/10 rounded-xl overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-gray-50 transition-colors"
+                  className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/5 transition-colors"
                 >
-                  <span className="font-semibold text-navy pr-4">{faq.q}</span>
+                  <span className="font-semibold text-white pr-4">{faq.q}</span>
                   <ChevronDown
                     className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-200 ${
                       openFaq === i ? "rotate-180" : ""
@@ -494,7 +494,7 @@ export default function Zrutam360Page() {
                   />
                 </button>
                 {openFaq === i && (
-                  <div className="px-6 pb-5 text-gray-600 leading-relaxed">
+                  <div className="px-6 pb-5 text-gray-400 leading-relaxed">
                     {faq.a}
                   </div>
                 )}
@@ -541,7 +541,7 @@ export default function Zrutam360Page() {
           >
             <a
               href="mailto:ceo@zrutam.com"
-              className="px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-amber/25 inline-flex items-center gap-2"
+              className="px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber inline-flex items-center gap-2"
             >
               Book a Demo
               <ArrowRight className="w-5 h-5" />

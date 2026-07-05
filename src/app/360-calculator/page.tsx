@@ -89,8 +89,8 @@ function SliderRow({
   return (
     <div>
       <div className="flex justify-between text-xs font-bold mb-1.5">
-        <span className="text-slate-700">{label}</span>
-        <span className="text-orange-600 bg-orange-100 px-1.5 py-0.5 rounded text-[10px]">
+        <span className="text-gray-200">{label}</span>
+        <span className="text-orange-300 bg-orange-500/15 px-1.5 py-0.5 rounded text-[10px]">
           {value}%
         </span>
       </div>
@@ -342,7 +342,7 @@ export default function CalculatorPage() {
           width: 100%;
           height: 4px;
           cursor: pointer;
-          background: #cbd5e1;
+          background: rgba(255, 255, 255, 0.18);
           border-radius: 2px;
         }
         .custom-range::-moz-range-thumb {
@@ -358,7 +358,7 @@ export default function CalculatorPage() {
           width: 100%;
           height: 4px;
           cursor: pointer;
-          background: #cbd5e1;
+          background: rgba(255, 255, 255, 0.18);
           border-radius: 2px;
         }
 
@@ -387,24 +387,24 @@ export default function CalculatorPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center"
+              className="bg-surface-overlay border border-white/10 rounded-2xl shadow-xl shadow-black/50 max-w-md w-full p-8 text-center"
             >
-              <div className="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-5">
-                <svg className="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 bg-orange-500/15 border border-orange-500/25 rounded-xl flex items-center justify-center mx-auto mb-5">
+                <svg className="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+              <h2 className="text-2xl font-bold text-white tracking-tight mb-2">
                 Unlock the Risk Calculator
               </h2>
-              <p className="text-slate-500 text-sm mb-6 leading-relaxed">
+              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
                 Enter your official work email to access the full interactive
                 Organizational Risk Calculator.
               </p>
@@ -415,10 +415,10 @@ export default function CalculatorPage() {
                   onChange={(e) => { setGateEmail(e.target.value); setGateError(""); }}
                   onKeyDown={(e) => { if (e.key === "Enter") handleGateSubmit(); }}
                   placeholder="you@company.com"
-                  className="w-full px-4 py-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
                 />
                 {gateError && (
-                  <p className="text-red-500 text-xs font-medium text-left">{gateError}</p>
+                  <p className="text-red-400 text-xs font-medium text-left">{gateError}</p>
                 )}
                 <button
                   onClick={handleGateSubmit}
@@ -428,7 +428,7 @@ export default function CalculatorPage() {
                   {gateSubmitting ? "Please wait..." : "Access Calculator"}
                 </button>
               </div>
-              <p className="text-[11px] text-slate-400 mt-4">
+              <p className="text-[11px] text-gray-500 mt-4">
                 We respect your privacy. No spam, ever.
               </p>
             </motion.div>
@@ -436,12 +436,12 @@ export default function CalculatorPage() {
         )}
       </AnimatePresence>
 
-      <div className="relative min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden">
+      <div className="relative min-h-screen bg-surface text-gray-200 overflow-x-hidden">
         {/* Ambient background blobs */}
         <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-300/40 rounded-full mix-blend-multiply blur-[100px]" />
+          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal/10 rounded-full blur-[100px]" />
           <div
-            className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full mix-blend-multiply blur-[120px] transition-all duration-1000"
+            className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] transition-all duration-1000"
             style={{
               backgroundColor:
                 revealed && isDanger ? "rgba(239,68,68,0.15)" : "rgba(239,68,68,0)",
@@ -457,10 +457,10 @@ export default function CalculatorPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-3 text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-3 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
               Organizational Risk Calculator
             </h1>
-            <p className="text-slate-600 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto">
+            <p className="text-gray-400 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto">
               Enter your workforce demographics and adjust the behavioral assumptions below. This
               tool algorithmically exposes the hidden financial risks carried by your frontline
               leadership layer.
@@ -478,9 +478,9 @@ export default function CalculatorPage() {
               transition={{ duration: 0.5 }}
             >
               {/* Company Demographics */}
-              <div className="bg-white/85 backdrop-blur-xl border border-black/[0.08] shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.01)] p-5 sm:p-6 rounded-2xl relative z-10">
-                <div className="flex items-center gap-3 mb-4 border-b border-slate-200 pb-3">
-                  <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 shrink-0">
+              <div className="glass-card p-5 sm:p-6 relative z-10">
+                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
+                  <div className="w-7 h-7 rounded-full bg-teal/15 flex items-center justify-center text-teal-300 shrink-0">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -490,7 +490,7 @@ export default function CalculatorPage() {
                       />
                     </svg>
                   </div>
-                  <h2 className="text-lg font-bold text-slate-900 leading-tight">
+                  <h2 className="text-lg font-bold text-white leading-tight">
                     Company Demographics
                   </h2>
                 </div>
@@ -499,7 +499,7 @@ export default function CalculatorPage() {
                   {/* Headcount & Salary */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-slate-500 mb-1.5">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1.5">
                         Total Headcount
                       </label>
                       <input
@@ -507,21 +507,21 @@ export default function CalculatorPage() {
                         value={total}
                         placeholder="Enter your headcount"
                         onChange={(e) => setTotal(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2.5 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full px-3 py-2.5 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between items-end mb-1.5">
-                        <label className="block text-[10px] uppercase tracking-widest font-semibold text-slate-500">
+                        <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400">
                           Avg. Base Salary
                         </label>
-                        <div className="flex bg-slate-200 rounded p-0.5 border border-slate-300 items-center">
+                        <div className="flex bg-white/10 rounded p-0.5 border border-white/15 items-center">
                           <button
                             onClick={() => toggleCurrency("USD")}
                             className={`text-[9px] px-2 py-0.5 rounded-sm transition-all ${
                               currency === "USD"
-                                ? "bg-white text-slate-800 font-bold shadow-sm"
-                                : "text-slate-500 bg-transparent hover:text-slate-800"
+                                ? "bg-white/20 text-white font-bold shadow-sm"
+                                : "text-gray-500 bg-transparent hover:text-gray-200"
                             }`}
                           >
                             USD
@@ -530,8 +530,8 @@ export default function CalculatorPage() {
                             onClick={() => toggleCurrency("INR")}
                             className={`text-[9px] px-2 py-0.5 rounded-sm transition-all ${
                               currency === "INR"
-                                ? "bg-white text-slate-800 font-bold shadow-sm"
-                                : "text-slate-500 bg-transparent hover:text-slate-800"
+                                ? "bg-white/20 text-white font-bold shadow-sm"
+                                : "text-gray-500 bg-transparent hover:text-gray-200"
                             }`}
                           >
                             INR
@@ -539,7 +539,7 @@ export default function CalculatorPage() {
                         </div>
                       </div>
                       <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-sm">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-sm">
                           {currency === "USD" ? "$" : "\u20B9"}
                         </span>
                         <input
@@ -547,7 +547,7 @@ export default function CalculatorPage() {
                           value={salary}
                           placeholder="Avg. frontline salary"
                           onChange={(e) => setSalary(e.target.value === "" ? "" : Number(e.target.value))}
-                          className="w-full pl-7 pr-3 py-2.5 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
+                          className="w-full pl-7 pr-3 py-2.5 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
                         />
                       </div>
                     </div>
@@ -556,7 +556,7 @@ export default function CalculatorPage() {
                   {/* The Pyramid */}
                   <div className="grid grid-cols-3 gap-3 pt-1">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-slate-500 mb-1.5">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1.5">
                         Top <span className="hidden sm:inline">(VP+)</span>
                       </label>
                       <input
@@ -564,11 +564,11 @@ export default function CalculatorPage() {
                         value={senior}
                         placeholder="e.g. 50"
                         onChange={(e) => setSenior(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-slate-500 mb-1.5">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1.5">
                         Middle <span className="hidden sm:inline">(Dir)</span>
                       </label>
                       <input
@@ -576,11 +576,11 @@ export default function CalculatorPage() {
                         value={middle}
                         placeholder="e.g. 200"
                         onChange={(e) => setMiddle(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white border border-slate-300 text-slate-900 shadow-[inset_0_2px_4px_0_rgba(0,0,0,0.02)] focus:outline-none focus:border-orange-500 focus:bg-orange-50/30 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400"
+                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-orange-600 mb-1.5 drop-shadow-sm">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-orange-400 mb-1.5 drop-shadow-sm">
                         Frontline <span className="hidden sm:inline">(Mgrs)</span>
                       </label>
                       <input
@@ -588,22 +588,22 @@ export default function CalculatorPage() {
                         value={flm}
                         placeholder="e.g. 350"
                         onChange={(e) => setFlm(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold text-orange-600 border-orange-300 bg-orange-50 shadow-[inset_0_1px_3px_rgba(249,115,22,0.1)] focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-slate-400 placeholder:text-orange-300"
+                        className="w-full px-3 py-2 rounded-lg text-sm font-bold text-orange-300 border border-orange-500/40 bg-orange-500/10 focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-orange-300/50"
                       />
                     </div>
                   </div>
 
                   {/* Error */}
                   {errorMsg && (
-                    <p className="text-red-500 text-[11px] font-semibold mt-1">{errorMsg}</p>
+                    <p className="text-red-400 text-[11px] font-semibold mt-1">{errorMsg}</p>
                   )}
                 </div>
               </div>
 
               {/* Adjustable Assumptions */}
-              <div className="bg-slate-50/80 backdrop-blur-xl border border-black/[0.08] shadow-[0_10px_25px_-5px_rgba(0,0,0,0.05),0_8px_10px_-6px_rgba(0,0,0,0.01)] p-5 sm:p-6 rounded-2xl relative z-10">
-                <div className="flex items-center gap-3 mb-4 border-b border-slate-200 pb-3">
-                  <div className="w-7 h-7 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 shrink-0">
+              <div className="glass-card p-5 sm:p-6 relative z-10">
+                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
+                  <div className="w-7 h-7 rounded-full bg-orange-500/15 flex items-center justify-center text-orange-400 shrink-0">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -614,10 +614,10 @@ export default function CalculatorPage() {
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-slate-900 leading-tight">
+                    <h2 className="text-lg font-bold text-white leading-tight">
                       Adjust Assumptions
                     </h2>
-                    <p className="text-[10px] text-slate-500 mt-0.5">
+                    <p className="text-[10px] text-gray-500 mt-0.5">
                       Anchored to industry benchmarks.
                     </p>
                   </div>
@@ -669,33 +669,33 @@ export default function CalculatorPage() {
 
             {/* ====== RIGHT: OUTPUT PANEL ====== */}
             <div
-              className={`lg:col-span-7 bg-white/85 backdrop-blur-xl border border-slate-200 shadow-lg p-5 sm:p-6 rounded-2xl relative z-20 flex flex-col lg:sticky lg:top-6 transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+              className={`lg:col-span-7 glass-card p-5 sm:p-6 relative z-20 flex flex-col lg:sticky lg:top-6 transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                 revealed
                   ? "opacity-100 translate-y-0 pointer-events-auto"
                   : "opacity-0 translate-y-5 pointer-events-none"
               }`}
             >
               {/* Header row */}
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-4">
-                <h2 className="text-lg sm:text-xl font-bold text-slate-900 flex items-center gap-2">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
+                <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
                   <span className="text-red-500">&#9888;&#65039;</span> The Executive Blind Spot
                 </h2>
-                <div className="text-[10px] sm:text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200 shadow-sm shrink-0">
-                  Staff: <span className="text-slate-900">{staffTotal.toLocaleString()}</span>
+                <div className="text-[10px] sm:text-xs font-bold text-gray-400 bg-white/10 px-2.5 py-1 rounded-full border border-white/10 shrink-0">
+                  Staff: <span className="text-white">{staffTotal.toLocaleString()}</span>
                 </div>
               </div>
 
               {/* Span of Control */}
-              <div className="mb-5 bg-slate-50 p-3 rounded-xl border border-slate-100">
+              <div className="mb-5 bg-white/5 p-3 rounded-xl border border-white/10">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-slate-500">
+                  <h3 className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-gray-400">
                     Span of Control Risk
                   </h3>
-                  <div className="text-lg sm:text-xl font-black text-slate-900 leading-none">
+                  <div className="text-lg sm:text-xl font-black text-white leading-none">
                     1 : {spanValue.toFixed(1)}
                   </div>
                 </div>
-                <div className="w-full h-1.5 bg-slate-200 rounded shadow-inner overflow-hidden">
+                <div className="w-full h-1.5 bg-white/10 rounded shadow-inner overflow-hidden">
                   <div
                     className="h-full transition-all duration-1000"
                     style={{
@@ -704,28 +704,28 @@ export default function CalculatorPage() {
                     }}
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 mt-1.5 italic">{spanMsg}</p>
+                <p className="text-[10px] text-gray-400 mt-1.5 italic">{spanMsg}</p>
               </div>
 
               {/* THE BIG SCARY NUMBER */}
               <div
-                className={`bg-red-50/80 rounded-xl p-5 border border-red-100 text-center mb-4 relative overflow-hidden shadow-sm ${
+                className={`bg-red-500/10 rounded-xl p-5 border border-red-500/30 text-center mb-4 relative overflow-hidden ${
                   isDanger && revealed ? "danger-glow" : ""
                 }`}
               >
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500" />
-                <h3 className="text-[11px] sm:text-xs uppercase tracking-widest font-bold text-slate-600 mb-1.5">
+                <h3 className="text-[11px] sm:text-xs uppercase tracking-widest font-bold text-red-300 mb-1.5">
                   Annual Value at Risk (TVR)
                 </h3>
-                <p className="text-[10px] sm:text-xs text-slate-600 mb-2 max-w-sm mx-auto leading-relaxed">
+                <p className="text-[10px] sm:text-xs text-gray-300 mb-2 max-w-sm mx-auto leading-relaxed">
                   If{" "}
-                  <strong className="text-slate-900 bg-red-100 px-1 rounded">
+                  <strong className="text-red-200 bg-red-500/20 px-1 rounded">
                     {pctIneffective}%
                   </strong>{" "}
                   of your Frontline Managers are unskilled, this is your estimated annual financial
                   exposure:
                 </p>
-                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-red-600 drop-shadow-sm tracking-tight">
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-red-500 drop-shadow-sm tracking-tight">
                   {totalRiskAnim.display}
                 </div>
               </div>
@@ -733,17 +733,17 @@ export default function CalculatorPage() {
               {/* Breakdown cards */}
               <div className="grid grid-cols-2 gap-3 mb-4">
                 {/* Productivity Leakage */}
-                <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-center">
-                  <div className="absolute right-0 top-0 w-12 h-12 bg-orange-100 rounded-full blur-xl -mr-4 -mt-4" />
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-0.5">
+                <div className="bg-white/5 p-3 rounded-xl border border-white/10 relative overflow-hidden flex flex-col justify-center">
+                  <div className="absolute right-0 top-0 w-12 h-12 bg-orange-500/20 rounded-full blur-xl -mr-4 -mt-4" />
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-0.5">
                     Productivity Leakage <span className="text-orange-500">*</span>
                   </h4>
                   <div className="text-lg sm:text-xl font-bold text-orange-500 leading-tight mb-0.5">
                     {prodRiskAnim.display}
                   </div>
-                  <p className="text-[8px] sm:text-[9px] text-slate-500 leading-tight">
+                  <p className="text-[8px] sm:text-[9px] text-gray-400 leading-tight">
                     <strong>{pctProd}%</strong> salary waste across the{" "}
-                    <strong className="text-slate-900 bg-orange-50 px-1 rounded">
+                    <strong className="text-orange-200 bg-orange-500/20 px-1 rounded">
                       {affectedStaffAnim.display}
                     </strong>{" "}
                     staff reporting to ineffective managers.
@@ -751,17 +751,17 @@ export default function CalculatorPage() {
                 </div>
 
                 {/* Turnover Cost */}
-                <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm relative overflow-hidden flex flex-col justify-center">
-                  <div className="absolute right-0 top-0 w-12 h-12 bg-red-100 rounded-full blur-xl -mr-4 -mt-4" />
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-slate-500 mb-0.5">
+                <div className="bg-white/5 p-3 rounded-xl border border-white/10 relative overflow-hidden flex flex-col justify-center">
+                  <div className="absolute right-0 top-0 w-12 h-12 bg-red-500/20 rounded-full blur-xl -mr-4 -mt-4" />
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-0.5">
                     Turnover Cost <span className="text-red-500">**</span>
                   </h4>
                   <div className="text-lg sm:text-xl font-bold text-red-500 leading-tight mb-0.5">
                     {turnoverRiskAnim.display}
                   </div>
-                  <p className="text-[8px] sm:text-[9px] text-slate-500 leading-tight">
+                  <p className="text-[8px] sm:text-[9px] text-gray-400 leading-tight">
                     Replacing{" "}
-                    <strong className="text-slate-900 bg-red-50 px-1 rounded">
+                    <strong className="text-red-200 bg-red-500/20 px-1 rounded">
                       {flightNumAnim.display}
                     </strong>{" "}
                     frontline staff who quit due to their manager.
@@ -770,7 +770,7 @@ export default function CalculatorPage() {
               </div>
 
               {/* Methodology footnotes */}
-              <div className="px-1 text-[9px] text-slate-500 leading-relaxed bg-slate-50 p-2 rounded-lg border border-slate-100 mt-auto">
+              <div className="px-1 text-[9px] text-gray-400 leading-relaxed bg-white/5 p-2 rounded-lg border border-white/10 mt-auto">
                 <span className="text-orange-500 font-bold">*</span>{" "}
                 <strong>Gallup:</strong> Active disengagement costs ~20% of salary in lost
                 productivity.
@@ -784,7 +784,7 @@ export default function CalculatorPage() {
 
           {/* ====== BELL CURVE SECTION ====== */}
           <motion.section
-            className="mt-8 bg-white/85 backdrop-blur-xl border border-slate-200 shadow-sm p-5 sm:p-8 rounded-2xl relative z-10 mb-12"
+            className="mt-8 glass-card p-5 sm:p-8 relative z-10 mb-12"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -793,21 +793,21 @@ export default function CalculatorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
               {/* Left: narrative */}
               <div>
-                <div className="inline-block bg-slate-100 text-slate-600 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3 border border-slate-200">
+                <div className="inline-block bg-white/10 text-gray-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3 border border-white/10">
                   The Scalability Problem
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 mb-3 tracking-tight">
+                <h3 className="text-xl sm:text-2xl font-black text-white mb-3 tracking-tight">
                   The &ldquo;Selected Few&rdquo; Fallacy
                 </h3>
-                <p className="text-slate-600 text-xs sm:text-sm mb-4 leading-relaxed">
+                <p className="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed">
                   The traditional L&amp;D budget is dangerously top-heavy. Resources are stretched
-                  thin: the <strong className="text-green-600">Top 20%</strong> get generic vendor
+                  thin: the <strong className="text-green-400">Top 20%</strong> get generic vendor
                   training, while HR exhausts time managing the{" "}
-                  <strong className="text-red-500">Bottom 10%</strong> on PIPs.
+                  <strong className="text-red-400">Bottom 10%</strong> on PIPs.
                 </p>
 
-                <div className="bg-orange-50 border-l-4 border-orange-500 p-3 sm:p-4 mb-4 rounded-r-xl shadow-inner">
-                  <h4 className="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2">
+                <div className="bg-orange-500/10 border-l-4 border-orange-500 p-3 sm:p-4 mb-4 rounded-r-xl">
+                  <h4 className="font-bold text-white text-xs sm:text-sm flex items-center gap-2">
                     <svg
                       className="w-4 h-4 text-orange-500"
                       fill="currentColor"
@@ -821,15 +821,15 @@ export default function CalculatorPage() {
                     </svg>
                     The 70% Blind Spot
                   </h4>
-                  <p className="text-[10px] sm:text-xs text-slate-700 mt-1 leading-relaxed">
-                    This leaves the massive <strong className="text-orange-600">70% core</strong>{" "}
+                  <p className="text-[10px] sm:text-xs text-gray-300 mt-1 leading-relaxed">
+                    This leaves the massive <strong className="text-orange-300">70% core</strong>{" "}
                     completely untouched. They don&apos;t qualify for limited training programs, yet
                     they manage the vast majority of your workforce.
                   </p>
                 </div>
 
-                <div className="text-xs text-slate-600 flex items-start gap-2.5 bg-green-50/50 p-3 rounded-lg border border-green-100">
-                  <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="text-xs text-gray-300 flex items-start gap-2.5 bg-green-500/10 p-3 rounded-lg border border-green-500/30">
+                  <div className="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center shrink-0 mt-0.5">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
@@ -847,11 +847,11 @@ export default function CalculatorPage() {
               </div>
 
               {/* Right: bell curve graphic */}
-              <div className="relative w-full h-48 sm:h-64 rounded-xl border border-slate-200 bg-white overflow-hidden flex items-end shadow-inner mt-4 lg:mt-0">
+              <div className="relative w-full h-48 sm:h-64 rounded-xl border border-white/10 bg-surface-raised overflow-hidden flex items-end mt-4 lg:mt-0">
                 {/* Colored background segments */}
                 <div className="absolute inset-0 flex opacity-20">
-                  <div className="w-[15%] bg-red-500 border-r-2 border-white" />
-                  <div className="w-[65%] bg-orange-500 border-r-2 border-white" />
+                  <div className="w-[15%] bg-red-500 border-r-2 border-surface-raised" />
+                  <div className="w-[65%] bg-orange-500 border-r-2 border-surface-raised" />
                   <div className="w-[20%] bg-green-500" />
                 </div>
 
@@ -863,7 +863,7 @@ export default function CalculatorPage() {
                 >
                   <path
                     d="M 0 0 L 1000 0 L 1000 300 L 0 300 Z M -50 300 C 200 300, 350 20, 500 20 C 650 20, 800 300, 1050 300 Z"
-                    fill="#ffffff"
+                    fill="#0A1628"
                     fillRule="evenodd"
                   />
                   <path
@@ -878,37 +878,37 @@ export default function CalculatorPage() {
                 {/* Labels */}
                 <div className="absolute bottom-0 w-full flex text-center pb-3 z-20 items-end h-full">
                   <div className="w-[15%] flex flex-col items-center justify-end h-full pb-2">
-                    <div className="bg-red-50 text-red-700 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-red-100">
+                    <div className="bg-red-500/15 text-red-300 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-red-500/30">
                       PIPs &amp;
                       <br />
                       Fired
                     </div>
-                    <div className="font-black text-lg sm:text-xl text-red-600 drop-shadow-sm">
+                    <div className="font-black text-lg sm:text-xl text-red-400 drop-shadow-sm">
                       10%
                     </div>
                   </div>
 
                   <div className="w-[65%] flex flex-col items-center justify-end h-full pb-2 relative">
                     <div className="absolute top-[30%] flex flex-col items-center">
-                      <div className="bg-slate-800 text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full shadow-lg mb-1.5 border border-slate-700">
+                      <div className="bg-surface-overlay text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full shadow-lg mb-1.5 border border-white/15">
                         The Unseen Majority
                       </div>
                     </div>
                     <div className="font-black text-3xl sm:text-4xl text-orange-500 drop-shadow-sm mb-0.5">
                       70%
                     </div>
-                    <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-slate-500 bg-white/90 px-2 py-0.5 rounded-full shadow-sm border border-slate-100">
+                    <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-gray-300 bg-surface-raised/90 px-2 py-0.5 rounded-full shadow-sm border border-white/10">
                       Untouched Middle
                     </div>
                   </div>
 
                   <div className="w-[20%] flex flex-col items-center justify-end h-full pb-2">
-                    <div className="bg-green-50 text-green-700 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-green-100">
+                    <div className="bg-green-500/15 text-green-300 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-green-500/30">
                       Generic
                       <br />
                       Training
                     </div>
-                    <div className="font-black text-lg sm:text-xl text-green-600 drop-shadow-sm">
+                    <div className="font-black text-lg sm:text-xl text-green-400 drop-shadow-sm">
                       20%
                     </div>
                   </div>
@@ -925,23 +925,23 @@ export default function CalculatorPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 mb-4 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 tracking-tight">
               Stop the Guesswork &mdash; Book a Demo
             </h2>
-            <p className="text-slate-600 text-sm mb-6 max-w-xl mx-auto">
+            <p className="text-gray-400 text-sm mb-6 max-w-xl mx-auto">
               See how Zrutam&apos;s 360-degree feedback platform can turn your Annual Value at Risk
               into measurable leadership growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href="mailto:ceo@zrutam.com"
-                className="inline-block bg-gradient-to-r from-amber to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-sm"
+                className="inline-block bg-gradient-to-r from-amber to-orange-500 hover:from-amber-600 hover:to-orange-600 text-navy font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-glow-amber transition-all transform hover:-translate-y-0.5 text-sm"
               >
                 Book a Demo
               </a>
               <a
                 href="/tools/360"
-                className="text-sm font-semibold text-teal hover:text-teal-500 underline underline-offset-4 transition-colors"
+                className="text-sm font-semibold text-teal hover:text-teal-300 underline underline-offset-4 transition-colors"
               >
                 Explore the 360 Tool
               </a>
