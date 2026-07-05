@@ -56,9 +56,10 @@ function MedalBadge({ type }: { type: string }) {
 
 export default function AwardsSection() {
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
+    <section className="py-20 lg:py-28 bg-surface-raised relative overflow-hidden">
       {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.015]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230A1628' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
+      <div className="aurora-blob animate-aurora-1 -top-40 right-0 w-[450px] h-[450px] bg-amber/[0.05]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
@@ -68,14 +69,14 @@ export default function AwardsSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200/60 rounded-full mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber/10 border border-amber/25 rounded-full mb-6">
             <TrophyIcon className="w-4 h-4 text-amber" />
-            <span className="text-sm font-semibold text-amber-700">Award-Winning Excellence</span>
+            <span className="text-sm font-semibold text-amber-300">Award-Winning Excellence</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-navy mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4">
             Awards & Recognition
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Recognized by industry leaders for innovation in corporate learning and development.
           </p>
         </motion.div>
@@ -91,7 +92,7 @@ export default function AwardsSection() {
             >
               <div className="relative group">
                 {/* Card */}
-                <div className="relative bg-white rounded-2xl border border-gray-200/80 p-8 md:p-10 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden">
+                <div className="relative glass-card p-8 md:p-10 hover:border-amber/30 hover:shadow-glow-amber transition-all duration-300 overflow-hidden">
                   {/* Accent top bar */}
                   <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber via-amber-400 to-teal" />
 
@@ -112,17 +113,17 @@ export default function AwardsSection() {
                         </span>
                       </div>
 
-                      <h3 className="text-xl md:text-2xl font-bold text-navy mb-2">
+                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                         {award.title}
                       </h3>
 
-                      <p className="text-gray-600 text-base md:text-lg mb-3">
-                        <span className="font-medium text-gray-800">Category:</span>{" "}
+                      <p className="text-gray-300 text-base md:text-lg mb-3">
+                        <span className="font-medium text-gray-100">Category:</span>{" "}
                         {award.category}
                       </p>
 
-                      <p className="text-sm text-gray-500">
-                        Presented by <span className="font-medium text-gray-700">{award.organizer}</span>
+                      <p className="text-sm text-gray-400">
+                        Presented by <span className="font-medium text-gray-200">{award.organizer}</span>
                       </p>
                     </div>
                   </div>
