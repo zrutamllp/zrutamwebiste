@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -94,42 +95,63 @@ function SolutionIcon({ icon }: { icon: string }) {
 }
 
 export default function SolutionCard({ title, description, icon, href }: SolutionCardProps) {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [hovering, setHovering] = useState(false);
+
   return (
     <motion.div
       whileHover={{ y: -6 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="h-full"
     >
       <Link href={href} className="block group h-full">
         <div
-          className="relative h-full bg-white rounded-2xl border border-gray-200/80 p-6 lg:p-8
-                     shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+          onMouseMove={(e) => {
+            const r = e.currentTarget.getBoundingClientRect();
+            setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
+          }}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          className="relative h-full glass-card p-6 lg:p-8 transition-all duration-300
+                     hover:border-teal/30 hover:shadow-glow-teal hover:bg-white/[0.06] overflow-hidden"
         >
+          {/* Cursor-tracking spotlight */}
+          <div
+            className="pointer-events-none absolute inset-0 transition-opacity duration-300"
+            style={{
+              opacity: hovering ? 1 : 0,
+              background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(14,165,233,0.12), transparent 65%)`,
+            }}
+          />
+
           {/* Teal accent line at top, visible on hover */}
           <div
-            className="absolute top-0 left-0 right-0 h-1 bg-teal transform origin-left scale-x-0
-                       group-hover:scale-x-100 transition-transform duration-300"
+            className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal to-sky-400
+                       transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
           />
 
           {/* Icon */}
           <div
-            className="w-14 h-14 rounded-xl bg-teal-50 text-teal flex items-center justify-center
-                       mb-5 group-hover:bg-teal group-hover:text-white transition-colors duration-300"
+            className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-teal/20 to-sky-600/10
+                       border border-teal/20 text-teal-300 flex items-center justify-center mb-5
+                       group-hover:from-teal group-hover:to-sky-500 group-hover:text-white
+                       group-hover:shadow-glow-teal transition-all duration-300"
           >
             <SolutionIcon icon={icon} />
           </div>
 
           {/* Title */}
-          <h3 className="text-lg font-bold text-navy mb-3 group-hover:text-teal transition-colors duration-300">
+          <h3 className="relative text-lg font-bold text-white mb-3 group-hover:text-teal-300 transition-colors duration-300">
             {title}
           </h3>
 
           {/* Description */}
-          <p className="text-sm text-gray-500 leading-relaxed mb-5">
+          <p className="relative text-sm text-gray-400 leading-relaxed mb-5">
             {description}
           </p>
 
           {/* Learn More link */}
-          <div className="flex items-center gap-2 text-sm font-semibold text-teal">
+          <div className="relative flex items-center gap-2 text-sm font-semibold text-teal-300">
             <span>Learn more</span>
             <svg
               className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
