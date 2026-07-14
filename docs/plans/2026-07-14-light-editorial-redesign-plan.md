@@ -30,6 +30,8 @@ Apply this map wherever old dark styling is met. Do not leave any entry of the l
 | `aurora-blob`, `animate-aurora-*` | delete (replaced by SVG motifs from Task 3) |
 | `bg-grid-dots` | keep (utility gets re-tinted in Task 1) |
 | `text-teal-300`, `text-teal-400` (links/accents on dark) | `text-teal-600 hover:text-teal-700` |
+| `gradient-navy`, `gradient-teal` (deleted utilities — silently no-op) | `bg-paper`/`bg-paper-warm` section, or `bg-ink` if the section is an intentional dark anchor |
+| `navy-50`, `navy-100`, `navy-900` usages written for the OLD dark scale | re-derive from context: old navy-50 `#1A2A44` was dark, new navy-50 `#F1F5F8` is near-white — do not keep the shade number blindly (affects AwardsSection, blog pages, tools/idp) |
 | amber accents `text-amber-300/400` | `text-amber-600` |
 | CTA `bg-teal hover:bg-teal-500` buttons | `<Button>` primitive (Task 2) |
 | `mailto:ceo@zrutam.com` CTAs | `/contact/?interest=<slug>` links (Task 9 lists every location) |
@@ -574,7 +576,7 @@ export default function NotFound() {
 **Files:**
 - Create: `DEPLOY.md`
 
-**Step 1: Dark-theme purge audit** — `grep -rn "bg-surface\|glass-card\|aurora\|glow-teal\|glow-amber\|text-gradient\|bg-navy-50 \|#050A14" src/` → expected: no hits (footer/stats-band `bg-ink` is the only intentional dark).
+**Step 1: Dark-theme purge audit** — `grep -rn "bg-surface\|glass-card\|aurora\|glow-teal\|glow-amber\|text-gradient\|gradient-navy\|gradient-teal\|navy-50\|#050A14" src/` → expected: no hits except intentional new-scale `navy-50` usages verified individually (footer/stats-band `bg-ink` is the only intentional dark).
 **Step 2: Full build** — `npm run build` exit 0; confirm `out/` contains all 18 routes + `404.html` + fonts under `_next/static/media/`.
 **Step 3: Browser pass** — every route at 1280px and 375px; tools functional; form flow; no console errors.
 **Step 4: `DEPLOY.md`** — checklist: (1) get Web3Forms access key at web3forms.com (free) and paste into `src/components/ContactForm.tsx` `ACCESS_KEY`; (2) `npm run build`; (3) zip contents of `out/` (not the folder itself); (4) Hostinger hPanel → File Manager → `public_html` → upload + extract (or FTP); (5) verify live: home, one tool, contact form sends a real email; (6) confirm `https://www.zrutam.com/sitemap.xml` still resolves. Note: `public/robots.txt` + `sitemap.xml` copy through automatically.
