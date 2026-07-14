@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { STATS } from "@/lib/constants";
+import Stat from "@/components/ui/Stat";
 
 function AnimatedNumber({
   value,
@@ -40,7 +41,7 @@ function AnimatedNumber({
   }, [inView, value]);
 
   return (
-    <span className="text-gradient">
+    <span>
       {display.toLocaleString()}
       {suffix}
     </span>
@@ -52,31 +53,27 @@ export default function StatsCounter() {
   const inView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative bg-surface py-16 lg:py-24 border-y border-white/[0.06] overflow-hidden"
-    >
-      <div className="aurora-blob animate-aurora-2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-teal/[0.07]" />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-white/[0.06]">
+    <section ref={sectionRef} className="relative bg-ink grain py-20 md:py-28 overflow-hidden">
+      <div className="relative max-w-6xl mx-auto px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-0 lg:divide-x lg:divide-navy-700">
           {STATS.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="text-center"
             >
-              <div className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-2 tracking-tight">
-                <AnimatedNumber
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  inView={inView}
-                />
-              </div>
-              <p className="text-gray-400 text-sm sm:text-base font-medium">
-                {stat.label}
-              </p>
+              <Stat
+                dark
+                value={
+                  <AnimatedNumber
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    inView={inView}
+                  />
+                }
+                label={stat.label}
+              />
             </motion.div>
           ))}
         </div>

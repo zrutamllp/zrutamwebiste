@@ -58,7 +58,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+        scrolled || mobileOpen
           ? "bg-paper/80 backdrop-blur-md border-b border-navy-100"
           : "bg-transparent border-b border-transparent"
       }`}
@@ -279,8 +279,8 @@ export default function Navbar() {
                 );
               })}
 
-              <div className="pt-4 border-t border-navy-100" onClick={closeMobile}>
-                <Button href="/contact/" className="w-full">
+              <div className="pt-4 border-t border-navy-100">
+                <Button href="/contact/" className="w-full" onClick={closeMobile}>
                   Book a Demo
                 </Button>
               </div>

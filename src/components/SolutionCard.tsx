@@ -1,8 +1,4 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 interface SolutionCardProps {
   title: string;
@@ -95,76 +91,36 @@ function SolutionIcon({ icon }: { icon: string }) {
 }
 
 export default function SolutionCard({ title, description, icon, href }: SolutionCardProps) {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [hovering, setHovering] = useState(false);
-
   return (
-    <motion.div
-      whileHover={{ y: -6 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      className="h-full"
+    <Link
+      href={href}
+      className="group flex flex-col h-full bg-white border border-navy-100 rounded-2xl shadow-card
+                 p-6 lg:p-8 transition-all duration-300 hover:shadow-lift hover:-translate-y-1"
     >
-      <Link href={href} className="block group h-full">
-        <div
-          onMouseMove={(e) => {
-            const r = e.currentTarget.getBoundingClientRect();
-            setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
-          }}
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          className="relative h-full glass-card p-6 lg:p-8 transition-all duration-300
-                     hover:border-teal/30 hover:shadow-glow-teal hover:bg-white/[0.06] overflow-hidden"
+      {/* Icon */}
+      <div className="inline-flex w-fit items-center justify-center bg-teal-50 text-teal-600 rounded-xl p-3 mb-5">
+        <SolutionIcon icon={icon} />
+      </div>
+
+      {/* Title */}
+      <h3 className="font-display text-xl text-ink mb-3">{title}</h3>
+
+      {/* Description */}
+      <p className="text-sm text-navy-600 leading-relaxed mb-5">{description}</p>
+
+      {/* Learn More link */}
+      <div className="mt-auto flex items-center gap-2 text-sm font-semibold text-teal-600">
+        <span className="link-underline">Learn more</span>
+        <svg
+          className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
         >
-          {/* Cursor-tracking spotlight */}
-          <div
-            className="pointer-events-none absolute inset-0 transition-opacity duration-300"
-            style={{
-              opacity: hovering ? 1 : 0,
-              background: `radial-gradient(400px circle at ${pos.x}px ${pos.y}px, rgba(14,165,233,0.12), transparent 65%)`,
-            }}
-          />
-
-          {/* Teal accent line at top, visible on hover */}
-          <div
-            className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-teal to-sky-400
-                       transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
-          />
-
-          {/* Icon */}
-          <div
-            className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-teal/20 to-sky-600/10
-                       border border-teal/20 text-teal-300 flex items-center justify-center mb-5
-                       group-hover:from-teal group-hover:to-sky-500 group-hover:text-white
-                       group-hover:shadow-glow-teal transition-all duration-300"
-          >
-            <SolutionIcon icon={icon} />
-          </div>
-
-          {/* Title */}
-          <h3 className="relative text-lg font-bold text-white mb-3 group-hover:text-teal-300 transition-colors duration-300">
-            {title}
-          </h3>
-
-          {/* Description */}
-          <p className="relative text-sm text-gray-400 leading-relaxed mb-5">
-            {description}
-          </p>
-
-          {/* Learn More link */}
-          <div className="relative flex items-center gap-2 text-sm font-semibold text-teal-300">
-            <span>Learn more</span>
-            <svg
-              className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-            </svg>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </div>
+    </Link>
   );
 }

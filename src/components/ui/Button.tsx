@@ -23,14 +23,16 @@ export default function Button({
   variant = "primary",
   children,
   className = "",
+  onClick,
 }: {
   href: string;
   variant?: Variant;
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void;
 }) {
   return (
-    <Link href={href} className={buttonClasses(variant, className)}>
+    <Link href={href} className={buttonClasses(variant, className)} onClick={onClick}>
       {children}
       {variant === "text" && (
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

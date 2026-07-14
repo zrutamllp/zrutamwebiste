@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Card from "@/components/ui/Card";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 interface Testimonial {
   quote: string;
@@ -77,29 +79,18 @@ export default function TestimonialSlider() {
   const current = testimonials[activeIndex];
 
   return (
-    <section className="relative py-16 lg:py-24 bg-surface overflow-hidden">
-      {/* Decorative giant quote */}
-      <div
-        className="absolute top-8 left-1/2 -translate-x-1/2 text-[200px] lg:text-[280px] leading-none
-                   font-serif text-white/[0.03] select-none pointer-events-none"
-        aria-hidden="true"
-      >
-        &ldquo;
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <span className="block text-teal-300 text-sm font-semibold uppercase tracking-[0.2em] mb-3">
-            Testimonials
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-4">
-            What Our Clients Say
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Trusted by leading enterprises across India, Middle East, and Southeast Asia.
-          </p>
-        </div>
+    <section className="relative py-20 md:py-28 bg-paper overflow-hidden">
+      <div className="relative max-w-6xl mx-auto px-6">
+        <SectionHeading
+          align="center"
+          eyebrow="Testimonials"
+          title={
+            <>
+              What our clients <em className="italic text-teal-600">say</em>
+            </>
+          }
+          lede="Trusted by leading enterprises across India, Middle East, and Southeast Asia."
+        />
 
         {/* Slider */}
         <div
@@ -107,7 +98,7 @@ export default function TestimonialSlider() {
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
-          <div className="relative min-h-[280px] sm:min-h-[240px]">
+          <div className="relative min-h-[540px] sm:min-h-[420px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div
                 key={activeIndex}
@@ -119,39 +110,36 @@ export default function TestimonialSlider() {
                 transition={{ duration: 0.35, ease: "easeInOut" }}
                 className="absolute inset-0"
               >
-                <div className="glass-card p-8 sm:p-10 lg:p-12">
-                  {/* Quote Mark */}
-                  <div className="mb-6">
-                    <svg
-                      className="w-10 h-10 text-teal opacity-30"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391C0 7.905 3.748 4.039 9 3l.996 2.151C7.563 6.068 6 8.789 6 11h4v10H0z" />
-                    </svg>
+                <Card hover={false} className="h-full p-8 sm:p-10 lg:p-12">
+                  {/* Oversized decorative quote mark */}
+                  <div
+                    className="font-display text-navy-200 text-7xl leading-none select-none mb-2"
+                    aria-hidden="true"
+                  >
+                    &ldquo;
                   </div>
 
                   {/* Quote Text */}
-                  <blockquote className="text-gray-200 text-base sm:text-lg leading-relaxed mb-8">
-                    &ldquo;{current.quote}&rdquo;
+                  <blockquote className="text-ink text-xl md:text-2xl leading-relaxed mb-8">
+                    {current.quote}
                   </blockquote>
 
                   {/* Author */}
                   <div className="flex items-center gap-4">
                     {/* Avatar placeholder */}
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-teal to-teal-600 flex items-center justify-center text-white font-bold text-lg shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-teal-50 flex items-center justify-center text-teal-600 font-display text-lg shrink-0">
                       {current.name.charAt(0)}
                     </div>
                     <div>
-                      <p className="font-semibold text-white text-sm sm:text-base">
+                      <p className="font-semibold text-ink text-sm sm:text-base">
                         {current.name}
                       </p>
-                      <p className="text-gray-400 text-sm">
+                      <p className="text-navy-500 text-sm">
                         {current.title}, {current.company}
                       </p>
                     </div>
                   </div>
-                </div>
+                </Card>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -165,8 +153,8 @@ export default function TestimonialSlider() {
                 aria-label={`Go to testimonial ${index + 1}`}
                 className={`rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? "w-8 h-2.5 bg-teal shadow-glow-teal"
-                    : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"
+                    ? "w-8 h-2.5 bg-ink"
+                    : "w-2.5 h-2.5 bg-navy-200 hover:bg-navy-300"
                 }`}
               />
             ))}
@@ -177,9 +165,9 @@ export default function TestimonialSlider() {
             <button
               onClick={() => paginate(-1)}
               aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full border border-white/15 hover:border-teal/50
-                         hover:text-teal-300 hover:shadow-glow-teal flex items-center justify-center
-                         text-gray-400 transition-all duration-300"
+              className="w-10 h-10 rounded-full border border-navy-200 text-navy-600
+                         hover:border-ink hover:text-ink flex items-center justify-center
+                         transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -188,9 +176,9 @@ export default function TestimonialSlider() {
             <button
               onClick={() => paginate(1)}
               aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full border border-white/15 hover:border-teal/50
-                         hover:text-teal-300 hover:shadow-glow-teal flex items-center justify-center
-                         text-gray-400 transition-all duration-300"
+              className="w-10 h-10 rounded-full border border-navy-200 text-navy-600
+                         hover:border-ink hover:text-ink flex items-center justify-center
+                         transition-all duration-300"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Card from "@/components/ui/Card";
 
 const awards = [
   {
@@ -25,7 +26,7 @@ function MedalBadge({ type }: { type: string }) {
   const colors: Record<string, { bg: string; text: string; ring: string; gradient: string }> = {
     Gold: {
       bg: "bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500",
-      text: "text-amber-900",
+      text: "text-amber-700",
       ring: "ring-amber-300/50",
       gradient: "from-amber-50 to-amber-100/50",
     },
@@ -56,27 +57,23 @@ function MedalBadge({ type }: { type: string }) {
 
 export default function AwardsSection() {
   return (
-    <section className="py-20 lg:py-28 bg-surface-raised relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }} />
-      <div className="aurora-blob animate-aurora-1 -top-40 right-0 w-[450px] h-[450px] bg-amber/[0.05]" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <section className="py-20 md:py-28 bg-paper-warm border-y border-navy-100 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto px-6 relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber/10 border border-amber/25 rounded-full mb-6">
-            <TrophyIcon className="w-4 h-4 text-amber" />
-            <span className="text-sm font-semibold text-amber-300">Award-Winning Excellence</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200 rounded-full mb-6">
+            <TrophyIcon className="w-4 h-4 text-amber-600" />
+            <span className="text-sm font-semibold text-amber-600">Award-Winning Excellence</span>
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4">
-            Awards & Recognition
+          <h2 className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-ink text-balance mb-4">
+            Awards &amp; <em className="italic text-teal-600">recognition</em>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-navy-600 text-lg max-w-2xl mx-auto leading-relaxed">
             Recognized by industry leaders for innovation in corporate learning and development.
           </p>
         </motion.div>
@@ -90,45 +87,42 @@ export default function AwardsSection() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <div className="relative group">
-                {/* Card */}
-                <div className="relative glass-card p-8 md:p-10 hover:border-amber/30 hover:shadow-glow-amber transition-all duration-300 overflow-hidden">
-                  {/* Accent top bar */}
-                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber via-amber-400 to-teal" />
+              <Card className="relative p-8 md:p-10 overflow-hidden">
+                {/* Accent top bar */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-amber-500" />
 
-                  <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8">
-                    {/* Trophy visual */}
-                    <div className="flex-shrink-0">
-                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-navy to-navy-50 flex items-center justify-center shadow-lg shadow-navy/20">
-                        <TrophyIcon className="w-10 h-10 md:w-12 md:h-12 text-amber" />
-                      </div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <MedalBadge type={award.medal} />
-                        <span className="text-xs font-medium text-gray-400 uppercase tracking-wider">
-                          {award.edition} &middot; {award.year}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
-                        {award.title}
-                      </h3>
-
-                      <p className="text-gray-300 text-base md:text-lg mb-3">
-                        <span className="font-medium text-gray-100">Category:</span>{" "}
-                        {award.category}
-                      </p>
-
-                      <p className="text-sm text-gray-400">
-                        Presented by <span className="font-medium text-gray-200">{award.organizer}</span>
-                      </p>
+                <div className="flex flex-col md:flex-row items-start gap-6 md:gap-8">
+                  {/* Trophy visual */}
+                  <div className="flex-shrink-0">
+                    <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-amber-50 flex items-center justify-center">
+                      <TrophyIcon className="w-10 h-10 md:w-12 md:h-12 text-amber-600" />
                     </div>
                   </div>
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <MedalBadge type={award.medal} />
+                      <span className="text-xs font-medium text-navy-500 uppercase tracking-wider">
+                        {award.edition} &middot; {award.year}
+                      </span>
+                    </div>
+
+                    <h3 className="font-display text-xl md:text-2xl text-ink mb-2">
+                      {award.title}
+                    </h3>
+
+                    <p className="text-navy-600 text-base md:text-lg mb-3">
+                      <span className="font-medium text-ink">Category:</span>{" "}
+                      {award.category}
+                    </p>
+
+                    <p className="text-sm text-navy-500">
+                      Presented by <span className="font-medium text-navy-600">{award.organizer}</span>
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Card>
             </motion.div>
           ))}
         </div>
@@ -139,7 +133,7 @@ export default function AwardsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center text-sm text-gray-400 mt-10"
+          className="text-center text-sm text-navy-500 mt-10"
         >
           Committed to setting new benchmarks in corporate learning &amp; development.
         </motion.p>

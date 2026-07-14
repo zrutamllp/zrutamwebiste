@@ -7,6 +7,7 @@ import CTABanner from "@/components/CTABanner";
 import HeroSection from "@/components/HeroSection";
 import FadeInSection from "@/components/FadeInSection";
 import AwardsSection from "@/components/AwardsSection";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const CLIENT_LOGOS = [
   { src: "/clients/amazon.svg", alt: "Amazon" },
@@ -26,9 +27,9 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Trusted By Section */}
-      <section className="py-16 bg-surface border-y border-white/[0.04]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-500 text-sm font-medium uppercase tracking-[0.2em] mb-10">
+      <section className="py-16 bg-paper-warm border-y border-navy-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <p className="text-center text-navy-500 text-sm font-medium uppercase tracking-[0.2em] mb-10">
             Trusted by leading enterprises across APAC
           </p>
           <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
@@ -36,7 +37,7 @@ export default function HomePage() {
               {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
                 <div
                   key={`${logo.alt}-${i}`}
-                  className="flex items-center justify-center h-10 opacity-50 hover:opacity-100 transition-opacity duration-300 brightness-0 invert"
+                  className="flex items-center justify-center h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition duration-300"
                 >
                   <Image
                     src={logo.src}
@@ -53,25 +54,23 @@ export default function HomePage() {
       </section>
 
       {/* Solutions Section */}
-      <section className="py-20 lg:py-28 bg-surface-raised">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 md:py-28 bg-paper">
+        <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="block text-teal-300 text-sm font-semibold uppercase tracking-[0.2em] mb-3">
-                What we do
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-4">
-                Our Solutions
-              </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Comprehensive AI-powered learning and development solutions
-                designed for the modern enterprise.
-              </p>
-            </div>
+            <SectionHeading
+              align="center"
+              eyebrow="What we do"
+              title={
+                <>
+                  Our <em className="italic text-teal-600">solutions</em>
+                </>
+              }
+              lede="Comprehensive AI-powered learning and development solutions designed for the modern enterprise."
+            />
           </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SOLUTIONS.map((solution, index) => (
-              <FadeInSection key={solution.slug} delay={index * 0.1}>
+              <FadeInSection key={solution.slug} delay={index * 0.1} className="h-full">
                 <SolutionCard
                   title={solution.shortTitle}
                   description={solution.description}
@@ -95,10 +94,15 @@ export default function HomePage() {
 
       {/* CTA Banner */}
       <CTABanner
-        title="Ready to Get Started?"
+        title={
+          <>
+            Ready to get{" "}
+            <em className="italic text-amber-400">started</em>?
+          </>
+        }
         subtitle="Transform your workforce with AI-powered learning solutions tailored for APAC enterprises."
-        primaryCTA={{ text: "Book a Demo", href: "/contact" }}
-        secondaryCTA={{ text: "Email Us", href: "mailto:ceo@zrutam.com" }}
+        primaryCTA={{ text: "Book a Demo", href: "/contact/" }}
+        secondaryCTA={{ text: "Explore Solutions", href: "/solutions/" }}
       />
     </>
   );
