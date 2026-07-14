@@ -1,6 +1,8 @@
-import Link from "next/link";
 import FadeInSection from "@/components/FadeInSection";
-
+import CTABanner from "@/components/CTABanner";
+import Button from "@/components/ui/Button";
+import SectionHeading from "@/components/ui/SectionHeading";
+import GrowthArc from "@/components/graphics/GrowthArc";
 
 interface SolutionData {
   title: string;
@@ -25,111 +27,98 @@ export default function SolutionDetailPage({
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-surface py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-dots opacity-30 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
-        <div className="aurora-blob animate-aurora-1 -top-40 -right-20 w-[500px] h-[500px] bg-teal/10" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <Link
-              href="/solutions"
-              className="inline-flex items-center text-teal-300 hover:text-teal-200 text-sm font-medium mb-6 transition-colors"
-            >
-              <svg
-                className="w-4 h-4 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Back to Solutions
-            </Link>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6">
-              {solution.title}
-            </h1>
-            <p className="text-lg md:text-xl text-gray-400 leading-relaxed">
-              {solution.description}
-            </p>
+      <section className="relative bg-paper grain overflow-hidden">
+        <div
+          className="absolute inset-y-0 right-0 w-1/2 bg-grid-dots opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)] hidden lg:block"
+          aria-hidden="true"
+        />
+        <div className="relative max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
+          <div className="grid lg:grid-cols-2 gap-14 lg:gap-10 items-center">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-6">
+                Solutions
+              </p>
+              <h1 className="font-display text-4xl md:text-6xl leading-[1.05] tracking-tight text-ink text-balance mb-6">
+                {solution.title}
+              </h1>
+              <p className="text-lg md:text-xl text-navy-600 leading-relaxed max-w-xl mb-10">
+                {solution.description}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button href="/contact/">Book a Demo</Button>
+                <Button href="/solutions/" variant="outline">
+                  All Solutions
+                </Button>
+              </div>
+            </div>
+            <div className="flex justify-center lg:justify-end">
+              <GrowthArc className="w-full max-w-lg" />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Overview */}
-      <section className="py-20 bg-surface-raised">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      {/* Overview + highlight pull-quote */}
+      <section className="py-20 md:py-28 bg-paper-warm border-t border-navy-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <FadeInSection>
               <div>
-                <h2 className="text-3xl font-bold text-white tracking-tight mb-6">Overview</h2>
-                <p className="text-gray-400 text-lg leading-relaxed">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-4">
+                  Overview
+                </p>
+                <h2 className="font-display text-3xl md:text-4xl leading-[1.1] tracking-tight text-ink mb-6">
+                  How it works
+                </h2>
+                <p className="text-navy-600 text-lg leading-relaxed">
                   {longDescription}
                 </p>
               </div>
             </FadeInSection>
 
-            {/* Key Highlight Callout */}
-            <FadeInSection delay={0.2}>
-              <div className="glass-card p-8 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300">
-                <div className="w-12 h-12 bg-gradient-to-br from-teal to-sky-500 rounded-xl flex items-center justify-center mb-4 shadow-glow-teal">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  Key Highlight
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed">
+            <FadeInSection delay={0.15}>
+              <blockquote className="border-l-2 border-amber-500 pl-6 lg:pl-8">
+                <p className="font-display italic text-2xl md:text-3xl leading-snug text-ink text-balance">
                   {solution.highlight}
                 </p>
-              </div>
+              </blockquote>
             </FadeInSection>
           </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-20 bg-surface">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Features — numbered editorial rows */}
+      <section className="py-20 md:py-28 bg-paper">
+        <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
-            <h2 className="text-3xl font-bold text-white tracking-tight mb-12 text-center">
-              Key Features
-            </h2>
+            <SectionHeading
+              eyebrow="Key features"
+              title={
+                <>
+                  What&apos;s <em className="italic text-teal-600">inside</em>
+                </>
+              }
+            />
           </FadeInSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="max-w-4xl">
             {solution.features.map((feature, index) => (
-              <FadeInSection key={index} delay={index * 0.1}>
-                <div className="flex items-start gap-4 glass-card !rounded-xl p-6 hover:border-teal/30 transition-colors duration-300">
-                  <div className="flex-shrink-0 w-8 h-8 bg-teal/15 border border-teal/25 rounded-lg flex items-center justify-center mt-0.5">
-                    <svg
-                      className="w-5 h-5 text-teal-300"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-gray-300 leading-relaxed">{feature}</p>
+              <FadeInSection key={feature} delay={index * 0.08}>
+                <div
+                  className={`flex items-baseline gap-6 md:gap-10 py-6 md:py-7 ${
+                    index < solution.features.length - 1
+                      ? "border-b border-navy-100"
+                      : ""
+                  }`}
+                >
+                  <span
+                    className="font-display text-3xl text-navy-300 tabular-nums shrink-0"
+                    aria-hidden="true"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-ink text-lg md:text-xl leading-relaxed">
+                    {feature}
+                  </p>
                 </div>
               </FadeInSection>
             ))}
@@ -137,68 +126,33 @@ export default function SolutionDetailPage({
         </div>
       </section>
 
-      {/* Target Audience */}
-      <section className="py-20 bg-surface-raised">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Target audience callout */}
+      <section className="py-20 md:py-28 bg-paper-warm border-y border-navy-100">
+        <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl font-bold text-white tracking-tight mb-6">
-                Who Is This For?
-              </h2>
-              <div className="glass-card p-8 hover:border-amber/25 transition-colors duration-300">
-                <div className="w-16 h-16 bg-amber/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                  <svg
-                    className="w-8 h-8 text-amber"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"
-                    />
-                  </svg>
-                </div>
-                <p className="text-xl text-gray-200 font-medium">
-                  {solution.targetAudience}
-                </p>
-              </div>
+            <div className="max-w-3xl mx-auto bg-teal-50 border-l-2 border-teal-500 rounded-r-xl p-6 md:p-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+                Who this is for
+              </p>
+              <p className="text-ink text-lg md:text-xl leading-relaxed">
+                {solution.targetAudience}
+              </p>
             </div>
           </FadeInSection>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="relative py-20 bg-surface overflow-hidden">
-        <div className="aurora-blob animate-aurora-2 -bottom-40 left-1/4 w-[450px] h-[450px] bg-teal/[0.08]" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <FadeInSection>
-            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6">
-              Ready to Get Started?
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-10">
-              Schedule a personalized demo to see how {solution.shortTitle} can
-              transform your organization.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 bg-amber hover:bg-amber-400 text-navy font-semibold rounded-lg transition-all duration-300 shadow-glow-amber hover:-translate-y-1"
-              >
-                Book a Demo
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 glass-card !rounded-lg text-white font-semibold hover:border-teal/40 hover:bg-white/[0.08] transition-all duration-300"
-              >
-                Contact Sales
-              </Link>
-            </div>
-          </FadeInSection>
-        </div>
-      </section>
+      {/* Closing CTA */}
+      <CTABanner
+        title={
+          <>
+            Ready to get <em className="italic text-amber-400">started</em>?
+          </>
+        }
+        subtitle={`Schedule a personalized demo to see how ${solution.shortTitle} can transform your organization.`}
+        primaryCTA={{ text: "Book a Demo", href: "/contact/" }}
+        secondaryCTA={{ text: "Contact Sales", href: "/contact/" }}
+      />
     </>
   );
 }
