@@ -21,7 +21,9 @@ export default function SectionHeading({
         {title}
       </h2>
       {lede && (
-        <p className="mt-5 text-lg leading-relaxed text-navy-600 max-w-[65ch]">
+        <p
+          className={`mt-5 text-lg leading-relaxed text-navy-600 max-w-[65ch] ${align === "center" ? "mx-auto" : ""}`}
+        >
           {lede}
         </p>
       )}
