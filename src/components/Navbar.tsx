@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_LINKS } from "@/lib/constants";
+import Button from "@/components/ui/Button";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -56,8 +57,10 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b border-white/[0.06] transition-all duration-300 ${
-        scrolled ? "bg-surface/90 shadow-lg shadow-black/20" : "bg-surface/70"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-paper/80 backdrop-blur-md border-b border-navy-100"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,8 +95,8 @@ export default function Navbar() {
                     onMouseLeave={handleDropdownLeave}
                   >
                     <button
-                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-gray-300
-                                 hover:text-white transition-colors rounded-lg"
+                      className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-navy-600
+                                 hover:text-ink transition-colors rounded-lg"
                       aria-expanded={activeDropdown === link.label}
                       aria-haspopup="true"
                     >
@@ -122,15 +125,15 @@ export default function Navbar() {
                           animate={{ opacity: 1, y: 0, scale: 1 }}
                           exit={{ opacity: 0, y: 8, scale: 0.96 }}
                           transition={{ duration: 0.18, ease: "easeOut" }}
-                          className="absolute top-full left-0 mt-1 w-64 bg-surface-overlay/95 backdrop-blur-xl
-                                     rounded-xl shadow-xl shadow-black/40 border border-white/10 py-2 z-50"
+                          className="absolute top-full left-0 mt-1 w-64 bg-white
+                                     rounded-xl shadow-lift border border-navy-100 py-2 z-50"
                         >
                           {link.children!.map((child) => (
                             <Link
                               key={child.href}
                               href={child.href}
-                              className="block px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5
-                                         hover:text-teal-300 transition-colors"
+                              className="block px-4 py-2.5 text-sm text-navy-600 hover:bg-navy-50
+                                         hover:text-ink transition-colors"
                             >
                               {child.label}
                             </Link>
@@ -146,16 +149,10 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="group px-3 py-2 text-sm font-medium text-gray-300 hover:text-white
+                  className="px-3 py-2 text-sm font-medium text-navy-600 hover:text-ink
                              transition-colors rounded-lg"
                 >
-                  <span
-                    className="relative after:absolute after:left-0 after:-bottom-0.5 after:h-px
-                               after:w-0 after:bg-teal after:transition-all after:duration-300
-                               group-hover:after:w-full"
-                  >
-                    {link.label}
-                  </span>
+                  <span className="link-underline">{link.label}</span>
                 </Link>
               );
             })}
@@ -163,20 +160,15 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
-            <a
-              href="mailto:ceo@zrutam.com"
-              className="inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold
-                         text-navy bg-amber hover:bg-amber-400 rounded-lg transition-all duration-300
-                         hover:shadow-glow-amber hover:-translate-y-0.5"
-            >
+            <Button href="/contact/" className="text-sm">
               Book a Demo
-            </a>
+            </Button>
           </div>
 
           {/* Mobile Hamburger */}
           <button
             className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg
-                       hover:bg-white/10 transition-colors"
+                       hover:bg-navy-50 transition-colors"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -184,17 +176,17 @@ export default function Navbar() {
             <span className="sr-only">Toggle navigation</span>
             <div className="w-5 h-4 relative flex flex-col justify-between">
               <span
-                className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 origin-center ${
+                className={`block h-0.5 w-5 bg-ink rounded-full transition-all duration-300 origin-center ${
                   mobileOpen ? "rotate-45 translate-y-[7px]" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ${
+                className={`block h-0.5 w-5 bg-ink rounded-full transition-all duration-300 ${
                   mobileOpen ? "opacity-0 scale-0" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 origin-center ${
+                className={`block h-0.5 w-5 bg-ink rounded-full transition-all duration-300 origin-center ${
                   mobileOpen ? "-rotate-45 -translate-y-[7px]" : ""
                 }`}
               />
@@ -211,7 +203,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="lg:hidden bg-surface-overlay/[0.98] backdrop-blur-xl border-t border-white/10 overflow-hidden"
+            className="lg:hidden bg-paper border-t border-navy-100 overflow-hidden"
           >
             <div className="max-h-[calc(100vh-4rem)] overflow-y-auto px-4 py-4 space-y-1">
               {NAV_LINKS.map((link) => {
@@ -223,8 +215,8 @@ export default function Navbar() {
                       <button
                         onClick={() => toggleMobileExpanded(link.label)}
                         className="flex items-center justify-between w-full px-3 py-3 text-base
-                                   font-medium text-gray-200 hover:text-teal-300 rounded-lg
-                                   hover:bg-white/5 transition-colors"
+                                   font-medium text-navy-600 hover:text-ink rounded-lg
+                                   hover:bg-navy-50 transition-colors"
                       >
                         {link.label}
                         <svg
@@ -259,8 +251,8 @@ export default function Navbar() {
                                   key={child.href}
                                   href={child.href}
                                   onClick={closeMobile}
-                                  className="block px-3 py-2.5 text-sm text-gray-400
-                                             hover:text-teal-300 hover:bg-white/5 rounded-lg
+                                  className="block px-3 py-2.5 text-sm text-navy-600
+                                             hover:text-ink hover:bg-navy-50 rounded-lg
                                              transition-colors"
                                 >
                                   {child.label}
@@ -279,23 +271,18 @@ export default function Navbar() {
                     key={link.label}
                     href={link.href}
                     onClick={closeMobile}
-                    className="block px-3 py-3 text-base font-medium text-gray-200
-                               hover:text-teal-300 rounded-lg hover:bg-white/5 transition-colors"
+                    className="block px-3 py-3 text-base font-medium text-navy-600
+                               hover:text-ink rounded-lg hover:bg-navy-50 transition-colors"
                   >
                     {link.label}
                   </Link>
                 );
               })}
 
-              <div className="pt-4 border-t border-white/10">
-                <a
-                  href="mailto:ceo@zrutam.com"
-                  onClick={closeMobile}
-                  className="block w-full text-center px-5 py-3 text-base font-semibold
-                             text-navy bg-amber hover:bg-amber-400 rounded-lg transition-colors"
-                >
+              <div className="pt-4 border-t border-navy-100" onClick={closeMobile}>
+                <Button href="/contact/" className="w-full">
                   Book a Demo
-                </a>
+                </Button>
               </div>
             </div>
           </motion.div>
