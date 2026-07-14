@@ -23,7 +23,8 @@ export default function NetworkMotif({ className = "" }: { className?: string })
         <line x1="434" y1="166" x2="300" y2="40" />
       </g>
 
-      {/* Nodes — gentle float */}
+      {/* Nodes — gentle float. Intentional: the float moves nodes relative to their
+          connecting lines (static) for a soft ambient effect, not a rendering bug. */}
       <g className="animate-float-slow">
         {/* center */}
         <circle cx="300" cy="300" r="7" fill="#0EA5E9" />

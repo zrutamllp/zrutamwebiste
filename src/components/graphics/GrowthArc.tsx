@@ -1,4 +1,8 @@
+import { useId } from "react";
+
 export default function GrowthArc({ className = "" }: { className?: string }) {
+  const patternId = `growth-arc-grid-${useId()}`;
+
   return (
     <svg
       viewBox="0 0 600 400"
@@ -8,11 +12,11 @@ export default function GrowthArc({ className = "" }: { className?: string }) {
     >
       {/* Subtle dotted grid backdrop */}
       <defs>
-        <pattern id="growth-arc-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+        <pattern id={patternId} width="40" height="40" patternUnits="userSpaceOnUse">
           <circle cx="20" cy="20" r="1.5" fill="#0B2239" fillOpacity="0.1" />
         </pattern>
       </defs>
-      <rect x="40" y="30" width="520" height="330" fill="url(#growth-arc-grid)" />
+      <rect x="40" y="30" width="520" height="330" fill={`url(#${patternId})`} />
 
       {/* Ascending curve, bottom-left to top-right */}
       <path
