@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { buttonBase } from "@/components/ui/Button";
 
 interface CTABannerProps {
   title: React.ReactNode;
@@ -13,8 +14,7 @@ interface CTABannerProps {
   };
 }
 
-const ctaBase =
-  "inline-flex items-center justify-center gap-2 rounded-full font-medium px-7 py-3.5 transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500 w-full sm:w-auto";
+const ctaBase = `${buttonBase} px-7 py-3.5 w-full sm:w-auto`;
 
 export default function CTABanner({
   title,

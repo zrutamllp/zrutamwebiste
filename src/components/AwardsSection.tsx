@@ -26,7 +26,7 @@ function MedalBadge({ type }: { type: string }) {
   const colors: Record<string, { bg: string; text: string; ring: string; gradient: string }> = {
     Gold: {
       bg: "bg-gradient-to-br from-yellow-300 via-amber-400 to-yellow-500",
-      text: "text-amber-700",
+      text: "text-ink",
       ring: "ring-amber-300/50",
       gradient: "from-amber-50 to-amber-100/50",
     },
@@ -66,9 +66,9 @@ export default function AwardsSection() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12 md:mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-50 border border-amber-200 rounded-full mb-6">
-            <TrophyIcon className="w-4 h-4 text-amber-600" />
-            <span className="text-sm font-semibold text-amber-600">Award-Winning Excellence</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-amber-100 border border-amber-200 rounded-full mb-6">
+            <TrophyIcon className="w-4 h-4 text-amber-700" />
+            <span className="text-sm font-semibold text-amber-700">Award-Winning Excellence</span>
           </div>
           <h2 className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-ink text-balance mb-4">
             Awards &amp; <em className="italic text-teal-600">recognition</em>

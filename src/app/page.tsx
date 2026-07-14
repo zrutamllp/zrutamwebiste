@@ -34,14 +34,30 @@ export default function HomePage() {
           </p>
           <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
             <div className="flex w-max animate-marquee gap-16 pr-16 hover:[animation-play-state:paused]">
-              {[...CLIENT_LOGOS, ...CLIENT_LOGOS].map((logo, i) => (
+              {CLIENT_LOGOS.map((logo) => (
                 <div
-                  key={`${logo.alt}-${i}`}
+                  key={logo.alt}
                   className="flex items-center justify-center h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition duration-300"
                 >
                   <Image
                     src={logo.src}
                     alt={logo.alt}
+                    width={120}
+                    height={40}
+                    className="h-8 md:h-10 w-auto object-contain"
+                  />
+                </div>
+              ))}
+              {/* Duplicate strip for the seamless loop — hidden from assistive tech */}
+              {CLIENT_LOGOS.map((logo) => (
+                <div
+                  key={`${logo.alt}-dup`}
+                  aria-hidden="true"
+                  className="flex items-center justify-center h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition duration-300"
+                >
+                  <Image
+                    src={logo.src}
+                    alt=""
                     width={120}
                     height={40}
                     className="h-8 md:h-10 w-auto object-contain"

@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export type Variant = "primary" | "outline" | "text";
 
-const base =
+export const buttonBase =
   "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500";
 
 const variants: Record<Variant, string> = {
@@ -15,7 +15,7 @@ const variants: Record<Variant, string> = {
 };
 
 export function buttonClasses(variant: Variant = "primary", extra = "") {
-  return `${base} ${variants[variant]} ${extra}`;
+  return `${buttonBase} ${variants[variant]} ${extra}`;
 }
 
 export default function Button({

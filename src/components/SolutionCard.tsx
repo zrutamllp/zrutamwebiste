@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cardClasses } from "@/components/ui/Card";
 
 interface SolutionCardProps {
   title: string;
@@ -94,8 +95,7 @@ export default function SolutionCard({ title, description, icon, href }: Solutio
   return (
     <Link
       href={href}
-      className="group flex flex-col h-full bg-white border border-navy-100 rounded-2xl shadow-card
-                 p-6 lg:p-8 transition-all duration-300 hover:shadow-lift hover:-translate-y-1"
+      className={cardClasses(true, "group flex flex-col h-full p-6 lg:p-8")}
     >
       {/* Icon */}
       <div className="inline-flex w-fit items-center justify-center bg-teal-50 text-teal-600 rounded-xl p-3 mb-5">
