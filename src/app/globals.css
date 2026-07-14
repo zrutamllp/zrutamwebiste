@@ -2,10 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-
 :root {
-  --navy: #0A1628;
+  --navy: #0B2239;
   --teal: #0EA5E9;
   --amber: #F59E0B;
 }
@@ -15,38 +13,45 @@ html {
 }
 
 body {
-  font-family: "Inter", system-ui, sans-serif;
-  color: #CBD5E1;
-  background: #050A14;
+  color: #0b2239;
+  background: #faf9f6;
 }
 
 ::selection {
-  background: rgba(14, 165, 233, 0.35);
-  color: #fff;
+  background: rgba(14, 165, 233, 0.2);
+  color: #0b2239;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  .gradient-navy {
-    background: linear-gradient(135deg, #0A1628 0%, #1A2A44 50%, #0F1E34 100%);
-  }
-  .gradient-teal {
-    background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
-  }
-  .text-gradient {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-teal-300 via-teal to-sky-400;
-  }
-  .glass-card {
-    @apply bg-white/[0.04] border border-white/10 backdrop-blur-md rounded-2xl;
-  }
   .bg-grid-dots {
-    background-image: radial-gradient(circle, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgba(11, 34, 57, 0.08) 1px, transparent 1px);
     background-size: 28px 28px;
   }
-  .aurora-blob {
-    @apply absolute rounded-full blur-3xl pointer-events-none;
+  /* faint paper grain, sits on sections that want texture */
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.04 0 0 0 0 0.13 0 0 0 0 0.22 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* editorial link underline sweep */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 1px;
   }
 }
 
