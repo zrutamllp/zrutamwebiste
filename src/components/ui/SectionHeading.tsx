@@ -3,11 +3,13 @@ export default function SectionHeading({
   title,
   lede,
   align = "left",
+  as: Heading = "h2",
 }: {
   eyebrow?: string;
   title: React.ReactNode;
   lede?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2";
 }) {
   const alignCls = align === "center" ? "text-center mx-auto" : "text-left";
   return (
@@ -17,9 +19,9 @@ export default function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-ink text-balance">
+      <Heading className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-ink text-balance">
         {title}
-      </h2>
+      </Heading>
       {lede && (
         <p
           className={`mt-5 text-lg leading-relaxed text-navy-600 max-w-[65ch] ${align === "center" ? "mx-auto" : ""}`}

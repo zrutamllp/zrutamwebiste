@@ -90,6 +90,7 @@ export default function SolutionsPage() {
         <div className="relative max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
           <FadeInSection>
             <SectionHeading
+              as="h1"
               align="center"
               eyebrow="Solutions"
               title={

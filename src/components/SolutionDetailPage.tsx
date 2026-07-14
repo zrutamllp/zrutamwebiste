@@ -45,7 +45,9 @@ export default function SolutionDetailPage({
                 {solution.description}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button href="/contact/">Book a Demo</Button>
+                <Button href={`/contact/?interest=${solution.slug}`}>
+                  Book a Demo
+                </Button>
                 <Button href="/solutions/" variant="outline">
                   All Solutions
                 </Button>
@@ -100,29 +102,31 @@ export default function SolutionDetailPage({
               }
             />
           </FadeInSection>
-          <div className="max-w-4xl">
+          <ol className="list-none max-w-4xl">
             {solution.features.map((feature, index) => (
-              <FadeInSection key={feature} delay={index * 0.08}>
-                <div
-                  className={`flex items-baseline gap-6 md:gap-10 py-6 md:py-7 ${
-                    index < solution.features.length - 1
-                      ? "border-b border-navy-100"
-                      : ""
-                  }`}
-                >
-                  <span
-                    className="font-display text-3xl text-navy-300 tabular-nums shrink-0"
-                    aria-hidden="true"
+              <li key={feature}>
+                <FadeInSection delay={index * 0.08}>
+                  <div
+                    className={`flex items-baseline gap-6 md:gap-10 py-6 md:py-7 ${
+                      index < solution.features.length - 1
+                        ? "border-b border-navy-100"
+                        : ""
+                    }`}
                   >
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <p className="text-ink text-lg md:text-xl leading-relaxed">
-                    {feature}
-                  </p>
-                </div>
-              </FadeInSection>
+                    <span
+                      className="font-display text-3xl text-navy-300 tabular-nums shrink-0"
+                      aria-hidden="true"
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-ink text-lg md:text-xl leading-relaxed">
+                      {feature}
+                    </p>
+                  </div>
+                </FadeInSection>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
       </section>
 
@@ -131,9 +135,9 @@ export default function SolutionDetailPage({
         <div className="max-w-6xl mx-auto px-6">
           <FadeInSection>
             <div className="max-w-3xl mx-auto bg-teal-50 border-l-2 border-teal-500 rounded-r-xl p-6 md:p-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+              <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
                 Who this is for
-              </p>
+              </h2>
               <p className="text-ink text-lg md:text-xl leading-relaxed">
                 {solution.targetAudience}
               </p>
@@ -150,7 +154,10 @@ export default function SolutionDetailPage({
           </>
         }
         subtitle={`Schedule a personalized demo to see how ${solution.shortTitle} can transform your organization.`}
-        primaryCTA={{ text: "Book a Demo", href: "/contact/" }}
+        primaryCTA={{
+          text: "Book a Demo",
+          href: `/contact/?interest=${solution.slug}`,
+        }}
         secondaryCTA={{ text: "Contact Sales", href: "/contact/" }}
       />
     </>
