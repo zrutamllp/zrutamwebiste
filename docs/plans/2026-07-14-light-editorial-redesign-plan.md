@@ -38,6 +38,8 @@ Apply this map wherever old dark styling is met. Do not leave any entry of the l
 
 Section rhythm: `py-20 md:py-28`; container `mx-auto max-w-6xl px-6`; reading columns `max-w-[65ch]`.
 
+**Primitive conventions (decided in T2 review):** the `className` prop on Button/Card is ADDITIVE ONLY — margins, width, flex placement. Never pass conflicting utilities (padding/color/radius overrides); Tailwind resolves conflicts by stylesheet order, not prop order, so overrides are nondeterministic. Native `<button>`/form elements reuse `buttonClasses(variant, extra)` exported from `src/components/ui/Button.tsx` instead of hand-rolling styles. Static informational cards should pass `hover={false}`.
+
 ---
 
 ### Task 0: Branch
