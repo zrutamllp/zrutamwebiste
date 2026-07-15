@@ -4,6 +4,9 @@ import { notFound } from "next/navigation";
 import { BLOG_POSTS } from "@/lib/constants";
 import FadeInSection from "@/components/FadeInSection";
 import CTABanner from "@/components/CTABanner";
+import Button from "@/components/ui/Button";
+import SectionHeading from "@/components/ui/SectionHeading";
+import { cardClasses } from "@/components/ui/Card";
 
 interface PageProps {
   params: { slug: string };
@@ -91,18 +94,23 @@ export default function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      {/* Article Header */}
-      <section className="gradient-navy py-20 md:py-28">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Article header */}
+      <section className="relative bg-paper grain overflow-hidden">
+        <div
+          className="absolute inset-x-0 top-0 h-96 bg-grid-dots opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]"
+          aria-hidden="true"
+        />
+        <div className="relative max-w-3xl mx-auto px-6 pt-32 pb-14 md:pt-40 md:pb-16">
           <Link
             href="/blog"
-            className="inline-flex items-center text-teal hover:text-teal-200 text-sm font-medium mb-8 transition-colors"
+            className="inline-flex items-center gap-2 text-teal-600 hover:text-teal-700 text-sm font-semibold mb-10 transition-colors"
           >
             <svg
-              className="w-4 h-4 mr-2"
+              className="w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -113,13 +121,13 @@ export default function BlogPostPage({ params }: PageProps) {
             </svg>
             Back to Blog
           </Link>
-          <span className="inline-block px-3 py-1 bg-teal/10 border border-teal/20 text-teal-300 text-sm font-medium rounded-full mb-4">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-4">
             {post.category}
-          </span>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+          </p>
+          <h1 className="font-display text-3xl md:text-5xl leading-[1.1] tracking-tight text-ink text-balance mb-6">
             {post.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-4 text-gray-400 text-sm">
+          <div className="flex flex-wrap items-center gap-3 text-navy-500 text-sm">
             <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "long",
@@ -127,123 +135,123 @@ export default function BlogPostPage({ params }: PageProps) {
                 year: "numeric",
               })}
             </time>
-            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span className="w-1 h-1 rounded-full bg-navy-300" aria-hidden="true" />
             <span>{post.readTime}</span>
-            <span className="w-1 h-1 rounded-full bg-gray-600" />
-            <span>{post.category}</span>
           </div>
         </div>
       </section>
 
-      {/* Article Content */}
-      <section className="py-16 bg-surface-raised">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Main Content */}
-            <article className="lg:col-span-2">
-              <div className="prose prose-lg max-w-none">
-                {content.map((paragraph, index) => (
-                  <FadeInSection key={index} delay={index * 0.1}>
-                    <p className="text-gray-300 leading-relaxed mb-6 text-lg">
-                      {paragraph}
-                    </p>
-                  </FadeInSection>
+      {/* Article body */}
+      <section className="py-16 md:py-20 bg-paper-warm border-t border-navy-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <article className="max-w-[65ch] mx-auto">
+            {content.map((paragraph, index) => (
+              <FadeInSection key={index} delay={Math.min(index, 3) * 0.08}>
+                <p className="text-navy-700 text-lg leading-relaxed mb-6">
+                  {paragraph}
+                </p>
+              </FadeInSection>
+            ))}
+
+            {/* Tags */}
+            <div className="mt-12 pt-8 border-t border-navy-100">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm text-navy-500 mr-2">Tags:</span>
+                {post.keyword.split(" ").map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-white border border-navy-100 text-navy-600 text-sm rounded-full"
+                  >
+                    {tag}
+                  </span>
                 ))}
               </div>
+            </div>
 
-              {/* Tags */}
-              <div className="mt-12 pt-8 border-t border-white/10">
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-sm text-gray-400 mr-2">Tags:</span>
-                  {post.keyword.split(" ").map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-white/10 text-gray-300 text-sm rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+            {/* Author / CTA end matter */}
+            <div className="mt-12 bg-white border border-navy-100 rounded-2xl p-6 md:p-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+                From the Zrutam team
+              </p>
+              <p className="text-navy-600 leading-relaxed mb-6">
+                We help APAC organizations build leadership pipelines and
+                skills-first workforces with AI-powered L&D tools. Curious how
+                these ideas apply to your organization?
+              </p>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-5">
+                <Button href="/contact/">Talk to Us</Button>
+                <Link
+                  href="/blog"
+                  className="text-sm font-semibold text-teal-600 hover:text-teal-700 transition-colors"
+                >
+                  <span className="link-underline">Back to all articles</span>
+                </Link>
               </div>
-            </article>
+            </div>
+          </article>
+        </div>
+      </section>
 
-            {/* Sidebar */}
-            <aside className="lg:col-span-1">
-              <div className="sticky top-24">
-                <h3 className="text-lg font-semibold text-white mb-6">
-                  Related Articles
-                </h3>
-                <div className="space-y-6">
-                  {relatedPosts.map((related) => (
-                    <Link
-                      key={related.slug}
-                      href={`/blog/${related.slug}`}
-                      className="block group"
-                    >
-                      <div className="glass-card p-5 hover:border-teal/30 hover:shadow-glow-teal transition-all duration-300">
-                        <span className="text-xs text-teal-300 font-medium">
-                          {related.category}
-                        </span>
-                        <h4 className="text-sm font-semibold text-white mt-1 group-hover:text-teal-300 transition-colors leading-snug">
-                          {related.title}
-                        </h4>
-                        <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
-                          <time dateTime={related.date}>
-                            {new Date(related.date).toLocaleDateString(
-                              "en-US",
-                              {
-                                month: "short",
-                                day: "numeric",
-                              }
-                            )}
-                          </time>
-                          <span className="w-1 h-1 rounded-full bg-gray-600" />
-                          <span>{related.readTime}</span>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-
-                {/* Newsletter CTA */}
-                <div className="mt-8 bg-gradient-to-br from-navy to-navy-50 rounded-xl p-6">
-                  <h4 className="text-white font-semibold mb-2">
-                    Stay Updated
-                  </h4>
-                  <p className="text-gray-400 text-sm mb-4">
-                    Get the latest L&D insights delivered to your inbox.
+      {/* Related articles */}
+      <section className="py-20 md:py-28 bg-paper border-t border-navy-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <FadeInSection>
+            <SectionHeading
+              eyebrow="Keep reading"
+              title={
+                <>
+                  Related <em className="italic text-teal-600">insights</em>
+                </>
+              }
+            />
+          </FadeInSection>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {relatedPosts.map((related, index) => (
+              <FadeInSection
+                key={related.slug}
+                delay={index * 0.08}
+                className="h-full"
+              >
+                <Link
+                  href={`/blog/${related.slug}`}
+                  className={cardClasses(true, "group flex flex-col h-full p-6")}
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-teal-600 mb-3">
+                    {related.category}
                   </p>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center text-teal hover:text-teal-200 text-sm font-medium transition-colors"
-                  >
-                    Subscribe to our newsletter
-                    <svg
-                      className="ml-1 w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </Link>
-                </div>
-              </div>
-            </aside>
+                  <h3 className="font-display text-lg leading-snug text-ink mb-4 transition-colors group-hover:text-teal-700">
+                    {related.title}
+                  </h3>
+                  <div className="mt-auto flex items-center gap-2 text-xs text-navy-500">
+                    <time dateTime={related.date}>
+                      {new Date(related.date).toLocaleDateString("en-US", {
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </time>
+                    <span
+                      className="w-1 h-1 rounded-full bg-navy-300"
+                      aria-hidden="true"
+                    />
+                    <span>{related.readTime}</span>
+                  </div>
+                </Link>
+              </FadeInSection>
+            ))}
           </div>
         </div>
       </section>
 
       <CTABanner
-        title="Ready to Transform Your Workforce?"
+        title={
+          <>
+            Ready to transform your{" "}
+            <em className="italic text-amber-400">workforce</em>?
+          </>
+        }
         subtitle="Discover how Zrutam's AI-powered L&D solutions can drive measurable outcomes."
-        primaryCTA={{ text: "Book a Demo", href: "/contact" }}
-        secondaryCTA={{ text: "Explore Solutions", href: "/solutions" }}
+        primaryCTA={{ text: "Book a Demo", href: "/contact/" }}
+        secondaryCTA={{ text: "Explore Solutions", href: "/solutions/" }}
       />
     </>
   );
