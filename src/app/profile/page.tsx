@@ -131,15 +131,15 @@ const AnimatedCounter = ({ end, suffix = "", prefix = "", duration = 2000 }: {
 
 // --- Custom Components ---
 
-const CompanyLogo = ({ src, name, className = "" }: { src: string; name: string; className?: string }) => {
+const CompanyLogo = ({ src, name, className = "", decorative = false }: { src: string; name: string; className?: string; decorative?: boolean }) => {
   const [hasError, setHasError] = useState(false);
 
-  if (hasError || !src) return <Building2 size={24} className="text-navy-400" />;
+  if (hasError || !src) return <Building2 size={24} className="text-navy-400" aria-hidden={decorative || undefined} />;
 
   return (
     <img
       src={src}
-      alt={`${name} logo`}
+      alt={decorative ? "" : `${name} logo`}
       className={`object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 ${className}`}
       onError={() => setHasError(true)}
     />
@@ -209,7 +209,7 @@ const MediaCard = ({ type, title, subtitle, imageSrc, link }: {
 
   return (
     <div className="group relative rounded-2xl overflow-hidden bg-ink border border-navy-100 shadow-card hover:shadow-lift transition-all duration-500 aspect-video cursor-pointer">
-      <img src={imageSrc} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" />
+      <img src={imageSrc} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:scale-110 group-hover:opacity-40 transition-all duration-700" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500"></div>
 
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -233,7 +233,7 @@ const MediaCard = ({ type, title, subtitle, imageSrc, link }: {
         <h3 className="text-lg md:text-xl font-bold text-white mb-1 leading-tight">{title}</h3>
         <p className="text-navy-200 text-xs md:text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 hidden sm:block">{subtitle}</p>
 
-        <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-2 md:mt-4 text-xs md:text-sm font-semibold text-teal-200 hover:text-white opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+        <a href={link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-2 md:mt-4 text-xs md:text-sm font-semibold text-teal-200 hover:text-white opacity-0 group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-500 delay-200">
           {isVideo ? 'Watch Video' : isGame ? 'Play Demo' : 'View Gallery'} <ExternalLink size={14} />
         </a>
       </div>
@@ -293,12 +293,6 @@ export default function ProfilePage() {
 
   return (
     <div className="min-h-screen bg-paper font-sans selection:bg-ink selection:text-paper overflow-hidden text-navy-600">
-
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .animate-scroll { animation: scroll 30s linear infinite; }
-        .hover-pause:hover { animation-play-state: paused; }
-      `}} />
 
       {/* Hero Section */}
       <section className="relative bg-paper grain overflow-hidden pt-28 md:pt-36 pb-16 md:pb-24 px-4 md:px-6">
@@ -365,7 +359,7 @@ export default function ProfilePage() {
       <section className="bg-paper-warm border-y border-navy-100 py-6 md:py-10 overflow-hidden relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-paper-warm to-transparent z-10"></div>
         <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-paper-warm to-transparent z-10"></div>
-        <div className="flex w-[200%] md:w-[200%] animate-scroll hover-pause">
+        <div className="flex w-[200%] animate-marquee hover:[animation-play-state:paused]">
           <div className="flex w-1/2 justify-around items-center px-4 md:px-8">
             <div className="hidden sm:block text-navy-600 font-semibold uppercase tracking-widest text-[10px] md:text-sm shrink-0 mr-4 md:mr-8">Trusted By Global Leaders</div>
             <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_%282018%29.svg" name="HSBC" className="h-5 md:h-8 px-2" />
@@ -375,14 +369,15 @@ export default function ProfilePage() {
             <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" name="Coca-Cola" className="h-5 md:h-8 px-2" />
             <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Vodafone_icon.svg" name="Vodafone" className="h-6 md:h-10 px-2" />
           </div>
-          <div className="flex w-1/2 justify-around items-center px-4 md:px-8">
+          {/* Duplicate strip for the seamless loop — hidden from assistive tech */}
+          <div className="flex w-1/2 justify-around items-center px-4 md:px-8" aria-hidden="true">
             <div className="hidden sm:block text-navy-600 font-semibold uppercase tracking-widest text-[10px] md:text-sm shrink-0 mr-4 md:mr-8">Trusted By Global Leaders</div>
-            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_%282018%29.svg" name="HSBC" className="h-5 md:h-8 px-2" />
-            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" name="Amazon" className="h-6 md:h-10 px-2" />
-            <CompanyLogo src="https://logo.clearbit.com/cdkglobal.com" name="CDK" className="h-6 md:h-10 px-2" />
-            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" name="HP" className="h-6 md:h-10 px-2" />
-            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" name="Coca-Cola" className="h-5 md:h-8 px-2" />
-            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Vodafone_icon.svg" name="Vodafone" className="h-6 md:h-10 px-2" />
+            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/aa/HSBC_logo_%282018%29.svg" name="HSBC" className="h-5 md:h-8 px-2" decorative />
+            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" name="Amazon" className="h-6 md:h-10 px-2" decorative />
+            <CompanyLogo src="https://logo.clearbit.com/cdkglobal.com" name="CDK" className="h-6 md:h-10 px-2" decorative />
+            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/ad/HP_logo_2012.svg" name="HP" className="h-6 md:h-10 px-2" decorative />
+            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" name="Coca-Cola" className="h-5 md:h-8 px-2" decorative />
+            <CompanyLogo src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Vodafone_icon.svg" name="Vodafone" className="h-6 md:h-10 px-2" decorative />
           </div>
         </div>
       </section>
@@ -391,7 +386,7 @@ export default function ProfilePage() {
       <section id="portfolio" className="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto">
         <FadeIn>
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-12">
-            <h4 className="text-teal-600 font-semibold tracking-[0.18em] uppercase text-xs md:text-sm mb-2 md:mb-3">Interactive Portfolio</h4>
+            <p className="text-teal-600 font-semibold tracking-[0.18em] uppercase text-xs md:text-sm mb-2 md:mb-3">Interactive Portfolio</p>
             <h2 className="font-display text-3xl md:text-5xl leading-[1.1] text-ink mb-4 md:mb-6 tracking-tight">Impact in Action</h2>
             <p className="text-base md:text-lg text-navy-600 leading-relaxed">Explore videos of past offsites, play demos of custom business simulations, and view galleries of large group interventions.</p>
           </div>
@@ -435,7 +430,7 @@ export default function ProfilePage() {
           <FadeIn>
             <div className="mb-10 md:mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8 text-center md:text-left">
               <div className="max-w-2xl mx-auto md:mx-0">
-                <h4 className="text-teal-600 font-semibold tracking-[0.18em] uppercase text-xs md:text-sm mb-2 md:mb-3">Core Offerings</h4>
+                <p className="text-teal-600 font-semibold tracking-[0.18em] uppercase text-xs md:text-sm mb-2 md:mb-3">Core Offerings</p>
                 <h2 className="font-display text-3xl md:text-5xl leading-[1.1] text-ink mb-3 md:mb-4 tracking-tight">High-Impact Solutions</h2>
                 <p className="text-base md:text-lg text-navy-600 leading-relaxed">Comprehensive, enterprise-grade interventions delivered directly through Zrutam LLP.</p>
               </div>
@@ -541,7 +536,7 @@ export default function ProfilePage() {
       <section id="experience" className="py-16 md:py-24 px-4 md:px-6 max-w-5xl mx-auto">
         <FadeIn>
           <div className="text-center max-w-3xl mx-auto mb-12 md:mb-20">
-            <h4 className="text-teal-600 font-semibold tracking-[0.18em] uppercase text-xs md:text-sm mb-2 md:mb-3">Track Record</h4>
+            <p className="text-teal-600 font-semibold tracking-[0.18em] uppercase text-xs md:text-sm mb-2 md:mb-3">Track Record</p>
             <h2 className="font-display text-3xl md:text-5xl leading-[1.1] text-ink mb-4 md:mb-6 tracking-tight">Enterprise Capability</h2>
             <p className="text-base md:text-lg text-navy-600 leading-relaxed">A two-decade foundation of scaling organizational development for the world&apos;s leading brands.</p>
           </div>
