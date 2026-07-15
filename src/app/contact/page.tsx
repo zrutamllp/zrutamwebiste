@@ -1,142 +1,90 @@
-"use client";
+import { Metadata } from "next";
+import ContactForm from "@/components/ContactForm";
+import FadeInSection from "@/components/FadeInSection";
+import SectionHeading from "@/components/ui/SectionHeading";
+import { cardClasses } from "@/components/ui/Card";
 
-import { motion } from "framer-motion";
+export const metadata: Metadata = {
+  title: "Contact Us | Zrutam",
+  description:
+    "Get in touch with Zrutam to book a demo or discuss your organization's L&D goals. We respond within one business day.",
+};
 
 export default function ContactPage() {
-
   return (
-    <>
-      {/* Hero */}
-      <section className="relative bg-surface py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-grid-dots opacity-30 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
-        <div className="aurora-blob animate-aurora-1 -top-40 -right-20 w-[500px] h-[500px] bg-teal/10" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6"
-          >
-            Get in Touch
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-          >
-            Ready to transform your workforce? Let us show you how Zrutam can
-            drive measurable L&D outcomes for your organization.
-          </motion.p>
-        </div>
-      </section>
+    <section className="relative bg-paper grain overflow-hidden">
+      <div
+        className="absolute inset-x-0 top-0 h-96 bg-grid-dots opacity-40 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]"
+        aria-hidden="true"
+      />
+      <div className="relative max-w-6xl mx-auto px-6 pt-32 pb-20 md:pt-40 md:pb-28">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+          {/* Left column — heading + contact info */}
+          <FadeInSection className="lg:col-span-2">
+            <SectionHeading
+              as="h1"
+              eyebrow="Contact"
+              title={
+                <>
+                  Let&apos;s <em className="italic text-teal-600">talk</em>
+                </>
+              }
+              lede="Ready to transform your workforce? Tell us what you're working toward and we'll show you how Zrutam can drive measurable L&D outcomes."
+            />
 
-      {/* Contact Form & Info */}
-      <section className="py-20 bg-surface-raised">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-16">
-            {/* Form */}
-            <div className="lg:col-span-3">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <h2 className="text-2xl font-bold text-white tracking-tight mb-2">
-                  Send Us a Message
+            <div className="space-y-8 -mt-2">
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy-500 mb-2">
+                  Email
                 </h2>
-                <p className="text-gray-400 mb-8">
-                  Have a question or want to discuss your L&D needs? Drop us an
-                  email and our team will get back to you within 24 hours.
-                </p>
-
                 <a
-                  href="mailto:ceo@zrutam.com?subject=Inquiry%20from%20Zrutam%20Website"
-                  className="inline-flex items-center justify-center gap-3 w-full md:w-auto px-10 py-4 bg-amber hover:bg-amber-400 text-navy font-semibold rounded-lg transition-all duration-300 shadow-glow-amber hover:-translate-y-0.5 text-base"
+                  href="mailto:ceo@zrutam.com"
+                  className="text-ink font-medium hover:text-teal-600 transition-colors"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                  </svg>
-                  Send Email to ceo@zrutam.com
+                  ceo@zrutam.com
                 </a>
+              </div>
 
-                <div className="mt-8 p-6 glass-card !rounded-xl">
-                  <p className="text-gray-400 text-sm">
-                    Clicking the button above will open your default email client
-                    with our CEO&apos;s email address pre-filled. You can also email
-                    us directly at{" "}
-                    <a href="mailto:ceo@zrutam.com" className="text-teal-300 hover:text-teal-200 font-medium">
-                      ceo@zrutam.com
-                    </a>
-                  </p>
-                </div>
-              </motion.div>
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy-500 mb-2">
+                  Office
+                </h2>
+                <p className="text-ink font-medium">Bhubaneswar, India</p>
+                <p className="text-navy-600 text-sm leading-relaxed mt-1">
+                  Chandrabali House, Ground Floor,
+                  <br />
+                  Uttamundahunan, Janla, Khordha,
+                  <br />
+                  Bhubaneswar &ndash; 752054
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-navy-500 mb-2">
+                  Working hours
+                </h2>
+                <p className="text-navy-600 text-sm leading-relaxed">
+                  Monday &ndash; Friday: 9:00 AM &ndash; 6:00 PM IST
+                  <br />
+                  Saturday &ndash; Sunday: Closed
+                </p>
+              </div>
+
+              <p className="text-navy-600 text-sm leading-relaxed border-l-2 border-teal-500 pl-4">
+                We respond to every message within one business day &mdash;
+                usually much sooner.
+              </p>
             </div>
+          </FadeInSection>
 
-            {/* Contact Info */}
-            <div className="lg:col-span-2">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="space-y-8"
-              >
-                {/* Email */}
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">
-                    Email Us
-                  </h3>
-                  <a
-                    href="mailto:ceo@zrutam.com"
-                    className="inline-flex items-center gap-3 text-gray-400 hover:text-teal-300 transition-colors"
-                  >
-                    <div className="w-10 h-10 bg-teal/15 border border-teal/25 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <svg className="w-5 h-5 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                      </svg>
-                    </div>
-                    ceo@zrutam.com
-                  </a>
-                </div>
-
-                {/* Office Location */}
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-4">
-                    Our Office
-                  </h3>
-                  <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 bg-teal/15 border border-teal/25 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-5 h-5 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="font-medium text-gray-200">Bhubaneswar, India</p>
-                      <p className="text-gray-400 text-sm leading-relaxed">
-                        Chandrabali House, Ground Floor,<br />
-                        Uttamundahunan, Janla, Khordha,<br />
-                        Bhubaneswar &ndash; 752054
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Working Hours */}
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-3">
-                    Working Hours
-                  </h3>
-                  <div className="text-gray-400 text-sm space-y-1">
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM IST</p>
-                    <p>Saturday - Sunday: Closed</p>
-                  </div>
-                </div>
-              </motion.div>
+          {/* Right column — form */}
+          <FadeInSection delay={0.15} className="lg:col-span-3">
+            <div className={cardClasses(false, "p-8")}>
+              <ContactForm />
             </div>
-          </div>
+          </FadeInSection>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

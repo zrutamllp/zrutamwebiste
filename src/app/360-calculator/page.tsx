@@ -934,7 +934,7 @@ export default function CalculatorPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="mailto:ceo@zrutam.com"
+                href="/contact/?interest=360"
                 className="inline-block bg-gradient-to-r from-amber to-orange-500 hover:from-amber-600 hover:to-orange-600 text-navy font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-glow-amber transition-all transform hover:-translate-y-0.5 text-sm"
               >
                 Book a Demo

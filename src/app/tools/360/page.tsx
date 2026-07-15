@@ -219,7 +219,7 @@ export default function Zrutam360Page() {
               className="flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <a
-                href="mailto:ceo@zrutam.com"
+                href="/contact/?interest=360"
                 className="px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber inline-flex items-center gap-2"
               >
                 Book a Demo
@@ -444,7 +444,7 @@ export default function Zrutam360Page() {
               </ul>
 
               <a
-                href="mailto:ceo@zrutam.com"
+                href="/contact/?interest=360"
                 className="block w-full text-center px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber"
               >
                 Contact for Volume Pricing
@@ -540,7 +540,7 @@ export default function Zrutam360Page() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <a
-              href="mailto:ceo@zrutam.com"
+              href="/contact/?interest=360"
               className="px-8 py-4 bg-amber hover:bg-amber-600 text-navy font-semibold rounded-lg transition-all duration-200 hover:shadow-glow-amber inline-flex items-center gap-2"
             >
               Book a Demo
