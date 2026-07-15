@@ -573,6 +573,8 @@ export default function NotFound() {
 
 **Verify:** static export emits `out/404.html` (Hostinger/Apache serves it automatically). **Commit.**
 
+**Recorded deviations (approved in review):** T7 deleted the article sidebar's fake "newsletter" block (was just a /contact link; function covered by end-matter CTA + CTABanner) and skipped pull-quote/callout recipes (articleContent is a flat string[] — nothing to render them from). Featured treatment applies to the filtered category's newest post.
+
 ### Task 13: Final verification + deploy checklist
 
 **Files:**
