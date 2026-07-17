@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { buttonClasses } from "@/components/ui/Button";
 
 const ACCESS_KEY = "REPLACE_WITH_WEB3FORMS_ACCESS_KEY"; // web3forms.com — free, takes 1 min
+
+const DEFAULT_INTEREST = "General Inquiry";
 
 const INTERESTS = [
   "Book a Demo — Zrutam 360",
@@ -12,7 +14,7 @@ const INTERESTS = [
   "Upskilling & Reskilling",
   "Custom E-Learning",
   "AI Skills Assessment",
-  "General Inquiry",
+  DEFAULT_INTEREST,
 ];
 
 // map ?interest= slugs (from solution/tool CTAs) to select options
@@ -30,7 +32,8 @@ export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
     "idle"
   );
-  const [interest, setInterest] = useState(INTERESTS[6]);
+  const [interest, setInterest] = useState(DEFAULT_INTEREST);
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // static export: read query param client-side (useSearchParams would demand a Suspense boundary)
@@ -39,6 +42,13 @@ export default function ContactForm() {
       setInterest(SLUG_TO_INTEREST[param.toLowerCase()]);
     }
   }, []);
+
+  useEffect(() => {
+    // move focus to the confirmation when the form unmounts, so keyboard/SR users aren't stranded
+    if (status === "sent") {
+      successRef.current?.focus();
+    }
+  }, [status]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,8 +63,11 @@ export default function ContactForm() {
           access_key: ACCESS_KEY,
           subject: `Zrutam website: ${data.interest}`,
         }),
+        signal: AbortSignal.timeout(10000),
       });
-      setStatus(res.ok ? "sent" : "error");
+      // Web3Forms can return a body verdict that diverges from the HTTP status
+      const json = await res.json();
+      setStatus(res.ok && json.success ? "sent" : "error");
     } catch {
       setStatus("error");
     }
@@ -63,7 +76,9 @@ export default function ContactForm() {
   if (status === "sent") {
     return (
       <div
-        className="bg-teal-50 border border-teal-200 rounded-2xl p-10 text-center"
+        ref={successRef}
+        tabIndex={-1}
+        className="bg-teal-50 border border-teal-200 rounded-2xl p-10 text-center focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
         role="status"
       >
         <p className="font-display text-2xl text-ink">
@@ -176,7 +191,7 @@ export default function ContactForm() {
           {status === "sending" ? "Sending…" : "Send Message"}
         </button>
         {status === "error" && (
-          <p className="mt-4 text-sm text-red-700" role="status">
+          <p className="mt-4 text-sm text-red-700" role="alert">
             Something went wrong — please email{" "}
             <a href="mailto:ceo@zrutam.com" className="underline">
               ceo@zrutam.com
