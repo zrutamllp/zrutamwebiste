@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { buttonClasses } from "@/components/ui/Button";
+import { cardClasses } from "@/components/ui/Card";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -89,8 +91,8 @@ function SliderRow({
   return (
     <div>
       <div className="flex justify-between text-xs font-bold mb-1.5">
-        <span className="text-gray-200">{label}</span>
-        <span className="text-orange-300 bg-orange-500/15 px-1.5 py-0.5 rounded text-[10px]">
+        <span className="text-ink">{label}</span>
+        <span className="text-teal-600 bg-teal-50 border border-teal-100 px-1.5 py-0.5 rounded text-[10px]">
           {value}%
         </span>
       </div>
@@ -101,7 +103,7 @@ function SliderRow({
         step={step ?? 1}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full accent-orange-500 custom-range"
+        className="w-full accent-teal-500 custom-range"
       />
     </div>
   );
@@ -328,54 +330,57 @@ export default function CalculatorPage() {
           height: 18px;
           width: 18px;
           border-radius: 50%;
-          background: #f97316;
+          background: #0284c7;
           cursor: pointer;
           margin-top: -7px;
-          box-shadow: 0 2px 5px rgba(249, 115, 22, 0.4);
+          box-shadow: 0 2px 5px rgba(2, 132, 199, 0.35);
           border: 2px solid white;
           transition: transform 0.1s;
         }
         .custom-range::-webkit-slider-thumb:hover {
           transform: scale(1.2);
         }
+        .custom-range:focus-visible::-webkit-slider-thumb {
+          box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.35);
+        }
         .custom-range::-webkit-slider-runnable-track {
           width: 100%;
           height: 4px;
           cursor: pointer;
-          background: rgba(255, 255, 255, 0.18);
+          background: #e4ebf1;
           border-radius: 2px;
         }
         .custom-range::-moz-range-thumb {
           height: 14px;
           width: 14px;
           border-radius: 50%;
-          background: #f97316;
+          background: #0284c7;
           cursor: pointer;
           border: 2px solid white;
-          box-shadow: 0 2px 5px rgba(249, 115, 22, 0.4);
+          box-shadow: 0 2px 5px rgba(2, 132, 199, 0.35);
+        }
+        .custom-range:focus-visible::-moz-range-thumb {
+          box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.35);
         }
         .custom-range::-moz-range-track {
           width: 100%;
           height: 4px;
           cursor: pointer;
-          background: rgba(255, 255, 255, 0.18);
+          background: #e4ebf1;
           border-radius: 2px;
         }
 
         @keyframes pulse-danger {
           0% {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.1),
-              inset 0 0 10px rgba(239, 68, 68, 0.05);
+            box-shadow: 0 8px 24px -8px rgba(220, 38, 38, 0.15);
           }
           100% {
-            box-shadow: 0 0 40px rgba(239, 68, 68, 0.2),
-              inset 0 0 20px rgba(239, 68, 68, 0.1);
+            box-shadow: 0 12px 36px -8px rgba(220, 38, 38, 0.3);
           }
         }
         .danger-glow {
-          box-shadow: 0 0 40px rgba(239, 68, 68, 0.15),
-            inset 0 0 20px rgba(239, 68, 68, 0.05);
-          border-color: rgba(239, 68, 68, 0.3) !important;
+          box-shadow: 0 8px 24px -8px rgba(220, 38, 38, 0.2);
+          border-color: rgba(220, 38, 38, 0.35) !important;
           animation: pulse-danger 3s infinite alternate;
         }
       `}</style>
@@ -387,24 +392,24 @@ export default function CalculatorPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-ink/50 backdrop-blur-sm flex items-center justify-center p-4"
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="bg-surface-overlay border border-white/10 rounded-2xl shadow-xl shadow-black/50 max-w-md w-full p-8 text-center"
+              className="bg-white border border-navy-100 rounded-2xl shadow-lift max-w-md w-full p-8 text-center"
             >
-              <div className="w-14 h-14 bg-orange-500/15 border border-orange-500/25 rounded-xl flex items-center justify-center mx-auto mb-5">
-                <svg className="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-14 h-14 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center mx-auto mb-5">
+                <svg className="w-7 h-7 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h2 className="text-2xl font-bold text-white tracking-tight mb-2">
+              <h2 className="font-display text-2xl text-ink tracking-tight mb-2">
                 Unlock the Risk Calculator
               </h2>
-              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+              <p className="text-navy-600 text-sm mb-6 leading-relaxed">
                 Enter your official work email to access the full interactive
                 Organizational Risk Calculator.
               </p>
@@ -415,20 +420,23 @@ export default function CalculatorPage() {
                   onChange={(e) => { setGateEmail(e.target.value); setGateError(""); }}
                   onKeyDown={(e) => { if (e.key === "Enter") handleGateSubmit(); }}
                   placeholder="you@company.com"
-                  className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/15 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-navy-200 bg-white text-ink placeholder:text-navy-400 text-sm focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all"
                 />
                 {gateError && (
-                  <p className="text-red-400 text-xs font-medium text-left">{gateError}</p>
+                  <p className="text-red-600 text-xs font-medium text-left">{gateError}</p>
                 )}
                 <button
                   onClick={handleGateSubmit}
                   disabled={gateSubmitting}
-                  className="w-full py-3 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold rounded-lg shadow-lg hover:shadow-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed text-sm"
+                  className={buttonClasses(
+                    "primary",
+                    "w-full text-sm disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0",
+                  )}
                 >
                   {gateSubmitting ? "Please wait..." : "Access Calculator"}
                 </button>
               </div>
-              <p className="text-[11px] text-gray-500 mt-4">
+              <p className="text-[11px] text-navy-600 mt-4">
                 We respect your privacy. No spam, ever.
               </p>
             </motion.div>
@@ -436,31 +444,19 @@ export default function CalculatorPage() {
         )}
       </AnimatePresence>
 
-      <div className="relative min-h-screen bg-surface text-gray-200 overflow-x-hidden">
-        {/* Ambient background blobs */}
-        <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-teal/10 rounded-full blur-[100px]" />
-          <div
-            className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] transition-all duration-1000"
-            style={{
-              backgroundColor:
-                revealed && isDanger ? "rgba(239,68,68,0.15)" : "rgba(239,68,68,0)",
-            }}
-          />
-        </div>
-
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-24 lg:pt-28 pb-8 lg:pb-12">
+      <div className="relative min-h-screen bg-paper grain text-ink overflow-x-hidden">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-32 md:pt-40 pb-8 lg:pb-12">
           {/* ---------- Header ---------- */}
           <motion.header
-            className="text-center mb-8"
+            className="text-center mb-10 md:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight mb-3 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
-              Organizational Risk Calculator
+            <h1 className="font-display text-4xl md:text-5xl leading-[1.05] tracking-tight text-ink text-balance mb-4">
+              Organizational <em className="italic text-teal-600">Risk</em> Calculator
             </h1>
-            <p className="text-gray-400 text-xs sm:text-sm lg:text-base max-w-2xl mx-auto">
+            <p className="text-navy-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
               Enter your workforce demographics and adjust the behavioral assumptions below. This
               tool algorithmically exposes the hidden financial risks carried by your frontline
               leadership layer.
@@ -478,9 +474,9 @@ export default function CalculatorPage() {
               transition={{ duration: 0.5 }}
             >
               {/* Company Demographics */}
-              <div className="glass-card p-5 sm:p-6 relative z-10">
-                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
-                  <div className="w-7 h-7 rounded-full bg-teal/15 flex items-center justify-center text-teal-300 shrink-0">
+              <div className={cardClasses(false, "p-6 md:p-8 relative z-10")}>
+                <div className="flex items-center gap-3 mb-4 border-b border-navy-100 pb-3">
+                  <div className="w-7 h-7 rounded-full bg-teal-50 flex items-center justify-center text-teal-600 shrink-0">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -490,7 +486,7 @@ export default function CalculatorPage() {
                       />
                     </svg>
                   </div>
-                  <h2 className="text-lg font-bold text-white leading-tight">
+                  <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 leading-tight">
                     Company Demographics
                   </h2>
                 </div>
@@ -499,7 +495,7 @@ export default function CalculatorPage() {
                   {/* Headcount & Salary */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1.5">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
                         Total Headcount
                       </label>
                       <input
@@ -507,31 +503,31 @@ export default function CalculatorPage() {
                         value={total}
                         placeholder="Enter your headcount"
                         onChange={(e) => setTotal(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2.5 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
+                        className="w-full px-3 py-2.5 rounded-xl text-sm font-bold border border-navy-200 bg-white text-ink focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition-all placeholder:font-normal placeholder:text-navy-400"
                       />
                     </div>
                     <div>
                       <div className="flex justify-between items-end mb-1.5">
-                        <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400">
+                        <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600">
                           Avg. Base Salary
                         </label>
-                        <div className="flex bg-white/10 rounded p-0.5 border border-white/15 items-center">
+                        <div className="flex bg-navy-50 rounded-full p-0.5 border border-navy-200 items-center">
                           <button
                             onClick={() => toggleCurrency("USD")}
-                            className={`text-[9px] px-2 py-0.5 rounded-sm transition-all ${
+                            className={`text-[9px] px-2 py-0.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-500 ${
                               currency === "USD"
-                                ? "bg-white/20 text-white font-bold shadow-sm"
-                                : "text-gray-500 bg-transparent hover:text-gray-200"
+                                ? "bg-ink text-paper font-bold shadow-card"
+                                : "text-navy-600 bg-transparent hover:text-ink"
                             }`}
                           >
                             USD
                           </button>
                           <button
                             onClick={() => toggleCurrency("INR")}
-                            className={`text-[9px] px-2 py-0.5 rounded-sm transition-all ${
+                            className={`text-[9px] px-2 py-0.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-500 ${
                               currency === "INR"
-                                ? "bg-white/20 text-white font-bold shadow-sm"
-                                : "text-gray-500 bg-transparent hover:text-gray-200"
+                                ? "bg-ink text-paper font-bold shadow-card"
+                                : "text-navy-600 bg-transparent hover:text-ink"
                             }`}
                           >
                             INR
@@ -539,7 +535,7 @@ export default function CalculatorPage() {
                         </div>
                       </div>
                       <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 font-bold text-sm">
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-navy-600 font-bold text-sm">
                           {currency === "USD" ? "$" : "\u20B9"}
                         </span>
                         <input
@@ -547,7 +543,7 @@ export default function CalculatorPage() {
                           value={salary}
                           placeholder="Avg. frontline salary"
                           onChange={(e) => setSalary(e.target.value === "" ? "" : Number(e.target.value))}
-                          className="w-full pl-7 pr-3 py-2.5 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
+                          className="w-full pl-7 pr-3 py-2.5 rounded-xl text-sm font-bold border border-navy-200 bg-white text-ink focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition-all placeholder:font-normal placeholder:text-navy-400"
                         />
                       </div>
                     </div>
@@ -556,7 +552,7 @@ export default function CalculatorPage() {
                   {/* The Pyramid */}
                   <div className="grid grid-cols-3 gap-3 pt-1">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1.5">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
                         Top <span className="hidden sm:inline">(VP+)</span>
                       </label>
                       <input
@@ -564,11 +560,11 @@ export default function CalculatorPage() {
                         value={senior}
                         placeholder="e.g. 50"
                         onChange={(e) => setSenior(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
+                        className="w-full px-3 py-2 rounded-xl text-sm font-bold border border-navy-200 bg-white text-ink focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition-all placeholder:font-normal placeholder:text-navy-400"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-gray-400 mb-1.5">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
                         Middle <span className="hidden sm:inline">(Dir)</span>
                       </label>
                       <input
@@ -576,11 +572,11 @@ export default function CalculatorPage() {
                         value={middle}
                         placeholder="e.g. 200"
                         onChange={(e) => setMiddle(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold bg-white/5 border border-white/15 text-white focus:outline-none focus:border-orange-500 focus:bg-orange-500/10 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-gray-500"
+                        className="w-full px-3 py-2 rounded-xl text-sm font-bold border border-navy-200 bg-white text-ink focus:outline-none focus:border-teal-500 focus:ring-2 focus:ring-teal-100 transition-all placeholder:font-normal placeholder:text-navy-400"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-orange-400 mb-1.5 drop-shadow-sm">
+                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-amber-700 mb-1.5">
                         Frontline <span className="hidden sm:inline">(Mgrs)</span>
                       </label>
                       <input
@@ -588,22 +584,22 @@ export default function CalculatorPage() {
                         value={flm}
                         placeholder="e.g. 350"
                         onChange={(e) => setFlm(e.target.value === "" ? "" : Number(e.target.value))}
-                        className="w-full px-3 py-2 rounded-lg text-sm font-bold text-orange-300 border border-orange-500/40 bg-orange-500/10 focus:outline-none focus:border-orange-500 focus:ring-[3px] focus:ring-orange-500/20 transition-all placeholder:font-normal placeholder:text-orange-300/50"
+                        className="w-full px-3 py-2 rounded-xl text-sm font-bold text-amber-700 border border-amber-300 bg-amber-50 focus:outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-100 transition-all placeholder:font-normal placeholder:text-amber-700/50"
                       />
                     </div>
                   </div>
 
                   {/* Error */}
                   {errorMsg && (
-                    <p className="text-red-400 text-[11px] font-semibold mt-1">{errorMsg}</p>
+                    <p className="text-red-600 text-[11px] font-semibold mt-1">{errorMsg}</p>
                   )}
                 </div>
               </div>
 
               {/* Adjustable Assumptions */}
-              <div className="glass-card p-5 sm:p-6 relative z-10">
-                <div className="flex items-center gap-3 mb-4 border-b border-white/10 pb-3">
-                  <div className="w-7 h-7 rounded-full bg-orange-500/15 flex items-center justify-center text-orange-400 shrink-0">
+              <div className={cardClasses(false, "p-6 md:p-8 relative z-10")}>
+                <div className="flex items-center gap-3 mb-4 border-b border-navy-100 pb-3">
+                  <div className="w-7 h-7 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 shrink-0">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -614,10 +610,10 @@ export default function CalculatorPage() {
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-lg font-bold text-white leading-tight">
+                    <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-teal-600 leading-tight">
                       Adjust Assumptions
                     </h2>
-                    <p className="text-[10px] text-gray-500 mt-0.5">
+                    <p className="text-[10px] text-navy-600 mt-0.5">
                       Anchored to industry benchmarks.
                     </p>
                   </div>
@@ -660,42 +656,42 @@ export default function CalculatorPage() {
               {!revealed && (
                 <button
                   onClick={handleReveal}
-                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-black text-base py-3.5 rounded-xl shadow-[0_4px_15px_rgba(239,68,68,0.3)] hover:shadow-[0_6px_20px_rgba(239,68,68,0.4)] transition-all transform hover:-translate-y-1"
+                  className={buttonClasses("primary", "w-full text-base font-bold tracking-wide")}
                 >
-                  REVEAL RISK EXPOSURE
+                  Reveal Risk Exposure
                 </button>
               )}
             </motion.div>
 
             {/* ====== RIGHT: OUTPUT PANEL ====== */}
             <div
-              className={`lg:col-span-7 glass-card p-5 sm:p-6 relative z-20 flex flex-col lg:sticky lg:top-6 transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+              className={`lg:col-span-7 ${cardClasses(false, "p-5 sm:p-6")} relative z-20 flex flex-col lg:sticky lg:top-24 transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] ${
                 revealed
                   ? "opacity-100 translate-y-0 pointer-events-auto"
                   : "opacity-0 translate-y-5 pointer-events-none"
               }`}
             >
               {/* Header row */}
-              <div className="flex items-center justify-between border-b border-white/10 pb-3 mb-4">
-                <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-                  <span className="text-red-500">&#9888;&#65039;</span> The Executive Blind Spot
+              <div className="flex items-center justify-between border-b border-navy-100 pb-3 mb-4">
+                <h2 className="font-display text-lg sm:text-xl text-ink flex items-center gap-2">
+                  <span className="text-red-600">&#9888;&#65039;</span> The Executive Blind Spot
                 </h2>
-                <div className="text-[10px] sm:text-xs font-bold text-gray-400 bg-white/10 px-2.5 py-1 rounded-full border border-white/10 shrink-0">
-                  Staff: <span className="text-white">{staffTotal.toLocaleString()}</span>
+                <div className="text-[10px] sm:text-xs font-bold text-navy-600 bg-navy-50 px-2.5 py-1 rounded-full border border-navy-100 shrink-0">
+                  Staff: <span className="text-ink">{staffTotal.toLocaleString()}</span>
                 </div>
               </div>
 
               {/* Span of Control */}
-              <div className="mb-5 bg-white/5 p-3 rounded-xl border border-white/10">
+              <div className="mb-5 bg-navy-50 p-3 rounded-xl border border-navy-100">
                 <div className="flex justify-between items-center mb-2">
-                  <h3 className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-gray-400">
+                  <h3 className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-navy-600">
                     Span of Control Risk
                   </h3>
-                  <div className="text-lg sm:text-xl font-black text-white leading-none">
+                  <div className="text-lg sm:text-xl font-black text-ink leading-none">
                     1 : {spanValue.toFixed(1)}
                   </div>
                 </div>
-                <div className="w-full h-1.5 bg-white/10 rounded shadow-inner overflow-hidden">
+                <div className="w-full h-1.5 bg-navy-100 rounded overflow-hidden">
                   <div
                     className="h-full transition-all duration-1000"
                     style={{
@@ -704,28 +700,28 @@ export default function CalculatorPage() {
                     }}
                   />
                 </div>
-                <p className="text-[10px] text-gray-400 mt-1.5 italic">{spanMsg}</p>
+                <p className="text-[10px] text-navy-600 mt-1.5 italic">{spanMsg}</p>
               </div>
 
               {/* THE BIG SCARY NUMBER */}
               <div
-                className={`bg-red-500/10 rounded-xl p-5 border border-red-500/30 text-center mb-4 relative overflow-hidden ${
+                className={`bg-red-50 rounded-xl p-5 border border-red-200 text-center mb-4 relative overflow-hidden ${
                   isDanger && revealed ? "danger-glow" : ""
                 }`}
               >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-red-500" />
-                <h3 className="text-[11px] sm:text-xs uppercase tracking-widest font-bold text-red-300 mb-1.5">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-red-500" />
+                <h3 className="text-[11px] sm:text-xs uppercase tracking-widest font-bold text-red-600 mb-1.5">
                   Annual Value at Risk (TVR)
                 </h3>
-                <p className="text-[10px] sm:text-xs text-gray-300 mb-2 max-w-sm mx-auto leading-relaxed">
+                <p className="text-[10px] sm:text-xs text-navy-600 mb-2 max-w-sm mx-auto leading-relaxed">
                   If{" "}
-                  <strong className="text-red-200 bg-red-500/20 px-1 rounded">
+                  <strong className="text-red-700 bg-red-100 px-1 rounded">
                     {pctIneffective}%
                   </strong>{" "}
                   of your Frontline Managers are unskilled, this is your estimated annual financial
                   exposure:
                 </p>
-                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-red-500 drop-shadow-sm tracking-tight">
+                <div className="font-display text-4xl md:text-5xl text-amber-700 tracking-tight">
                   {totalRiskAnim.display}
                 </div>
               </div>
@@ -733,17 +729,16 @@ export default function CalculatorPage() {
               {/* Breakdown cards */}
               <div className="grid grid-cols-2 gap-3 mb-4">
                 {/* Productivity Leakage */}
-                <div className="bg-white/5 p-3 rounded-xl border border-white/10 relative overflow-hidden flex flex-col justify-center">
-                  <div className="absolute right-0 top-0 w-12 h-12 bg-orange-500/20 rounded-full blur-xl -mr-4 -mt-4" />
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-0.5">
-                    Productivity Leakage <span className="text-orange-500">*</span>
+                <div className="bg-navy-50 p-3 rounded-xl border border-navy-100 relative overflow-hidden flex flex-col justify-center">
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-navy-600 mb-0.5">
+                    Productivity Leakage <span className="text-amber-600">*</span>
                   </h4>
-                  <div className="text-lg sm:text-xl font-bold text-orange-500 leading-tight mb-0.5">
+                  <div className="text-lg sm:text-xl font-bold text-amber-700 leading-tight mb-0.5">
                     {prodRiskAnim.display}
                   </div>
-                  <p className="text-[8px] sm:text-[9px] text-gray-400 leading-tight">
+                  <p className="text-[8px] sm:text-[9px] text-navy-600 leading-tight">
                     <strong>{pctProd}%</strong> salary waste across the{" "}
-                    <strong className="text-orange-200 bg-orange-500/20 px-1 rounded">
+                    <strong className="text-amber-700 bg-amber-100 px-1 rounded">
                       {affectedStaffAnim.display}
                     </strong>{" "}
                     staff reporting to ineffective managers.
@@ -751,17 +746,16 @@ export default function CalculatorPage() {
                 </div>
 
                 {/* Turnover Cost */}
-                <div className="bg-white/5 p-3 rounded-xl border border-white/10 relative overflow-hidden flex flex-col justify-center">
-                  <div className="absolute right-0 top-0 w-12 h-12 bg-red-500/20 rounded-full blur-xl -mr-4 -mt-4" />
-                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-gray-400 mb-0.5">
-                    Turnover Cost <span className="text-red-500">**</span>
+                <div className="bg-navy-50 p-3 rounded-xl border border-navy-100 relative overflow-hidden flex flex-col justify-center">
+                  <h4 className="text-[9px] sm:text-[10px] uppercase tracking-widest font-bold text-navy-600 mb-0.5">
+                    Turnover Cost <span className="text-red-600">**</span>
                   </h4>
-                  <div className="text-lg sm:text-xl font-bold text-red-500 leading-tight mb-0.5">
+                  <div className="text-lg sm:text-xl font-bold text-red-600 leading-tight mb-0.5">
                     {turnoverRiskAnim.display}
                   </div>
-                  <p className="text-[8px] sm:text-[9px] text-gray-400 leading-tight">
+                  <p className="text-[8px] sm:text-[9px] text-navy-600 leading-tight">
                     Replacing{" "}
-                    <strong className="text-red-200 bg-red-500/20 px-1 rounded">
+                    <strong className="text-red-700 bg-red-100 px-1 rounded">
                       {flightNumAnim.display}
                     </strong>{" "}
                     frontline staff who quit due to their manager.
@@ -770,12 +764,12 @@ export default function CalculatorPage() {
               </div>
 
               {/* Methodology footnotes */}
-              <div className="px-1 text-[9px] text-gray-400 leading-relaxed bg-white/5 p-2 rounded-lg border border-white/10 mt-auto">
-                <span className="text-orange-500 font-bold">*</span>{" "}
+              <div className="px-1 text-[9px] text-navy-600 leading-relaxed bg-navy-50 p-2 rounded-lg border border-navy-100 mt-auto">
+                <span className="text-amber-600 font-bold">*</span>{" "}
                 <strong>Gallup:</strong> Active disengagement costs ~20% of salary in lost
                 productivity.
                 <br />
-                <span className="text-red-500 font-bold">**</span>{" "}
+                <span className="text-red-600 font-bold">**</span>{" "}
                 <strong>SHRM &amp; DDI:</strong> Poor leadership drives ~33% flight risk. Replacement
                 costs avg 50% of base salary.
               </div>
@@ -784,7 +778,7 @@ export default function CalculatorPage() {
 
           {/* ====== BELL CURVE SECTION ====== */}
           <motion.section
-            className="mt-8 glass-card p-5 sm:p-8 relative z-10 mb-12"
+            className={cardClasses(false, "mt-8 p-5 sm:p-8 relative z-10 mb-12")}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
@@ -793,23 +787,23 @@ export default function CalculatorPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
               {/* Left: narrative */}
               <div>
-                <div className="inline-block bg-white/10 text-gray-400 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3 border border-white/10">
+                <div className="inline-block bg-navy-50 text-navy-600 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3 border border-navy-100">
                   The Scalability Problem
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black text-white mb-3 tracking-tight">
+                <h3 className="font-display text-xl sm:text-2xl text-ink mb-3 tracking-tight">
                   The &ldquo;Selected Few&rdquo; Fallacy
                 </h3>
-                <p className="text-gray-400 text-xs sm:text-sm mb-4 leading-relaxed">
+                <p className="text-navy-600 text-xs sm:text-sm mb-4 leading-relaxed">
                   The traditional L&amp;D budget is dangerously top-heavy. Resources are stretched
-                  thin: the <strong className="text-green-400">Top 20%</strong> get generic vendor
+                  thin: the <strong className="text-green-600">Top 20%</strong> get generic vendor
                   training, while HR exhausts time managing the{" "}
-                  <strong className="text-red-400">Bottom 10%</strong> on PIPs.
+                  <strong className="text-red-600">Bottom 10%</strong> on PIPs.
                 </p>
 
-                <div className="bg-orange-500/10 border-l-4 border-orange-500 p-3 sm:p-4 mb-4 rounded-r-xl">
-                  <h4 className="font-bold text-white text-xs sm:text-sm flex items-center gap-2">
+                <div className="bg-amber-50 border-l-4 border-amber-500 p-3 sm:p-4 mb-4 rounded-r-xl">
+                  <h4 className="font-bold text-ink text-xs sm:text-sm flex items-center gap-2">
                     <svg
-                      className="w-4 h-4 text-orange-500"
+                      className="w-4 h-4 text-amber-600"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -821,15 +815,15 @@ export default function CalculatorPage() {
                     </svg>
                     The 70% Blind Spot
                   </h4>
-                  <p className="text-[10px] sm:text-xs text-gray-300 mt-1 leading-relaxed">
-                    This leaves the massive <strong className="text-orange-300">70% core</strong>{" "}
+                  <p className="text-[10px] sm:text-xs text-navy-600 mt-1 leading-relaxed">
+                    This leaves the massive <strong className="text-amber-700">70% core</strong>{" "}
                     completely untouched. They don&apos;t qualify for limited training programs, yet
                     they manage the vast majority of your workforce.
                   </p>
                 </div>
 
-                <div className="text-xs text-gray-300 flex items-start gap-2.5 bg-green-500/10 p-3 rounded-lg border border-green-500/30">
-                  <div className="w-5 h-5 rounded-full bg-green-500/15 text-green-400 flex items-center justify-center shrink-0 mt-0.5">
+                <div className="text-xs text-navy-700 flex items-start gap-2.5 bg-green-50 p-3 rounded-lg border border-green-200">
+                  <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 mt-0.5">
                     <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                       <path
                         fillRule="evenodd"
@@ -847,11 +841,11 @@ export default function CalculatorPage() {
               </div>
 
               {/* Right: bell curve graphic */}
-              <div className="relative w-full h-48 sm:h-64 rounded-xl border border-white/10 bg-surface-raised overflow-hidden flex items-end mt-4 lg:mt-0">
+              <div className="relative w-full h-48 sm:h-64 rounded-xl border border-navy-100 bg-white overflow-hidden flex items-end mt-4 lg:mt-0">
                 {/* Colored background segments */}
                 <div className="absolute inset-0 flex opacity-20">
-                  <div className="w-[15%] bg-red-500 border-r-2 border-surface-raised" />
-                  <div className="w-[65%] bg-orange-500 border-r-2 border-surface-raised" />
+                  <div className="w-[15%] bg-red-500 border-r-2 border-white" />
+                  <div className="w-[65%] bg-amber-500 border-r-2 border-white" />
                   <div className="w-[20%] bg-green-500" />
                 </div>
 
@@ -863,13 +857,13 @@ export default function CalculatorPage() {
                 >
                   <path
                     d="M 0 0 L 1000 0 L 1000 300 L 0 300 Z M -50 300 C 200 300, 350 20, 500 20 C 650 20, 800 300, 1050 300 Z"
-                    fill="#0A1628"
+                    fill="#FFFFFF"
                     fillRule="evenodd"
                   />
                   <path
                     d="M -50 300 C 200 300, 350 20, 500 20 C 650 20, 800 300, 1050 300"
                     fill="none"
-                    stroke="#94a3b8"
+                    stroke="#8AA0B5"
                     strokeWidth="3"
                     strokeDasharray="6,3"
                   />
@@ -878,37 +872,37 @@ export default function CalculatorPage() {
                 {/* Labels */}
                 <div className="absolute bottom-0 w-full flex text-center pb-3 z-20 items-end h-full">
                   <div className="w-[15%] flex flex-col items-center justify-end h-full pb-2">
-                    <div className="bg-red-500/15 text-red-300 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-red-500/30">
+                    <div className="bg-red-50 text-red-600 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-red-200">
                       PIPs &amp;
                       <br />
                       Fired
                     </div>
-                    <div className="font-black text-lg sm:text-xl text-red-400 drop-shadow-sm">
+                    <div className="font-black text-lg sm:text-xl text-red-600">
                       10%
                     </div>
                   </div>
 
                   <div className="w-[65%] flex flex-col items-center justify-end h-full pb-2 relative">
                     <div className="absolute top-[30%] flex flex-col items-center">
-                      <div className="bg-surface-overlay text-white text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full shadow-lg mb-1.5 border border-white/15">
+                      <div className="bg-ink text-paper text-[9px] sm:text-[10px] font-bold px-2 py-1 rounded-full shadow-card mb-1.5">
                         The Unseen Majority
                       </div>
                     </div>
-                    <div className="font-black text-3xl sm:text-4xl text-orange-500 drop-shadow-sm mb-0.5">
+                    <div className="font-black text-3xl sm:text-4xl text-amber-700 mb-0.5">
                       70%
                     </div>
-                    <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-gray-300 bg-surface-raised/90 px-2 py-0.5 rounded-full shadow-sm border border-white/10">
+                    <div className="text-[8px] sm:text-[9px] font-bold uppercase tracking-widest text-navy-600 bg-white/90 px-2 py-0.5 rounded-full shadow-sm border border-navy-100">
                       Untouched Middle
                     </div>
                   </div>
 
                   <div className="w-[20%] flex flex-col items-center justify-end h-full pb-2">
-                    <div className="bg-green-500/15 text-green-300 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-green-500/30">
+                    <div className="bg-green-50 text-green-700 px-1.5 py-0.5 rounded shadow-sm text-[8px] sm:text-[9px] font-bold mb-1.5 uppercase leading-tight border border-green-200">
                       Generic
                       <br />
                       Training
                     </div>
-                    <div className="font-black text-lg sm:text-xl text-green-400 drop-shadow-sm">
+                    <div className="font-black text-lg sm:text-xl text-green-600">
                       20%
                     </div>
                   </div>
@@ -925,23 +919,20 @@ export default function CalculatorPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-2xl sm:text-3xl font-black text-white mb-4 tracking-tight">
-              Stop the Guesswork &mdash; Book a Demo
+            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-4 tracking-tight">
+              Stop the <em className="italic text-teal-600">Guesswork</em> &mdash; Book a Demo
             </h2>
-            <p className="text-gray-400 text-sm mb-6 max-w-xl mx-auto">
+            <p className="text-navy-600 text-sm mb-6 max-w-xl mx-auto">
               See how Zrutam&apos;s 360-degree feedback platform can turn your Annual Value at Risk
               into measurable leadership growth.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href="/contact/?interest=360"
-                className="inline-block bg-gradient-to-r from-amber to-orange-500 hover:from-amber-600 hover:to-orange-600 text-navy font-bold px-8 py-3.5 rounded-xl shadow-lg hover:shadow-glow-amber transition-all transform hover:-translate-y-0.5 text-sm"
-              >
+              <a href="/contact/?interest=360" className={buttonClasses("primary")}>
                 Book a Demo
               </a>
               <a
                 href="/tools/360"
-                className="text-sm font-semibold text-teal hover:text-teal-300 underline underline-offset-4 transition-colors"
+                className="text-sm font-semibold text-teal-600 hover:text-teal-700 underline underline-offset-4 transition-colors rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
               >
                 Explore the 360 Tool
               </a>
