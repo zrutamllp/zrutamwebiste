@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import FadeInSection from "@/components/FadeInSection";
-import Button, { buttonBase } from "@/components/ui/Button";
+import CTABanner from "@/components/CTABanner";
+import Button from "@/components/ui/Button";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { cardClasses } from "@/components/ui/Card";
 import NetworkMotif from "@/components/graphics/NetworkMotif";
@@ -126,8 +126,8 @@ export default function IDPToolProductPage() {
                 personalized growth roadmap powered by AI.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button href="/contact">Start Free Trial</Button>
-                <Button href="/contact" variant="outline">
+                <Button href="/contact/?interest=idp">Start Free Trial</Button>
+                <Button href="/contact/?interest=idp" variant="outline">
                   Request a Demo
                 </Button>
               </div>
@@ -281,38 +281,11 @@ export default function IDPToolProductPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-paper py-20 md:py-28">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="relative bg-ink grain rounded-3xl px-6 py-16 sm:px-12 lg:py-20 overflow-hidden">
-            <svg
-              viewBox="0 0 400 400"
-              aria-hidden="true"
-              className="pointer-events-none absolute -top-24 -right-24 w-[320px] h-[320px]"
-            >
-              <circle cx="200" cy="200" r="190" fill="none" stroke="#FAF9F6" strokeOpacity="0.08" strokeWidth="1" />
-              <circle cx="200" cy="200" r="140" fill="none" stroke="#FAF9F6" strokeOpacity="0.1" strokeWidth="1" />
-              <circle cx="200" cy="200" r="90" fill="none" stroke="#F59E0B" strokeOpacity="0.25" strokeWidth="1" />
-            </svg>
-            <FadeInSection>
-              <div className="relative max-w-3xl mx-auto text-center">
-                <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-paper tracking-tight leading-[1.1] text-balance mb-4">
-                  Ready to Transform Employee Development?
-                </h2>
-                <p className="text-lg sm:text-xl text-navy-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                  Join leading enterprises across APAC who use the IDP Tool to
-                  drive personalized employee growth at scale.
-                </p>
-                <Link
-                  href="/contact"
-                  className={`${buttonBase} px-7 py-3.5 bg-paper text-ink hover:bg-white hover:shadow-lift hover:-translate-y-0.5`}
-                >
-                  Start Free Trial
-                </Link>
-              </div>
-            </FadeInSection>
-          </div>
-        </div>
-      </section>
+      <CTABanner
+        title="Ready to Transform Employee Development?"
+        subtitle="Join leading enterprises across APAC who use the IDP Tool to drive personalized employee growth at scale."
+        primaryCTA={{ text: "Start Free Trial", href: "/contact/?interest=idp" }}
+      />
     </>
   );
 }

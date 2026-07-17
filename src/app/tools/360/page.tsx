@@ -446,7 +446,7 @@ export default function Zrutam360Page() {
               <p className="text-teal-600 text-sm font-semibold uppercase tracking-[0.18em] mb-2">
                 Enterprise Pricing
               </p>
-              <h3 className="font-display text-4xl md:text-5xl text-amber-600 mb-1">
+              <h3 className="font-display text-4xl md:text-5xl text-amber-700 mb-1">
                 Contact Us
               </h3>
               <p className="text-navy-600 text-sm">Custom pricing based on volume</p>
@@ -502,20 +502,26 @@ export default function Zrutam360Page() {
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 className="border-b border-navy-100"
               >
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  aria-expanded={openFaq === i}
-                  className="w-full flex items-center justify-between py-5 text-left rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
-                >
-                  <span className="font-semibold text-ink pr-4">{faq.q}</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-navy-400 flex-shrink-0 transition-transform duration-200 ${
-                      openFaq === i ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
+                <h3>
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    aria-expanded={openFaq === i}
+                    aria-controls={`faq-panel-${i}`}
+                    className="w-full flex items-center justify-between py-5 text-left rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
+                  >
+                    <span className="font-semibold text-ink pr-4">{faq.q}</span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-navy-400 flex-shrink-0 transition-transform duration-200 ${
+                        openFaq === i ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </h3>
                 {openFaq === i && (
-                  <div className="pb-5 text-navy-600 leading-relaxed">
+                  <div
+                    id={`faq-panel-${i}`}
+                    className="pb-5 text-navy-600 leading-relaxed"
+                  >
                     {faq.a}
                   </div>
                 )}

@@ -8,7 +8,7 @@ interface CTABannerProps {
     text: string;
     href: string;
   };
-  secondaryCTA: {
+  secondaryCTA?: {
     text: string;
     href: string;
   };
@@ -55,12 +55,14 @@ export default function CTABanner({
               </Link>
 
               {/* Secondary CTA — outline on ink */}
-              <Link
-                href={secondaryCTA.href}
-                className={`${ctaBase} border border-navy-600 text-paper hover:border-paper hover:-translate-y-0.5`}
-              >
-                {secondaryCTA.text}
-              </Link>
+              {secondaryCTA && (
+                <Link
+                  href={secondaryCTA.href}
+                  className={`${ctaBase} border border-navy-600 text-paper hover:border-paper hover:-translate-y-0.5`}
+                >
+                  {secondaryCTA.text}
+                </Link>
+              )}
             </div>
           </div>
         </div>
