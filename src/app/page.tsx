@@ -29,7 +29,7 @@ export default function HomePage() {
       {/* Trusted By Section */}
       <section className="py-16 bg-paper-warm border-y border-navy-100">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-center text-navy-500 text-sm font-medium uppercase tracking-[0.2em] mb-10">
+          <p className="text-center text-navy-600 text-sm font-medium uppercase tracking-[0.2em] mb-10">
             Trusted by leading enterprises across APAC
           </p>
           <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">

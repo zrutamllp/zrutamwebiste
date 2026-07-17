@@ -133,7 +133,7 @@ export default function AwardsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center text-sm text-navy-500 mt-10"
+          className="text-center text-sm text-navy-600 mt-10"
         >
           Committed to setting new benchmarks in corporate learning &amp; development.
         </motion.p>

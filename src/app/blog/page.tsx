@@ -98,7 +98,7 @@ export default function BlogPage() {
                   <p className="text-navy-600 text-lg leading-relaxed max-w-2xl mb-6">
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-navy-500">
+                  <div className="flex flex-wrap items-center gap-3 text-sm text-navy-600">
                     <time dateTime={featuredPost.date}>
                       {formatDate(featuredPost.date, "long")}
                     </time>
@@ -175,7 +175,7 @@ export default function BlogPage() {
 
           {filteredPosts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-navy-500 text-lg">
+              <p className="text-navy-600 text-lg">
                 No posts found in this category.
               </p>
             </div>

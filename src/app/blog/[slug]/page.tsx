@@ -156,7 +156,7 @@ export default function BlogPostPage({ params }: PageProps) {
             {/* Tags */}
             <div className="mt-12 pt-8 border-t border-navy-100">
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-sm text-navy-500 mr-2">Tags:</span>
+                <span className="text-sm text-navy-600 mr-2">Tags:</span>
                 {post.keyword.split(" ").map((tag) => (
                   <span
                     key={tag}

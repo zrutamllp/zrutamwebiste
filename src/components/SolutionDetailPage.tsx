@@ -102,7 +102,7 @@ export default function SolutionDetailPage({
               }
             />
           </FadeInSection>
-          <ol className="list-none max-w-4xl">
+          <ol role="list" className="list-none max-w-4xl">
             {solution.features.map((feature, index) => (
               <li key={feature}>
                 <FadeInSection delay={index * 0.08}>

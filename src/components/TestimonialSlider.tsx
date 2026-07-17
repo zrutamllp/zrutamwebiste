@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Card from "@/components/ui/Card";
 import SectionHeading from "@/components/ui/SectionHeading";
 
@@ -54,6 +54,7 @@ const slideVariants = {
 export default function TestimonialSlider() {
   const [[activeIndex, direction], setActiveIndex] = useState([0, 0]);
   const [isPaused, setIsPaused] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   const paginate = useCallback(
     (newDirection: number) => {
@@ -69,12 +70,12 @@ export default function TestimonialSlider() {
     setActiveIndex(([prev]) => [index, index > prev ? 1 : -1]);
   };
 
-  // Auto-rotate
+  // Auto-rotate (skipped entirely when the user prefers reduced motion)
   useEffect(() => {
-    if (isPaused) return;
+    if (isPaused || reduceMotion) return;
     const interval = setInterval(() => paginate(1), 5000);
     return () => clearInterval(interval);
-  }, [isPaused, paginate]);
+  }, [isPaused, reduceMotion, paginate]);
 
   const current = testimonials[activeIndex];
 
@@ -97,7 +98,10 @@ export default function TestimonialSlider() {
           className="max-w-3xl mx-auto"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
         >
+          {/* min-h is coupled to the longest quote at text-xl/2xl — retune if quotes change */}
           <div className="relative min-h-[540px] sm:min-h-[420px]">
             <AnimatePresence mode="wait" custom={direction}>
               <motion.div

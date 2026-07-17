@@ -1,3 +1,7 @@
+// web3forms.com — free, takes 1 min. Powers BOTH the contact form and the
+// 360-calculator email gate. Go-live: paste the real key here (one edit).
+export const WEB3FORMS_ACCESS_KEY = "REPLACE_WITH_WEB3FORMS_ACCESS_KEY";
+
 export const SITE_NAME = "Zrutam";
 export const SITE_URL = "https://www.zrutam.com";
 export const SITE_DESCRIPTION =

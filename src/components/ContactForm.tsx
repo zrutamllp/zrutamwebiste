@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { buttonClasses } from "@/components/ui/Button";
-
-const ACCESS_KEY = "REPLACE_WITH_WEB3FORMS_ACCESS_KEY"; // web3forms.com — free, takes 1 min
+import { WEB3FORMS_ACCESS_KEY } from "@/lib/constants";
 
 const DEFAULT_INTEREST = "General Inquiry";
 
@@ -60,7 +59,7 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           ...data,
-          access_key: ACCESS_KEY,
+          access_key: WEB3FORMS_ACCESS_KEY,
           subject: `Zrutam website: ${data.interest}`,
         }),
         signal: AbortSignal.timeout(10000),

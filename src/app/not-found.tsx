@@ -1,4 +1,7 @@
+import { Metadata } from "next";
 import Button from "@/components/ui/Button";
+
+export const metadata: Metadata = { title: "Page Not Found | Zrutam" };
 
 export default function NotFound() {
   return (

@@ -1,17 +1,15 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef, useEffect, useId } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { buttonClasses } from "@/components/ui/Button";
 import { cardClasses } from "@/components/ui/Card";
+import { WEB3FORMS_ACCESS_KEY } from "@/lib/constants";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
 /* ------------------------------------------------------------------ */
 const EXCHANGE_RATE = 83;
-
-/* Formspree endpoint — create a free form at https://formspree.io and paste your form ID below */
-const FORMSPREE_URL = "https://formspree.io/f/mbdpkgdz";
 
 /* ------------------------------------------------------------------ */
 /*  Currency formatter                                                 */
@@ -88,15 +86,17 @@ function SliderRow({
   step?: number;
   onChange: (v: number) => void;
 }) {
+  const id = useId();
   return (
     <div>
       <div className="flex justify-between text-xs font-bold mb-1.5">
-        <span className="text-ink">{label}</span>
+        <label htmlFor={id} className="text-ink">{label}</label>
         <span className="text-teal-600 bg-teal-50 border border-teal-100 px-1.5 py-0.5 rounded text-[10px]">
           {value}%
         </span>
       </div>
       <input
+        id={id}
         type="range"
         min={min}
         max={max}
@@ -146,10 +146,15 @@ export default function CalculatorPage() {
     setGateError("");
     setGateSubmitting(true);
     try {
-      await fetch(FORMSPREE_URL, {
+      await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email, _subject: "New 360 Calculator Lead", source: "360-calculator" }),
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: "Zrutam website: Risk Calculator email gate",
+          email,
+          source: "360-calculator",
+        }),
       });
     } catch {
       // silently continue — don't block user if webhook fails
@@ -295,7 +300,7 @@ export default function CalculatorPage() {
   /* --- span meter helpers --- */
   const meterWidth = Math.min((spanValue / 25) * 100, 100);
   const meterColor =
-    spanValue <= 7 ? "#22c55e" : spanValue <= 12 ? "#eab308" : "#ef4444";
+    spanValue <= 7 ? "#16A34A" : spanValue <= 12 ? "#D97706" : "#DC2626";
   const spanMsg =
     spanValue <= 7
       ? "Healthy span of control. Active coaching possible."
@@ -399,6 +404,9 @@ export default function CalculatorPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="gate-heading"
               className="bg-white border border-navy-100 rounded-2xl shadow-lift max-w-md w-full p-8 text-center"
             >
               <div className="w-14 h-14 bg-teal-50 border border-teal-100 rounded-xl flex items-center justify-center mx-auto mb-5">
@@ -406,7 +414,7 @@ export default function CalculatorPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <h2 className="font-display text-2xl text-ink tracking-tight mb-2">
+              <h2 id="gate-heading" className="font-display text-2xl text-ink tracking-tight mb-2">
                 Unlock the Risk Calculator
               </h2>
               <p className="text-navy-600 text-sm mb-6 leading-relaxed">
@@ -416,6 +424,7 @@ export default function CalculatorPage() {
               <div className="space-y-3">
                 <input
                   type="email"
+                  aria-label="Work email"
                   value={gateEmail}
                   onChange={(e) => { setGateEmail(e.target.value); setGateError(""); }}
                   onKeyDown={(e) => { if (e.key === "Enter") handleGateSubmit(); }}
@@ -495,10 +504,11 @@ export default function CalculatorPage() {
                   {/* Headcount & Salary */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
+                      <label htmlFor="calc-total" className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
                         Total Headcount
                       </label>
                       <input
+                        id="calc-total"
                         type="number"
                         value={total}
                         placeholder="Enter your headcount"
@@ -508,12 +518,13 @@ export default function CalculatorPage() {
                     </div>
                     <div>
                       <div className="flex justify-between items-end mb-1.5">
-                        <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600">
+                        <label htmlFor="calc-salary" className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600">
                           Avg. Base Salary
                         </label>
                         <div className="flex bg-navy-50 rounded-full p-0.5 border border-navy-200 items-center">
                           <button
                             onClick={() => toggleCurrency("USD")}
+                            aria-pressed={currency === "USD"}
                             className={`text-[9px] px-2 py-0.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-500 ${
                               currency === "USD"
                                 ? "bg-ink text-paper font-bold shadow-card"
@@ -524,6 +535,7 @@ export default function CalculatorPage() {
                           </button>
                           <button
                             onClick={() => toggleCurrency("INR")}
+                            aria-pressed={currency === "INR"}
                             className={`text-[9px] px-2 py-0.5 rounded-full transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-teal-500 ${
                               currency === "INR"
                                 ? "bg-ink text-paper font-bold shadow-card"
@@ -539,6 +551,7 @@ export default function CalculatorPage() {
                           {currency === "USD" ? "$" : "\u20B9"}
                         </span>
                         <input
+                          id="calc-salary"
                           type="number"
                           value={salary}
                           placeholder="Avg. frontline salary"
@@ -552,10 +565,11 @@ export default function CalculatorPage() {
                   {/* The Pyramid */}
                   <div className="grid grid-cols-3 gap-3 pt-1">
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
+                      <label htmlFor="calc-senior" className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
                         Top <span className="hidden sm:inline">(VP+)</span>
                       </label>
                       <input
+                        id="calc-senior"
                         type="number"
                         value={senior}
                         placeholder="e.g. 50"
@@ -564,10 +578,11 @@ export default function CalculatorPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
+                      <label htmlFor="calc-middle" className="block text-[10px] uppercase tracking-widest font-semibold text-navy-600 mb-1.5">
                         Middle <span className="hidden sm:inline">(Dir)</span>
                       </label>
                       <input
+                        id="calc-middle"
                         type="number"
                         value={middle}
                         placeholder="e.g. 200"
@@ -576,10 +591,11 @@ export default function CalculatorPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest font-semibold text-amber-700 mb-1.5">
+                      <label htmlFor="calc-flm" className="block text-[10px] uppercase tracking-widest font-semibold text-amber-700 mb-1.5">
                         Frontline <span className="hidden sm:inline">(Mgrs)</span>
                       </label>
                       <input
+                        id="calc-flm"
                         type="number"
                         value={flm}
                         placeholder="e.g. 350"
@@ -656,7 +672,7 @@ export default function CalculatorPage() {
               {!revealed && (
                 <button
                   onClick={handleReveal}
-                  className={buttonClasses("primary", "w-full text-base font-bold tracking-wide")}
+                  className={buttonClasses("primary", "w-full text-base tracking-wide")}
                 >
                   Reveal Risk Exposure
                 </button>
@@ -700,7 +716,7 @@ export default function CalculatorPage() {
                     }}
                   />
                 </div>
-                <p className="text-[10px] text-navy-600 mt-1.5 italic">{spanMsg}</p>
+                <p className={`text-[10px] mt-1.5 italic ${isDanger ? "text-red-600 font-semibold" : "text-navy-600"}`}>{spanMsg}</p>
               </div>
 
               {/* THE BIG SCARY NUMBER */}
@@ -931,7 +947,7 @@ export default function CalculatorPage() {
                 Book a Demo
               </a>
               <a
-                href="/tools/360"
+                href="/tools/360/"
                 className="text-sm font-semibold text-teal-600 hover:text-teal-700 underline underline-offset-4 transition-colors rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
               >
                 Explore the 360 Tool
