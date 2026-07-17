@@ -2,7 +2,18 @@ import Link from "next/link";
 import { buttonClasses } from "@/components/ui/Button";
 import { cardClasses } from "@/components/ui/Card";
 import type { QuizLevel } from "../quizData";
-import { slideClasses } from "./QuizPage";
+import { slideClasses } from "./slideClasses";
+
+/* Editorial Ink badge gradients per level. quizData stays byte-identical to the
+   archive branch, so its legacy `color` gradients are ignored for rendering and
+   mapped here instead (teal for the learning tiers, amber for mastery). */
+const LEVEL_BADGE_GRADIENTS: Record<string, string> = {
+  "AI Apprentice 🌱": "from-teal-200 to-teal-400",
+  "Prompt Explorer 🧭": "from-teal-400 to-teal-600",
+  "AI Navigator 🚀": "from-amber-300 to-amber-500",
+  "Prompt Wizard 🧙‍♂️": "from-amber-400 to-amber-600",
+};
+const DEFAULT_BADGE_GRADIENT = "from-teal-400 to-teal-600";
 
 type ResultSlideProps = {
   userLevel: QuizLevel;
@@ -32,7 +43,9 @@ export default function ResultSlide({
           )}
         >
           <div
-            className={`mx-auto mb-6 flex h-20 w-20 rotate-3 items-center justify-center rounded-2xl bg-gradient-to-br ${userLevel.color} text-white shadow-lift`}
+            className={`mx-auto mb-6 flex h-20 w-20 rotate-3 items-center justify-center rounded-2xl bg-gradient-to-br ${
+              LEVEL_BADGE_GRADIENTS[userLevel.title] ?? DEFAULT_BADGE_GRADIENT
+            } text-white shadow-lift`}
           >
             <svg
               viewBox="0 0 24 24"

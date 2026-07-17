@@ -1,5 +1,5 @@
 import type { QuizQuestion } from "../quizData";
-import { slideClasses } from "./QuizPage";
+import { slideClasses } from "./slideClasses";
 
 type QuestionSlideProps = {
   question: QuizQuestion;

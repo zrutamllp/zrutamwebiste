@@ -10,15 +10,6 @@ import ConfettiCanvas from "./ConfettiCanvas";
 
 const maxPossibleScore = questions.length * 2;
 
-/* shared slide transition classes — replaces the old styled-jsx .slide/.active */
-export function slideClasses(active: boolean) {
-  return `absolute inset-0 flex items-center justify-center overflow-y-auto p-4 transition-all duration-500 ease-out ${
-    active
-      ? "z-10 translate-y-0 opacity-100"
-      : "pointer-events-none translate-y-5 opacity-0"
-  }`;
-}
-
 export default function QuizPage() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});

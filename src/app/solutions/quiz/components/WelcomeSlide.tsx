@@ -1,7 +1,7 @@
 import { buttonClasses } from "@/components/ui/Button";
 import { cardClasses } from "@/components/ui/Card";
 import { questions } from "../quizData";
-import { slideClasses } from "./QuizPage";
+import { slideClasses } from "./slideClasses";
 
 type WelcomeSlideProps = {
   onStart: () => void;
