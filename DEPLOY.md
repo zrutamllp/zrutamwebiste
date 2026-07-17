@@ -2,19 +2,11 @@
 
 The site is a fully static export (Next.js `output: "export"`). No Node.js needed on the server — you upload plain HTML/CSS/JS files.
 
-## 1. Activate the forms (one-time, ~1 minute)
+## 1. Activate the forms — ✅ DONE (2026-07-15)
 
-Both the **contact form** and the **Risk Calculator email gate** post to Web3Forms. They ship with a placeholder key, so submissions will fail until you do this:
+Both the **contact form** and the **Risk Calculator email gate** post to Web3Forms. The live access key is already wired into `WEB3FORMS_ACCESS_KEY` in `src/lib/constants.ts` (commit 181adf9). Submissions arrive at the inbox the Web3Forms form was registered with — confirm in the Web3Forms dashboard that delivery points at **ceo@zrutam.com**.
 
-1. Go to [web3forms.com](https://web3forms.com) and create a free access key.
-   Use **ceo@zrutam.com** as the email — that is where all form submissions will arrive.
-2. Open `src/lib/constants.ts` and replace the placeholder in the ONE constant:
-
-   ```ts
-   export const WEB3FORMS_ACCESS_KEY = "paste-your-key-here";
-   ```
-
-That single edit powers both forms. Nothing else to configure.
+To rotate the key later: replace that one constant and rebuild.
 
 ## 2. Build
 
