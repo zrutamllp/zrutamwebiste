@@ -27,7 +27,7 @@ Re-deploying: repeat steps 2–3. Overwrite existing files.
 
 ## 4. 404 handling
 
-Nothing to configure. Hostinger (Apache/LiteSpeed) serves `404.html` automatically for missing routes, and every real route is a folder with its own `index.html` (the build uses `trailingSlash: true`).
+Handled by the `.htaccess` that ships in every build (`ErrorDocument 404 /404.html` — lives in `public/`, copied to `out/` automatically). Every real route is a folder with its own `index.html` (the build uses `trailingSlash: true`). Verified live 2026-07-17: Hostinger does NOT serve `404.html` automatically without this file.
 
 ## 5. Post-deploy verification
 
