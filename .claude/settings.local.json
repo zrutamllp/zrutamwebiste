@@ -182,7 +182,26 @@
       "Bash(git commit -m 'feat: port quiz and accelerator pages into light editorial redesign *)",
       "PowerShell(cd D:\\\\zrutamWebsite; npx tsc --noEmit; Write-Output \"tsc exit: $LASTEXITCODE\"; if \\($LASTEXITCODE -eq 0\\) { npm run build | Select-Object -Last 8; Write-Output \"build exit: $LASTEXITCODE\" })",
       "Bash(git commit -m 'fix: quiz result badge palette, extract slideClasses \\(port review\\) *)",
-      "PowerShell(Remove-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -Force -ErrorAction SilentlyContinue; & \"$env:WINDIR\\\\System32\\\\tar.exe\" -a -cf \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -C \"D:\\\\zrutamWebsite\\\\out\" .; \"zip: {0:N1} MB\" -f \\(\\(Get-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\"\\).Length / 1MB\\))"
+      "PowerShell(Remove-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -Force -ErrorAction SilentlyContinue; & \"$env:WINDIR\\\\System32\\\\tar.exe\" -a -cf \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -C \"D:\\\\zrutamWebsite\\\\out\" .; \"zip: {0:N1} MB\" -f \\(\\(Get-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\"\\).Length / 1MB\\))",
+      "Bash(git commit -m 'docs: ai-cost calculator implementation plan *)",
+      "PowerShell(Get-Item node_modules\\\\html2canvas\\\\dist\\\\html2canvas.min.js | Select-Object Name, Length; Get-ChildItem out -ErrorAction SilentlyContinue | Select-Object -First 5 Name; if \\(Test-Path out\\) { \\(Get-Item out\\).LastWriteTime; git log -1 --format='%ci %h' })",
+      "PowerShell(New-Item -ItemType Directory -Force public\\\\ai-cost\\\\fonts | Out-Null; $map = @{ 'e4af272ccee01ff0-s.p.woff2'='inter-latin.woff2'; '8e9860b6e62d6359-s.woff2'='inter-latin-ext.woff2'; 'af4bf8399d1aacdf-s.p.woff2'='fraunces-latin.woff2'; '4da3161b738b07dd-s.woff2'='fraunces-latin-ext.woff2'; '6ba5f591ae6c56f6-s.p.woff2'='fraunces-latin-italic.woff2'; 'c62081b071647022-s.woff2'='fraunces-latin-ext-italic.woff2' }; foreach \\($k in $map.Keys\\) { Copy-Item \"out\\\\_next\\\\static\\\\media\\\\$k\" \"public\\\\ai-cost\\\\fonts\\\\$\\($map[$k]\\)\" }; Get-ChildItem public\\\\ai-cost\\\\fonts | Select-Object Name, Length)",
+      "PowerShell(npx tsc --noEmit; \"tsc exit: $LASTEXITCODE\")",
+      "PowerShell(Get-ChildItem \"D:\\\\zrutamWebsite\\\\public\\\\ai-cost\" -Recurse | Select-Object FullName, Length; git -C D:\\\\zrutamWebsite branch --show-current; \\(Get-Item \"D:\\\\zrutamWebsite\\\\node_modules\\\\html2canvas\\\\dist\\\\html2canvas.min.js\"\\).Length)",
+      "PowerShell(git branch --show-current; \\(Get-Item node_modules/html2canvas/dist/html2canvas.min.js\\).Length)",
+      "PowerShell(git log --oneline -8; git status --short; \\(Get-Item public/ai-cost/index.html\\).Length)",
+      "PowerShell($c = Get-Content public/ai-cost/index.html; $c.Count; $c | ForEach-Object {$i=0} {$i++; if \\($_.Length -gt 5000\\) { \"LINE $i : LENGTH $\\($_.Length\\) : $\\($_.Substring\\(0,80\\)\\)\" }})",
+      "PowerShell($html = [IO.File]::ReadAllText\\(\"D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html\"\\); $dist = [IO.File]::ReadAllText\\(\"D:\\\\zrutamWebsite\\\\node_modules\\\\html2canvas\\\\dist\\\\html2canvas.min.js\"\\); $html.Contains\\($dist.TrimEnd\\(\\)\\))",
+      "PowerShell(npm run build 2>$null | Select-Object -Last 5; echo \"EXIT=$LASTEXITCODE\"; \\(Get-Item out/ai-cost/index.html\\).Length)",
+      "PowerShell(git add public/ai-cost)",
+      "PowerShell(git -C D:\\\\zrutamWebsite log --oneline -3 feat/ai-cost-calculator)",
+      "PowerShell(git -C D:\\\\zrutamWebsite show --stat a37251a)",
+      "PowerShell($f='D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html'; \\(Get-Content $f | Measure-Object -Line\\).Lines; Get-Content $f | ForEach-Object {$i=0}{$i++; if\\($_.Length -gt 500\\){\"$i : LEN=$\\($_.Length\\)\"}})",
+      "PowerShell($f='D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html'; Select-String -Path $f -Pattern 'https?://[^\"''\\\\s\\)<]+' -AllMatches | Where-Object {$_.LineNumber -ne 560 -and $_.LineNumber -ne 546} | ForEach-Object { $ln=$_.LineNumber; $_.Matches | ForEach-Object { \"$ln : $\\($_.Value\\)\" } })",
+      "PowerShell(npm --prefix D:\\\\zrutamWebsite run build)",
+      "PowerShell(git -C D:\\\\zrutamWebsite show --stat a37251a; \\(Get-Item D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html\\).Length; \\(Get-Content D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html | Measure-Object -Line\\).Lines)",
+      "PowerShell($i=0; Get-Content D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html | ForEach-Object { $i++; if \\($_.Length -gt 2000\\) { \"$i : $\\($_.Length\\)\" } })",
+      "Bash(git commit -m 'docs: record AC2 approved deviations, extend QA checklist *)"
     ]
   }
 }
