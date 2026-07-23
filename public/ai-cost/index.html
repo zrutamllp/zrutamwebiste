@@ -5,6 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Cost of Not Enabling AI | Zrutam</title>
 <meta name="description" content="A two-lens calculator: what un-enabled AI is quietly costing your organisation every year — wasted Copilot licences (hard cash) and lost productivity (value at stake). Conservative, cited, currency-native.">
+<meta property="og:title" content="The Cost of Not Enabling AI — Zrutam">
+<meta property="og:description" content="Two numbers, shown separately: the cash you're already burning on unused Copilot seats, and the productivity value still on the table. Deliberately conservative, every assumption cited.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aicost.zrutam.com/">
+<meta property="og:image" content="https://www.zrutam.com/ai-cost/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Cost of Not Enabling AI — Zrutam">
+<meta name="twitter:description" content="Two numbers, shown separately: the cash you're already burning on unused Copilot seats, and the productivity value still on the table. Deliberately conservative, every assumption cited.">
+<meta name="twitter:image" content="https://www.zrutam.com/ai-cost/og-card.png">
+<link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* ============ Fonts (self-hosted, latin subsets; no Inter italic exists — Fraunces serves all italics) ============ */
 @font-face{font-family:"Fraunces";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/fraunces-latin.woff2) format("woff2");unicode-range:u+00??,u+0131,u+0152-0153,u+02bb-02bc,u+02c6,u+02da,u+02dc,u+0304,u+0308,u+0329,u+2000-206f,u+20ac,u+2122,u+2191,u+2193,u+2212,u+2215,u+feff,u+fffd}
@@ -67,7 +80,7 @@ h1 em{color:var(--teal700);font-style:italic}
 /* Top currency segment */
 .topseg{display:flex;justify-content:center;margin:0 0 22px}
 .seg{display:inline-flex;background:var(--white);border:1px solid var(--navy200);border-radius:9999px;padding:4px;gap:4px}
-.seg button{border:none;background:transparent;color:var(--navy600);border-radius:9999px;padding:.4rem .95rem;font-weight:600;font-size:.9rem;min-height:36px}
+.seg button{border:none;background:transparent;color:var(--navy600);border-radius:9999px;padding:.4rem .95rem;font-weight:600;font-size:.9rem;min-height:44px}
 .seg button.on{background:var(--ink);color:var(--paper)}
 
 /* ============ Wizard ============ */
@@ -100,12 +113,12 @@ input[type=range]{width:100%;accent-color:var(--teal);height:44px;background:tra
 
 /* Lens cards */
 .lens{border-radius:16px;color:#fff;padding:22px 24px;margin:14px 0}
-.lens.value{background:linear-gradient(135deg,#075985,#0284C7)}
-.lens.cash{background:linear-gradient(135deg,#B45309,#D97706)}
-.lens .eyeb{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:.92}
+.lens.value{background:linear-gradient(135deg,#075985,#0369A1)}
+.lens.cash{background:linear-gradient(135deg,#92400E,#B45309)}
+.lens .eyeb{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:1}
 .lens .fig{font-family:var(--font-display);font-weight:600;font-size:clamp(1.9rem,6.5vw,3rem);line-height:1.15;margin:4px 0 2px;letter-spacing:-.01em}
-.lens .sub{font-size:.9rem;opacity:.93}
-.lens .line{font-size:.9rem;margin-top:6px;opacity:.95}
+.lens .sub{font-size:.9rem;opacity:1}
+.lens .line{font-size:.9rem;margin-top:6px;opacity:1}
 .sep-note{background:var(--paper);border:1px solid var(--navy100);border-radius:12px;padding:14px 16px;font-size:.9rem;color:var(--navy600);margin:16px 0}
 .sep-note strong{color:var(--ink)}
 .cta-row{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:24px}
@@ -167,12 +180,12 @@ table.bk tr.sunkrow td{color:var(--amber700)}
 #shareCard .sc-head{font-family:var(--font-display);font-weight:600;font-size:1.75rem;line-height:1.2;letter-spacing:-.01em;margin-bottom:22px;max-width:44ch}
 #shareCard .sc-lenses{display:flex;gap:18px;margin-bottom:18px}
 #shareCard .sc-lens{border-radius:16px;color:#fff;padding:22px 24px}
-#shareCard .sc-lens.value{flex:1.35;background:linear-gradient(135deg,#075985,#0284C7)}
-#shareCard .sc-lens.cash{flex:1;background:linear-gradient(135deg,#B45309,#D97706)}
-#shareCard .sc-lens .eyeb{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:.92}
+#shareCard .sc-lens.value{flex:1.35;background:linear-gradient(135deg,#075985,#0369A1)}
+#shareCard .sc-lens.cash{flex:1;background:linear-gradient(135deg,#92400E,#B45309)}
+#shareCard .sc-lens .eyeb{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:1}
 #shareCard .sc-lens .fig{font-family:var(--font-display);font-weight:600;font-size:2.6rem;line-height:1.15;margin:4px 0 2px}
-#shareCard .sc-lens .sub{font-size:.85rem;opacity:.93}
-#shareCard .sc-lens .mult{font-size:.78rem;opacity:.85;margin-top:6px}
+#shareCard .sc-lens .sub{font-size:.85rem;opacity:1}
+#shareCard .sc-lens .mult{font-size:.78rem;opacity:1;margin-top:6px}
 #shareCard .sc-note{font-size:.88rem;color:var(--navy600);border:1px solid var(--navy100);background:var(--white);border-radius:10px;padding:12px 16px;margin-bottom:14px}
 #shareCard .sc-note strong{color:var(--ink)}
 #shareCard .sc-basis{font-size:.82rem;color:var(--navy600);margin-bottom:16px}
@@ -603,17 +616,35 @@ function setAll(cls, t){
   for(var i = 0; i < els.length; i++) els[i].textContent = t;
 }
 
+/* Clamp a numeric input's value to its own min/max; empty/invalid → fallback. */
+function clampTo(el, fallback){
+  var v = parseFloat(el.value);
+  if(el.value === "" || isNaN(v)) v = fallback;
+  if(el.min !== "" && !isNaN(parseFloat(el.min))) v = Math.max(v, parseFloat(el.min));
+  if(el.max !== "" && !isNaN(parseFloat(el.max))) v = Math.min(v, parseFloat(el.max));
+  return v;
+}
+
 /* ============ The calculation model (spec §3 — verbatim) ============ */
 function calc(){
-  var emp     = +$("emp").value || 0;
-  var licPct  = +$("lic").value || 0;
-  var sal     = +$("sal").value || 0;
-  var tsPaid  = +$("tsPaid").value || 0;
-  var tsFree  = +$("tsFree").value || 0;
-  var cap     = +$("cap").value || 0;
-  var licCost = +$("licCost").value || 0;
-  var uu      = +$("uu").value || 0;
-  var days    = +$("days").value || 220;
+  var emp     = clampTo($("emp"), 1000);
+  var licPct  = clampTo($("lic"), 30);
+  var sal     = clampTo($("sal"), CUR[cur].salDef);
+  var tsPaid  = clampTo($("tsPaid"), 30);
+  var tsFree  = clampTo($("tsFree"), 10);
+  var cap     = clampTo($("cap"), 20);
+  var licCost = clampTo($("licCost"), CUR[cur].lic);
+  var uu      = clampTo($("uu"), 50);
+  var days    = clampTo($("days"), 220);
+  if(days <= 0) days = 220;
+
+  /* Salary benchmark chips: deselect when the value diverges (fix: stale .on) */
+  var chipEls = document.querySelectorAll("#wChips .wchip");
+  for(var ci = 0; ci < chipEls.length; ci++){
+    var match = parseFloat(chipEls[ci].getAttribute("data-val")) === sal;
+    chipEls[ci].classList.toggle("on", match);
+    chipEls[ci].setAttribute("aria-pressed", match ? "true" : "false");
+  }
 
   var hourly    = sal / (days * 8);
   var paidCount = Math.round(emp * licPct/100);
@@ -791,7 +822,10 @@ document.querySelectorAll("#wizard .wopt").forEach(function(b){
 function link(srcId, mirrors){
   $(srcId).addEventListener("input", function(){
     var v = $(srcId).value;
-    mirrors.forEach(function(id){ $(id).value = v; });
+    /* an empty number field must not blank its range mirrors (they'd jump to midpoint) */
+    if(v !== "" && !isNaN(parseFloat(v))){
+      mirrors.forEach(function(id){ $(id).value = v; });
+    }
     calc();
   });
 }
@@ -813,7 +847,8 @@ $("exploreBtn").addEventListener("click", function(){
   fc.style.display = "block";
   $("closingCta").style.display = "block";
   calc();
-  fc.scrollIntoView({behavior:"smooth", block:"start"});
+  var motionOK = window.matchMedia && window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  fc.scrollIntoView({behavior: motionOK ? "smooth" : "auto", block:"start"});
 });
 
 /* ============ Share-card export (spec §9) ============ */
@@ -824,6 +859,8 @@ function slug(){
 }
 $("saveBtn").addEventListener("click", function(){
   var st = $("saveStatus");
+  var oldInline = $("saveInline");
+  if(oldInline) oldInline.remove();
   st.textContent = "Rendering…";
   calc();
   html2canvas($("shareCard"), {
@@ -833,26 +870,66 @@ $("saveBtn").addEventListener("click", function(){
     ignoreElements: function(el){ return el.hasAttribute && el.hasAttribute("data-noshot"); }
   }).then(function(canvas){
     var name = "AI-cost-of-inaction-" + slug() + ".png";
-    var done = function(){ st.textContent = "Saved to your Downloads folder ✓ (your browser chooses the folder)"; };
-    var fallback = function(){
+    var downloadDone = function(){ st.textContent = "Saved to your Downloads folder ✓ (your browser chooses the folder)"; };
+    var dataUrlFallback = function(){
       var a = document.createElement("a");
       a.href = canvas.toDataURL("image/png");
       a.download = name;
       document.body.appendChild(a); a.click(); a.remove();
-      done();
+      downloadDone();
+    };
+    var downloadPath = function(blob){
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+      downloadDone();
+    };
+    var inlinePath = function(blob){
+      /* In-app webviews (LinkedIn, Facebook, Instagram, Line) often silently drop
+         a.download — show the PNG inline so the user can long-press → save. */
+      var wrap = document.createElement("div");
+      wrap.id = "saveInline";
+      wrap.style.marginTop = "10px";
+      var img = document.createElement("img");
+      img.src = URL.createObjectURL(blob);
+      img.alt = "Your cost-of-inaction card — long-press to save";
+      img.style.maxWidth = "100%";
+      img.style.border = "1px solid #E4EBF1";
+      img.style.borderRadius = "8px";
+      var hint = document.createElement("p");
+      hint.textContent = "Long-press the image to save it";
+      hint.style.cssText = "font-size:.8rem;color:#3E5A75;margin-top:6px";
+      wrap.appendChild(img); wrap.appendChild(hint);
+      var anchor = $("saveBtn").closest(".savewrap") || $("saveBtn").parentNode;
+      anchor.parentNode.insertBefore(wrap, anchor.nextSibling);
+      st.textContent = "Long-press the image below to save it";
+    };
+    var finish = function(blob){
+      var file = null;
+      try{ file = new File([blob], name, {type:"image/png"}); }catch(e){ file = null; }
+      if(file && navigator.canShare && navigator.share && navigator.canShare({files:[file]})){
+        st.textContent = "Opening share sheet…";
+        navigator.share({files:[file], title:"The Cost of Not Enabling AI"}).then(function(){
+          st.textContent = "Shared ✓";
+        }).catch(function(err){
+          if(err && err.name === "AbortError"){ st.textContent = ""; }   /* user cancelled */
+          else { downloadPath(blob); }
+        });
+        return;
+      }
+      var inAppWebview = /LinkedIn|FBAN|FBAV|Instagram|Line\//.test(navigator.userAgent);
+      if(inAppWebview){ inlinePath(blob); return; }
+      downloadPath(blob);
     };
     if(canvas.toBlob){
       canvas.toBlob(function(blob){
-        if(!blob){ fallback(); return; }
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement("a");
-        a.href = url; a.download = name;
-        document.body.appendChild(a); a.click(); a.remove();
-        setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-        done();
+        if(!blob){ dataUrlFallback(); return; }
+        finish(blob);
       }, "image/png");
     } else {
-      fallback();
+      dataUrlFallback();
     }
   }).catch(function(e){
     st.textContent = "Could not render the image — " + (e && e.message ? e.message : e);
