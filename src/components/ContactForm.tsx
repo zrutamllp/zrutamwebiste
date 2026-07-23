@@ -13,6 +13,7 @@ const INTERESTS = [
   "Upskilling & Reskilling",
   "Custom E-Learning",
   "AI Skills Assessment",
+  "AI Enablement",
   DEFAULT_INTEREST,
 ];
 
@@ -25,6 +26,8 @@ const SLUG_TO_INTEREST: Record<string, string> = {
   "upskilling-reskilling": "Upskilling & Reskilling",
   "custom-elearning": "Custom E-Learning",
   "ai-skills-assessment": "AI Skills Assessment",
+  "ai-enablement": "AI Enablement",
+  "ai-cost": "AI Enablement",
 };
 
 export default function ContactForm() {
