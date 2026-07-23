@@ -50,6 +50,12 @@ Single column; wizard steps full-width with ≥44px touch targets; lens cards st
 - User: hPanel → Domains → Subdomains → create `aicost` → upload zip into the subdomain's document root → extract.
 - DEPLOY.md gains a subdomain section.
 
+## Approved deviations from the spec (decided in AC2 review)
+
+1. §9 export backgroundColor `#F3F5F7` → `#FAF9F6` (paper token; avoids a mismatched halo).
+2. §9 save flow: on browsers where `navigator.share` supports files (LinkedIn/iOS in-app webviews — a primary channel), the share sheet is used instead of `a.download`, with honest status text; in-app webviews without file-share get the PNG inline with a "long-press to save" hint. The spec's "Saved to your Downloads folder ✓" claim is only shown on the actual download path.
+3. Added beyond spec: OG/Twitter meta + `og-card.png` (1200×627) — functional requirement for a link distributed via LinkedIn DMs/cold email; input clamping to input min/max; gradient light-stops darkened for WCAG AA on small white text.
+
 ## QA
 
 Spec §14 checklist executed in the browser pane (desktop 1280 + mobile 375/390), including: currency switch behavior, adoption monotonicity (Barely > Patchy > Fairly > Heavily on both lenses), 0% licence path, company-name flow, offline PNG export producing a clean landscape card, slider/number sync, citation links, no-total-anywhere audit.

@@ -75,6 +75,8 @@ Dev server, desktop 1280 AND mobile 375 (plus 390 spot-check). Execute EVERY §1
 8. Six citation links present with correct hrefs (#c1–#c6).
 9. Mobile ≤560px: no horizontal overflow (scrollWidth == innerWidth) on every wizard step, reveal, and fullcalc; touch targets ≥44px.
 10. `calc()` on load + on every input (change an input, output updates without focus loss).
+11. Negative/empty input torture: type -1000 and clear each number field — no negative money, no NaN, mirrors don't jump.
+12. Save path by environment: desktop → download + "Saved…" status; share-capable webview → share sheet; in-app webview without file share → inline PNG + long-press hint. OG tags present; og-card.png exists and is 1200×627.
 Fix everything found; commit fixes: `git commit -m "fix: ai-cost QA findings (spec §14)"`
 
 ### Task 5: Packaging + deploy docs + merge
