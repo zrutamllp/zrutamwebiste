@@ -115,6 +115,7 @@ input[type=range]{width:100%;accent-color:var(--teal);height:44px;background:tra
 .lens{border-radius:16px;color:#fff;padding:22px 24px;margin:14px 0}
 .lens.value{background:linear-gradient(135deg,#075985,#0369A1)}
 .lens.cash{background:linear-gradient(135deg,#92400E,#B45309)}
+.lens.result{background:linear-gradient(135deg,#0B2239,#16324B)}
 .lens .eyeb{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:1}
 .lens .fig{font-family:var(--font-display);font-weight:600;font-size:clamp(1.9rem,6.5vw,3rem);line-height:1.15;margin:4px 0 2px;letter-spacing:-.01em}
 .lens .sub{font-size:.9rem;opacity:1}
@@ -182,6 +183,10 @@ table.bk tr.sunkrow td{color:var(--amber700)}
 #shareCard .sc-lens{border-radius:16px;color:#fff;padding:22px 24px}
 #shareCard .sc-lens.value{flex:1.35;background:linear-gradient(135deg,#075985,#0369A1)}
 #shareCard .sc-lens.cash{flex:1;background:linear-gradient(135deg,#92400E,#B45309)}
+#shareCard .sc-cap{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;background:linear-gradient(135deg,#0B2239,#16324B);color:#fff;border-radius:14px;padding:14px 22px;margin-bottom:16px}
+#shareCard .sc-cap-eyeb{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+#shareCard .sc-cap-fig{font-family:var(--font-display);font-weight:600;font-size:1.7rem;letter-spacing:-.01em}
+#shareCard .sc-cap-sub{font-size:.85rem}
 #shareCard .sc-lens .eyeb{font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;opacity:1}
 #shareCard .sc-lens .fig{font-family:var(--font-display);font-weight:600;font-size:2.6rem;line-height:1.15;margin:4px 0 2px}
 #shareCard .sc-lens .sub{font-size:.85rem;opacity:1}
@@ -240,8 +245,8 @@ table.bk tr.sunkrow td{color:var(--amber700)}
 
   <!-- ==================== WIZARD ==================== -->
   <section id="wizard" class="wizard-card" aria-label="Guided calculator">
-    <div class="dots" id="wDots" role="progressbar" aria-label="Wizard progress" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" aria-valuetext="Step 1 of 6">
-      <span class="dot on" data-d="1"></span><span class="dot" data-d="2"></span><span class="dot" data-d="3"></span><span class="dot" data-d="4"></span><span class="dot" data-d="5"></span><span class="dot" data-d="6"></span>
+    <div class="dots" id="wDots" role="progressbar" aria-label="Wizard progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" aria-valuetext="Step 1 of 7">
+      <span class="dot on" data-d="1"></span><span class="dot" data-d="2"></span><span class="dot" data-d="3"></span><span class="dot" data-d="4"></span><span class="dot" data-d="5"></span><span class="dot" data-d="6"></span><span class="dot" data-d="7"></span>
     </div>
 
     <!-- Step 1: currency -->
@@ -317,12 +322,27 @@ table.bk tr.sunkrow td{color:var(--amber700)}
       </div>
       <div class="wnav">
         <button type="button" class="btn-ghost" data-back="4">&larr; Back</button>
-        <button type="button" class="btn" data-next="6">See the cost &rarr;</button>
+        <button type="button" class="btn" data-next="6">Next &rarr;</button>
       </div>
     </div>
 
-    <!-- Step 6: reveal -->
+    <!-- Step 6: realistic adoption guess -->
     <div class="wstep" data-step="6" hidden>
+      <h2 tabindex="-1">One last thing &mdash; your wild guess: when you roll out <em>any</em> initiative, how much of the org actually adopts it?</h2>
+      <p class="hint">Be honest &mdash; 10%? 20%? 50%? We'll count only that share of the value as truly achievable, so the number you see next is one you can defend in a boardroom.</p>
+      <p class="bigval"><span id="wAdoptVal">30</span><small>%</small></p>
+      <div class="rangewrap">
+        <input type="range" id="wAdopt" min="5" max="100" step="5" value="30" aria-label="Realistic adoption of any initiative, percent">
+        <div class="rlabels" aria-hidden="true"><span>5%</span><span>100%</span></div>
+      </div>
+      <div class="wnav">
+        <button type="button" class="btn-ghost" data-back="5">&larr; Back</button>
+        <button type="button" class="btn" data-next="7">See the cost &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 7: reveal -->
+    <div class="wstep" data-step="7" hidden>
       <h2 tabindex="-1">Here's what un-enabled AI is quietly costing <span class="wCoName">your organisation</span> &mdash; every year:</h2>
 
       <div class="lens value">
@@ -338,7 +358,13 @@ table.bk tr.sunkrow td{color:var(--amber700)}
         <p class="line" id="wSeatLine" hidden>at your ~<span id="wSeatPct"></span>% that's <span id="wSeatCount"></span> seats &asymp; <span id="wSunkN"></span>/yr</p>
       </div>
 
-      <div class="sep-note"><strong>What these two numbers mean:</strong> &#9312; is money already leaving your account &mdash; Copilot seats you pay for that nobody really uses. &#9313; is money you could gain &mdash; the value of the hours your people would save if they used AI well. The seat figure scales with you: &asymp; <span id="wPer1000"></span> per 1,000 idle seats.</div>
+      <div class="lens result">
+        <p class="eyeb">&#9314; Capacity recovered &middot; at your <span id="wAdoptPct">30</span>% adoption guess</p>
+        <p class="fig" id="wFteN">&mdash;</p>
+        <p class="sub">full-time-equivalents of working hours back &mdash; like adding that many people without hiring &middot; worth &asymp; <span id="wAchN">&mdash;</span>/yr</p>
+      </div>
+
+      <div class="sep-note"><strong>What these numbers mean:</strong> &#9312; is money already leaving your account &mdash; Copilot seats you pay for that nobody really uses. &#9313; is money you could gain &mdash; the value of the hours your people would save if they used AI well. &#9314; is &#9313; made realistic: only the share your own adoption guess says you'd capture, shown as people-worth of capacity. The seat figure scales with you: &asymp; <span id="wPer1000"></span> per 1,000 idle seats.</div>
 
       <div class="cta-row">
         <a class="btn" href="https://www.zrutam.com/contact/?interest=ai-enablement">See how to fix it &mdash; book 20 min &rarr;</a>
@@ -346,7 +372,7 @@ table.bk tr.sunkrow td{color:var(--amber700)}
       </div>
 
       <div class="wnav" style="margin-top:14px">
-        <button type="button" class="btn-ghost" data-back="5">&larr; Back</button>
+        <button type="button" class="btn-ghost" data-back="6">&larr; Back</button>
         <span class="spacer"></span>
       </div>
     </div>
@@ -425,6 +451,13 @@ table.bk tr.sunkrow td{color:var(--amber700)}
               </div>
             </div>
             <div class="field">
+              <label for="adopt">Your wild guess &mdash; share of the org that actually adopts any initiative <span class="lnote">(%) &mdash; discounts &#9313; to what's achievable</span></label>
+              <div class="slrow">
+                <input type="range" id="adopt" min="5" max="100" step="5" value="30">
+                <output id="adoptVal" for="adopt">30%</output>
+              </div>
+            </div>
+            <div class="field">
               <label for="days">Working days / year</label>
               <input type="number" id="days" min="1" max="365" step="1" value="220">
             </div>
@@ -464,7 +497,14 @@ table.bk tr.sunkrow td{color:var(--amber700)}
           <p class="line" id="oppIndLine"></p>
         </div>
 
-        <div class="sep-note"><strong>In plain terms:</strong> &#9312; is money you're already spending &mdash; paid Copilot licences sitting unused. That cash is real even if nobody ever saves a minute. &#9313; is money waiting to be unlocked &mdash; the value of the hours your team would get back with proper enablement. One is today's waste, the other is tomorrow's gain. Fixing adoption addresses both at once &mdash; which is why we show them side by side rather than adding them into one inflated total.</div>
+        <div class="lens result">
+          <p class="eyeb">&#9314; Capacity recovered &middot; at your <span id="adoptPct">30</span>% adoption guess</p>
+          <p class="fig" id="fteN">&mdash;</p>
+          <p class="sub" id="fteFormula"></p>
+          <p class="line" id="achLine"></p>
+        </div>
+
+        <div class="sep-note"><strong>In plain terms:</strong> &#9312; is money you're already spending &mdash; paid Copilot licences sitting unused. That cash is real even if nobody ever saves a minute. &#9313; is money waiting to be unlocked &mdash; the value of the hours your team would get back with proper enablement. One is today's waste, the other is tomorrow's gain. &#9314; keeps it honest: it takes &#9313; and counts only the share your own adoption guess says you'd actually capture &mdash; then shows those hours as full-time-equivalents of capacity back. We show all three side by side rather than adding them into one inflated total.</div>
 
         <div class="callout"><strong>Copilot is an add-on.</strong> Your team already pays for Microsoft 365 (Word, Excel, Outlook, Teams) &mdash; that base cost isn't counted here. Turning Copilot on adds ~<span id="licMoTxt">&#8377;2,495/mo</span> per person on top of that. If a seat isn't used, the <strong>entire add-on fee is pure sunk cost</strong> &mdash; and the free tier (Copilot Chat) is web-only and can't see your org data.<sup><a href="#c4">[4]</a></sup></div>
 
@@ -541,6 +581,11 @@ table.bk tr.sunkrow td{color:var(--amber700)}
       <p class="sub" id="scSeatSub">per idle seat/yr &middot; &asymp; &mdash; / 1,000 seats</p>
       <p class="mult">Multiply by however many paid seats you hold.</p>
     </div>
+  </div>
+  <div class="sc-cap">
+    <span class="sc-cap-eyeb">&#9314; CAPACITY RECOVERED &middot; at your <span id="scAdoptPct">30</span>% adoption guess</span>
+    <span class="sc-cap-fig" id="scFte">&mdash;</span>
+    <span class="sc-cap-sub">FTE of working hours back &middot; worth &asymp; <span id="scAch">&mdash;</span>/yr</span>
   </div>
   <p class="sc-note" id="scNote">&#9312; is what you're paying today for Copilot seats nobody uses. &#9313; is what your people could unlock with proper enablement. At industry benchmarks the value at stake is &asymp; <span id="scOppInd">&mdash;</span> a year.</p>
   <p class="sc-basis" id="scBasis"></p>
@@ -664,6 +709,13 @@ function calc(){
   var sunkInd   = paidCount * licCost * (uuInd/100);
   var unreal    = 100 - cap;
 
+  /* ③ Capacity recovered — ② discounted by the realistic-adoption guess, expressed as FTE */
+  var adoptPct  = clampTo($("adopt"), 30);
+  var achievable = opp * (adoptPct/100);
+  var hrsRecov   = (paidCount*hpPaid + freeCount*hpFree) * (1 - cap/100) * (adoptPct/100);
+  var fteRecov   = hrsRecov / (days * 8);
+  var fteTxt     = "≈ " + (fteRecov >= 10 ? num(Math.round(fteRecov)) : (Math.round(fteRecov*10)/10)) + " FTE";
+
   /* Company personalisation */
   var co = ($("co").value || "").trim();
   var coName = co || "your organisation";
@@ -681,6 +733,8 @@ function calc(){
   setText("tsFreeVal", tsFree + " min");
   setText("capVal", cap + "%");
   setText("uuVal", uu + "%");
+  setText("adoptVal", adoptPct + "%");
+  setText("wAdoptVal", String(adoptPct));
 
   /* Wizard reveal (step 6) */
   setText("wOppN", money(opp));
@@ -697,6 +751,9 @@ function calc(){
     }
   }
   setText("wPer1000", money(per1000));
+  setText("wAdoptPct", String(adoptPct));
+  setText("wFteN", fteTxt);
+  setText("wAchN", money(achievable));
 
   /* Full calculator — lenses */
   setText("sunkN", money(sunk));
@@ -705,6 +762,10 @@ function calc(){
   setText("oppN", money(opp));
   setText("oppFormula", num(paidCount) + " paid @ " + tsPaid + " min/day + " + num(freeCount) + " free @ " + tsFree + " min/day · " + unreal + "% unrealised");
   setText("oppIndLine", "At industry benchmarks ≈ " + money(oppInd) + "/yr");
+  setText("adoptPct", String(adoptPct));
+  setText("fteN", fteTxt);
+  setText("fteFormula", num(Math.round(hrsRecov)) + " recovered hours/yr ÷ (" + days + " days × 8 h) — like adding " + fteTxt.replace("≈ ", "") + " without hiring");
+  setText("achLine", "Worth ≈ " + money(achievable) + "/yr at your " + adoptPct + "% adoption guess");
 
   /* Add-on callout + licence note */
   setText("licMoTxt", CUR[cur].licMo);
@@ -730,6 +791,9 @@ function calc(){
   setText("scSeat", money(seatWaste));
   setText("scSeatSub", "per idle seat/yr · ≈ " + money(per1000) + " / 1,000 seats");
   setText("scOppInd", money(oppInd));
+  setText("scAdoptPct", String(adoptPct));
+  setText("scFte", fteTxt);
+  setText("scAch", money(achievable));
   setText("scBasis", "What we ran: " + num(emp) + " workers · " + money(sal) + " avg salary/yr · " + num(paidCount) + " paid Copilot @ " + tsPaid + " min/day + " + num(freeCount) + " free Chat @ " + tsFree + " min/day");
 }
 
@@ -791,7 +855,7 @@ function wizGo(n, moveFocus){
   }
   var pb = $("wDots");
   pb.setAttribute("aria-valuenow", String(n));
-  pb.setAttribute("aria-valuetext", "Step " + n + " of 6");
+  pb.setAttribute("aria-valuetext", "Step " + n + " of 7");
 }
 
 document.querySelectorAll("#wizard [data-next]").forEach(function(b){
@@ -834,10 +898,12 @@ link("emp",  ["empR","wEmp"]);
 link("empR", ["emp","wEmp"]);
 link("wLic", ["lic"]);
 link("lic",  ["wLic"]);
+link("wAdopt", ["adopt"]);
+link("adopt",  ["wAdopt"]);
 link("wSal", ["sal","salR"]);
 link("sal",  ["salR","wSal"]);
 link("salR", ["sal","wSal"]);
-["tsPaid","tsFree","cap","licCost","uu","days","co"].forEach(function(id){
+["tsPaid","tsFree","cap","licCost","uu","days","co","adopt","wAdopt"].forEach(function(id){
   $(id).addEventListener("input", calc);
 });
 
