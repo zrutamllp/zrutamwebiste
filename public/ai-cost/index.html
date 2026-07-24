@@ -233,8 +233,8 @@ table.bk tr.sunkrow td{color:var(--amber700)}
     <div class="seg" id="curSeg" role="group" aria-label="Currency">
       <button type="button" data-cur="INR" class="on" aria-pressed="true">&#8377; INR</button>
       <button type="button" data-cur="USD" aria-pressed="false">$ USD</button>
-      <button type="button" data-cur="EUR" aria-pressed="false">&euro; EUR</button>
-      <button type="button" data-cur="AUD" aria-pressed="false">A$ AUD</button>
+      <button type="button" data-cur="AED" aria-pressed="false">AED</button>
+      <button type="button" data-cur="SGD" aria-pressed="false">S$ SGD</button>
     </div>
   </div>
 
@@ -251,8 +251,8 @@ table.bk tr.sunkrow td{color:var(--amber700)}
       <div class="choices" role="group" aria-label="Choose currency">
         <button type="button" class="wcur on" data-cur="INR" aria-pressed="true">&#8377; INR<span class="sub">India</span></button>
         <button type="button" class="wcur" data-cur="USD" aria-pressed="false">$ USD<span class="sub">United States</span></button>
-        <button type="button" class="wcur" data-cur="EUR" aria-pressed="false">&euro; EUR<span class="sub">Europe</span></button>
-        <button type="button" class="wcur" data-cur="AUD" aria-pressed="false">A$ AUD<span class="sub">Australia</span></button>
+        <button type="button" class="wcur" data-cur="AED" aria-pressed="false">AED<span class="sub">UAE &middot; Dubai</span></button>
+        <button type="button" class="wcur" data-cur="SGD" aria-pressed="false">S$ SGD<span class="sub">Singapore</span></button>
       </div>
       <div class="wnav">
         <span class="spacer"></span>
@@ -338,7 +338,7 @@ table.bk tr.sunkrow td{color:var(--amber700)}
         <p class="line" id="wSeatLine" hidden>at your ~<span id="wSeatPct"></span>% that's <span id="wSeatCount"></span> seats &asymp; <span id="wSunkN"></span>/yr</p>
       </div>
 
-      <div class="sep-note">Shown <strong>separately, not summed</strong> &mdash; &#9312; is cash already gone; &#9313; is the upside of fixing it. The wasted-licence figure is <strong>per seat</strong>, so multiply by however many paid Copilot seats you actually hold: &asymp; <span id="wPer1000"></span> per 1,000 idle seats.</div>
+      <div class="sep-note"><strong>What these two numbers mean:</strong> &#9312; is money already leaving your account &mdash; Copilot seats you pay for that nobody really uses. &#9313; is money you could gain &mdash; the value of the hours your people would save if they used AI well. The seat figure scales with you: &asymp; <span id="wPer1000"></span> per 1,000 idle seats.</div>
 
       <div class="cta-row">
         <a class="btn" href="https://www.zrutam.com/contact/?interest=ai-enablement">See how to fix it &mdash; book 20 min &rarr;</a>
@@ -464,7 +464,7 @@ table.bk tr.sunkrow td{color:var(--amber700)}
           <p class="line" id="oppIndLine"></p>
         </div>
 
-        <div class="sep-note">&#9312; and &#9313; are two different things, shown <strong>separately on purpose</strong>. &#9312; is cash already spent on unused licences &mdash; real even if nobody ever saves a minute. &#9313; is the value of the time your people could reclaim. <strong>We don't add them:</strong> for the paid cohort that would double-count &mdash; enabling recovers the productivity <em>and</em> justifies the licence; you don't bank both.</div>
+        <div class="sep-note"><strong>In plain terms:</strong> &#9312; is money you're already spending &mdash; paid Copilot licences sitting unused. That cash is real even if nobody ever saves a minute. &#9313; is money waiting to be unlocked &mdash; the value of the hours your team would get back with proper enablement. One is today's waste, the other is tomorrow's gain. Fixing adoption addresses both at once &mdash; which is why we show them side by side rather than adding them into one inflated total.</div>
 
         <div class="callout"><strong>Copilot is an add-on.</strong> Your team already pays for Microsoft 365 (Word, Excel, Outlook, Teams) &mdash; that base cost isn't counted here. Turning Copilot on adds ~<span id="licMoTxt">&#8377;2,495/mo</span> per person on top of that. If a seat isn't used, the <strong>entire add-on fee is pure sunk cost</strong> &mdash; and the free tier (Copilot Chat) is web-only and can't see your org data.<sup><a href="#c4">[4]</a></sup></div>
 
@@ -542,7 +542,7 @@ table.bk tr.sunkrow td{color:var(--amber700)}
       <p class="mult">Multiply by however many paid seats you hold.</p>
     </div>
   </div>
-  <p class="sc-note" id="scNote">Shown <strong>separately, not summed</strong> &mdash; &#9312; is cash already gone, &#9313; is the upside of fixing it. At industry benchmarks the value at stake is &asymp; <span id="scOppInd">&mdash;</span> a year.</p>
+  <p class="sc-note" id="scNote">&#9312; is what you're paying today for Copilot seats nobody uses. &#9313; is what your people could unlock with proper enablement. At industry benchmarks the value at stake is &asymp; <span id="scOppInd">&mdash;</span> a year.</p>
   <p class="sc-basis" id="scBasis"></p>
   <div class="sc-foot">
     <span>Every assumption is published &amp; adjustable in the live calculator</span>
@@ -585,15 +585,15 @@ var CUR = {
   USD:{sym:"$", licMo:"$30/mo", lic:360, salDef:80000, salMin:30000, salMax:300000, salStep:2500,
     chips:[[45000,"Support $45k"],[80000,"Professional $80k"],[120000,"Engineer $120k"],[180000,"Manager $180k"]],
     note:"US knowledge-worker median ≈ $80–95k/yr"},
-  EUR:{sym:"€", licMo:"€28/mo", lic:336, salDef:60000, salMin:25000, salMax:250000, salStep:2500,
-    chips:[[38000,"Support €38k"],[60000,"Professional €60k"],[90000,"Engineer €90k"],[140000,"Manager €140k"]],
-    note:"EU knowledge-worker avg ≈ €55–65k/yr"},
-  AUD:{sym:"A$", licMo:"A$45/mo", lic:540, salDef:95000, salMin:40000, salMax:320000, salStep:2500,
-    chips:[[60000,"Support A$60k"],[95000,"Professional A$95k"],[130000,"Engineer A$130k"],[180000,"Manager A$180k"]],
-    note:"Australia knowledge-worker avg ≈ A$90–100k/yr"}
+  AED:{sym:"AED ", licMo:"AED 110/mo", lic:1320, salDef:180000, salMin:60000, salMax:800000, salStep:5000,
+    chips:[[90000,"Admin AED 90k"],[180000,"Professional AED 180k"],[260000,"Engineer AED 260k"],[400000,"Manager AED 400k"]],
+    note:"UAE knowledge-worker avg ≈ AED 15–20k/month (region list, approx)"},
+  SGD:{sym:"S$", licMo:"S$41/mo", lic:492, salDef:75000, salMin:30000, salMax:350000, salStep:2500,
+    chips:[[45000,"Support S$45k"],[75000,"Professional S$75k"],[110000,"Engineer S$110k"],[160000,"Manager S$160k"]],
+    note:"Singapore knowledge-worker avg ≈ S$70–80k/yr (region list, approx)"}
 };
 /* Optional FX map — NOT used by default (currency switch resets salary, no conversion). */
-var fxINR = {INR:1, USD:87, EUR:94, AUD:57};
+var fxINR = {INR:1, USD:87, AED:23.7, SGD:65};
 
 var cur = "INR";
 
