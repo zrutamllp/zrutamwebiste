@@ -201,7 +201,13 @@
       "PowerShell(npm --prefix D:\\\\zrutamWebsite run build)",
       "PowerShell(git -C D:\\\\zrutamWebsite show --stat a37251a; \\(Get-Item D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html\\).Length; \\(Get-Content D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html | Measure-Object -Line\\).Lines)",
       "PowerShell($i=0; Get-Content D:\\\\zrutamWebsite\\\\public\\\\ai-cost\\\\index.html | ForEach-Object { $i++; if \\($_.Length -gt 2000\\) { \"$i : $\\($_.Length\\)\" } })",
-      "Bash(git commit -m 'docs: record AC2 approved deviations, extend QA checklist *)"
+      "Bash(git commit -m 'docs: record AC2 approved deviations, extend QA checklist *)",
+      "PowerShell(Remove-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -Force -ErrorAction SilentlyContinue; & \"$env:WINDIR\\\\System32\\\\tar.exe\" -a -cf \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -C \"D:\\\\zrutamWebsite\\\\out\" .; \"main site zip: {0:N1} MB\" -f \\(\\(Get-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\"\\).Length / 1MB\\))",
+      "Bash(node -e ' *)",
+      "Bash(git commit -m 'feat: AED + SGD currencies \\(replacing EUR/AUD\\), client-friendly lens copy, regenerated OG card *)",
+      "PowerShell(Remove-Item \"D:\\\\zrutamWebsite\\\\aicost-subdomain.zip\",\"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -Force -ErrorAction SilentlyContinue; & \"$env:WINDIR\\\\System32\\\\tar.exe\" -a -cf \"D:\\\\zrutamWebsite\\\\aicost-subdomain.zip\" -C \"D:\\\\zrutamWebsite\\\\public\\\\ai-cost\" .; & \"$env:WINDIR\\\\System32\\\\tar.exe\" -a -cf \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\" -C \"D:\\\\zrutamWebsite\\\\out\" .; \"aicost: {0:N2} MB | site: {1:N1} MB\" -f \\(\\(Get-Item \"D:\\\\zrutamWebsite\\\\aicost-subdomain.zip\"\\).Length/1MB\\), \\(\\(Get-Item \"D:\\\\zrutamWebsite\\\\zrutam-site.zip\"\\).Length/1MB\\))",
+      "Bash(git commit -m 'feat: adoption-guess slider + third lens '\\\\''Capacity recovered'\\\\'' \\(FTE + achievable value\\) *)",
+      "Bash(git commit -m 'chore: update local tool permission allowlist *)"
     ]
   }
 }
