@@ -106,6 +106,7 @@ export default function ClientsPage() {
                   width={140}
                   height={48}
                   className="h-9 md:h-11 w-auto object-contain opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition duration-300"
+                  style={{ width: "auto" }}
                 />
               </div>
             ))}
