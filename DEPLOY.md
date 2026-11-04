@@ -2,6 +2,26 @@
 
 The site is a fully static export (Next.js `output: "export"`). No Node.js needed on the server — you upload plain HTML/CSS/JS files.
 
+## 0. Automatic deploy (GitHub Actions) — preferred
+
+`.github/workflows/deploy.yml` builds the site and uploads `out/` to Hostinger over FTP on every push to `main`. Pull requests into `main` get a build check only. Re-run by hand from GitHub → **Actions → Deploy to Hostinger → Run workflow**.
+
+One-time setup:
+
+1. hPanel → **Websites → zrutam.com → Files → FTP Accounts**. Note the **FTP IP / hostname** and **username** (create an FTP account or reset its password if you don't know it).
+2. GitHub → repo **Settings → Secrets and variables → Actions → Secrets → New repository secret**, add:
+   - `FTP_SERVER` — the FTP hostname or IP (no `ftp://`)
+   - `FTP_USERNAME` — the FTP username
+   - `FTP_PASSWORD` — the FTP password
+3. Optional, same page → **Variables** tab:
+   - `FTP_SERVER_DIR` — where the site lives *relative to where the FTP login lands*. Default `public_html/`. If that FTP account opens directly inside `public_html` (you see `index.html` at the top level), set it to `./`.
+   - `FTP_PROTOCOL` — default `ftps`. Set to `ftp` only if the deploy fails with a TLS/SSL error.
+4. Merge to `main` (or Run workflow). Watch the run in the **Actions** tab.
+
+The upload is incremental (state kept in `public_html/.ftp-deploy-sync-state.json`) and never deletes files that were on the server before. The first run uploads everything (~26 MB).
+
+The manual steps below still work as a fallback.
+
 ## 1. Activate the forms — ✅ DONE (2026-07-15)
 
 Both the **contact form** and the **Risk Calculator email gate** post to Web3Forms. The live access key is already wired into `WEB3FORMS_ACCESS_KEY` in `src/lib/constants.ts` (commit 181adf9). Submissions arrive at the inbox the Web3Forms form was registered with — confirm in the Web3Forms dashboard that delivery points at **ceo@zrutam.com**.
