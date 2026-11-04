@@ -8,6 +8,8 @@ Both the **contact form** and the **Risk Calculator email gate** post to Web3For
 
 To rotate the key later: replace that one constant and rebuild.
 
+The POSH pages use the same key for CEO notifications: "POSH preview unlocked by …" (screen tour on /solutions/posh/) and "POSH Pulse Check completed by …" (/solutions/posh/pulse-check/). Visitors are not emailed — the Pulse Check report is shown on the page only.
+
 ## 2. Build
 
 ```
@@ -35,6 +37,7 @@ Handled by the `.htaccess` that ships in every build (`ErrorDocument 404 /404.ht
 - [ ] One solution page renders, e.g. /solutions/leadership-development/
 - [ ] /360-calculator/ — enter headcount 1000, salary 50000, pyramid 20/80/100, hit "Reveal Risk Exposure" → TVR shows **$4.38M**
 - [ ] /contact/ — submit the form and confirm a REAL email arrives at ceo@zrutam.com (only works after step 1)
+- [ ] /solutions/posh/pulse-check/ — finish the quiz with your own work email: the full report shows on the page, and ceo@zrutam.com gets "POSH Pulse Check completed by …"
 - [ ] https://www.zrutam.com/sitemap.xml resolves
 - [ ] A made-up URL like /nope/ shows the branded 404 page
 

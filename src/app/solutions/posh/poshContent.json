@@ -1,0 +1,142 @@
+{
+  "knowledge": [
+    {
+      "label": "The 11 pm meme",
+      "q": "Your colleague drops an adult meme in the team WhatsApp group at 11 pm, from his personal phone. POSH-wise?",
+      "opts": [
+        "His phone, his time, his problem",
+        "Workplace conduct — the team group counts",
+        "Only an issue if someone objects in the group"
+      ],
+      "correct": 1,
+      "law": "A work group is an extended workplace — Sec 2(o). The hour and whose phone it is don't matter."
+    },
+    {
+      "label": "The Goa offer",
+      "q": "A senior says it exactly once: “Join me for the Goa weekend and consider your promotion done.”",
+      "opts": [
+        "One-off — legally too thin",
+        "Enough — a single quid pro quo incident counts",
+        "Counts only if repeated three times"
+      ],
+      "correct": 1,
+      "law": "One incident of quid pro quo is enough — no pattern required. Sec 2(n) read with Sec 3."
+    },
+    {
+      "label": "The visitor",
+      "q": "A woman visiting your office — not an employee — is harassed there. She can complain to:",
+      "opts": ["No one — she's not staff", "Your company's ICC", "Only the police"],
+      "correct": 1,
+      "law": "An aggrieved woman is any woman at the workplace, employed or not — Sec 2(a)."
+    },
+    {
+      "label": "The banter U-turn",
+      "q": "She laughed along with the team's double-meaning jokes for months. Now she has complained.",
+      "opts": [
+        "Too late — she participated",
+        "Valid — welcomeness can be withdrawn anytime",
+        "Valid only for jokes made after she objected"
+      ],
+      "correct": 1,
+      "law": "Past participation doesn't make present conduct welcome. Welcomeness is revocable."
+    },
+    {
+      "label": "The deadline",
+      "q": "The window to file a written complaint with the ICC:",
+      "opts": ["30 days, strict", "3 months, extendable by 3 more", "One year, flat"],
+      "correct": 1,
+      "law": "3 months from the (last) incident, extendable by 3 more for reasons recorded in writing — Sec 9."
+    },
+    {
+      "label": "The unproved case",
+      "q": "A complaint is inquired into but can't be proved. The complainant:",
+      "opts": [
+        "Faces action for a false complaint",
+        "Faces nothing — unless malice and knowing falsehood are proved",
+        "Must apologise to the respondent"
+      ],
+      "correct": 1,
+      "law": "Unproved is not false. Sec 14 needs proven malice and knowing falsehood."
+    }
+  ],
+  "action": [
+    {
+      "q": "Office party. A senior is making a junior visibly uncomfortable. Honestly, you…",
+      "opts": [
+        "Look away — not my circus",
+        "Check on the junior afterwards",
+        "Walk over and break the moment — “hey, need you for a second”"
+      ]
+    },
+    {
+      "q": "A colleague confides she's being harassed, but says, “Don't tell anyone.” You…",
+      "opts": [
+        "Keep the secret, fully",
+        "Keep gently nudging her to do something",
+        "Help her reach the ICC or the right channel, at her pace"
+      ]
+    },
+    {
+      "q": "The team's “banter” crosses the line almost every week. You…",
+      "opts": [
+        "Laugh along / stay quiet",
+        "Feel uneasy, change the topic sometimes",
+        "Call it out, or raise it with someone who can act"
+      ]
+    },
+    {
+      "q": "Quick — who's on your company's ICC?",
+      "opts": [
+        "We have one?",
+        "Roughly know / could find out",
+        "Know the names and how to reach them"
+      ]
+    }
+  ],
+  "profiles": {
+    "spectator": {
+      "name": "The Silent Spectator",
+      "short": "Silent Spectator",
+      "tag": "You'd rather not get involved — and workplace silence counts on exactly that.",
+      "body": "You're not the problem — but right now, you're not part of the solution either. Most workplaces run on people like you: decent, busy, assuming someone else will step in. Here's the good news — the law actually gives you easy, low-drama ways to act; most people just never learn them. Your profile isn't a character flaw. It's a training gap, and it's the easiest one to fix.",
+      "steps": [
+        "Learn the 3 situations that count as harassment even when “nobody meant it”.",
+        "Find out who's on your ICC — this week, not someday.",
+        "Learn one 10-second distraction move (the 5D bystander framework)."
+      ]
+    },
+    "guesser": {
+      "name": "The Well-Meaning Guesser",
+      "short": "Well-Meaning Guesser",
+      "tag": "You'll absolutely step in — and possibly onto a legal landmine while doing it.",
+      "body": "Courage isn't your issue — accuracy is. People like you intervene, mediate, promise confidentiality, broker apologies… and accidentally violate the very Act you're trying to honour (informal “settlements” are the classic one). The gap between your instinct and the law is exactly where well-meaning people get workplaces into trouble. Point that courage through the right channel, and you become genuinely formidable.",
+      "steps": [
+        "Learn why you must never broker a private settlement — only the ICC conciliates.",
+        "Learn the one sentence to say when someone confides in you.",
+        "Know the 90-day inquiry basics before you promise anyone anything."
+      ]
+    },
+    "expert": {
+      "name": "The Quiet Expert",
+      "short": "Quiet Expert",
+      "tag": "You know the law cold. The room just never hears it from you.",
+      "body": "You'd score well in any POSH test — and still watch the uncomfortable moment pass at the next offsite. Knowledge without intervention protects nobody; what keeps workplaces silent isn't ignorance, it's fear and awkwardness. You don't need another law lecture. You need the small, scripted moves that make stepping in feel as easy as staying quiet.",
+      "steps": [
+        "Pick your default 5D move — Distract is the easiest to start with.",
+        "Practise one line until it's automatic: “Not cool — moving on.”",
+        "Be the person who tells a confider exactly where the ICC is."
+      ]
+    },
+    "champion": {
+      "name": "The Culture Champion",
+      "short": "Culture Champion",
+      "tag": "You know it AND you act on it. Your workplace is probably underusing you.",
+      "body": "Rare combination: you understand the Act and you move when it matters. The question now isn't you — it's leverage. Champions like you are exactly who ICCs, bystander programmes and new-joiner inductions need as visible allies. One caution: champions sometimes overreach into investigating or fixing things themselves. Your power is in routing, not resolving.",
+      "steps": [
+        "Volunteer visibility — the ICC, induction talks, a bystander session.",
+        "Mentor one Guesser or Spectator on your team.",
+        "Learn the line between supporting a complainant and running your own inquiry."
+      ]
+    }
+  }
+}

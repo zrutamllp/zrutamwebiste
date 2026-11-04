@@ -9,7 +9,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import { cardClasses } from "@/components/ui/Card";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
@@ -18,8 +18,9 @@ export function generateStaticParams() {
   }));
 }
 
-export function generateMetadata({ params }: PageProps): Metadata {
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
   if (!post) return { title: "Post Not Found | Zrutam" };
   return {
     title: `${post.title} | Zrutam Blog`,
@@ -79,8 +80,9 @@ const articleContent: Record<string, string[]> = {
   ],
 };
 
-export default function BlogPostPage({ params }: PageProps) {
-  const post = BLOG_POSTS.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: PageProps) {
+  const { slug } = await params;
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   if (!post) {
     notFound();

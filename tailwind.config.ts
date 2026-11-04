@@ -45,6 +45,10 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-12px)" },
         },
+        fadeUp: {
+          from: { opacity: "0", transform: "translateY(14px)" },
+          to: { opacity: "1", transform: "none" },
+        },
       },
       animation: {
         marquee: "marquee 35s linear infinite",
